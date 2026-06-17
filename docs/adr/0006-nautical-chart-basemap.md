@@ -1,4 +1,4 @@
-# 0006. Nautical Chart Basemap with OpenSeaMap Overlay
+# 0006. Nautical Chart Basemap with NOAA Display Service
 
 **Date:** 2026-06-17  
 **Status:** Accepted
@@ -18,18 +18,17 @@ yet.
 
 ## Decision
 
-Use a raster OSM base with an OpenSeaMap seamark overlay as the nautical map
-presentation for the club explorer. Keep the club markers and interactions in
-the existing MapLibre client component, and expose a toggle so users can
-switch back to the standard basemap when they prefer a simpler view or when
-the seamark overlay is not helpful.
+Use NOAA Chart Display Service tiles as the nautical basemap in chart mode,
+and keep OpenStreetMap as the standard mode. Keep the club markers and
+interactions in the existing MapLibre client component, and expose an explicit
+toggle so users can switch between chart and standard map presentations.
 
 The style includes:
 
 - a neutral marine background color
-- OpenStreetMap raster tiles for the base geography
-- OpenSeaMap seamark tiles for nautical symbols and chart detail
-- a UI toggle between chart and standard basemaps
+- NOAA Chart Display Service tiles for chart mode
+- OpenStreetMap raster tiles for standard mode
+- a high-contrast, opaque UI toggle between chart and standard basemaps
 - explicit attribution for both data sources
 
 ## Consequences
@@ -38,8 +37,7 @@ The style includes:
   pipeline.
 - The implementation stays client-side and compatible with the current
   MapLibre setup.
-- If seamark tiles are unavailable, the app still falls back to the OSM base
-  map.
+- If NOAA tiles are unavailable, users can switch to the standard OSM mode.
 - Users can opt into a cleaner standard basemap without leaving the map view.
 - The current approach is an interim nautical basemap, not a full ENC-style
   chart renderer.

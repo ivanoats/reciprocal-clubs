@@ -13,66 +13,62 @@ type MapViewProps = {
   onSelectClub?: (clubName: string) => void
 }
 
+type MapMode = 'nautical' | 'standard'
+
 const SOURCE_ID = 'clubs-source'
 const CLUSTER_LAYER_ID = 'clusters'
 const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
+const NOAA_CHART_TILE_URL =
+  'https://gis.charttools.noaa.gov/arcgis/rest/services/MarineChart_Services/NOAACharts/MapServer/tile/{z}/{y}/{x}'
 
-const createBaseStyle = (includeSeamarkOverlay: boolean): StyleSpecification => ({
-  version: 8,
-  glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-  sources: {
-    osm: {
-      type: 'raster',
-      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-      tileSize: 256,
-      attribution: '&copy; OpenStreetMap contributors',
-    },
-    seamark: {
-      type: 'raster',
-      tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
-      tileSize: 256,
-      attribution: '&copy; OpenSeaMap contributors',
-    },
-  },
-  layers: [
+const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
+  const isNautical = mapMode === 'nautical'
+  const baseSourceId = isNautical ? 'noaa' : 'osm'
+
+  const layers: NonNullable<StyleSpecification['layers']> = [
     {
       id: 'chart-background',
       type: 'background',
       paint: {
-        'background-color': '#d8efe8',
+        'background-color': isNautical ? '#d8efe8' : '#d7e3ef',
       },
     },
     {
-      id: 'osm-base',
+      id: 'base-map',
       type: 'raster',
-      source: 'osm',
+      source: baseSourceId,
     },
-    ...(includeSeamarkOverlay
-      ? [
-          {
-            id: 'seamark-overlay',
-            type: 'raster',
-            source: 'seamark',
-            paint: {
-              'raster-opacity': 0.9,
-            },
-          },
-        ]
-      : []),
-  ],
-})
+  ]
+
+  return {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+      osm: {
+        type: 'raster',
+        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+        tileSize: 256,
+        attribution: '&copy; OpenStreetMap contributors',
+      },
+      noaa: {
+        type: 'raster',
+        tiles: [NOAA_CHART_TILE_URL],
+        tileSize: 256,
+        attribution: '&copy; NOAA Office of Coast Survey',
+      },
+    },
+    layers,
+  }
+}
 
 export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
-  const [mapMode, setMapMode] = useState<'nautical' | 'standard'>('nautical')
-  const mapStyle = useMemo(
-    () => createBaseStyle(mapMode === 'nautical'),
-    [mapMode],
-  )
+  const [mapMode, setMapMode] = useState<MapMode>('nautical')
+  const mapStyle = useMemo(() => createBaseStyle(mapMode), [mapMode])
 
   const featureCollection = useMemo(
     () => ({
@@ -104,7 +100,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: BASE_MAP_STYLE,
+      style: mapStyle,
       center: INITIAL_CENTER,
       zoom: 4.5,
     })
@@ -336,9 +332,10 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           rounded: 'full',
           border: '1px solid',
           borderColor: 'borderSubtle',
-          bg: 'bgCanvas',
+          bg: 'bgSurface',
           p: '1',
-          backdropFilter: 'blur(10px)',
+          boxShadow: 'md',
+          opacity: 0.98,
         })}
       >
         <button
@@ -350,7 +347,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             fontSize: 'sm',
             fontWeight: '600',
             color: mapMode === 'nautical' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'nautical' ? 'bgSurface' : 'transparent',
+            bg: mapMode === 'nautical' ? 'bgCanvas' : 'bgSurface',
             boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('nautical')}
@@ -367,7 +364,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             fontSize: 'sm',
             fontWeight: '600',
             color: mapMode === 'standard' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'standard' ? 'bgSurface' : 'transparent',
+            bg: mapMode === 'standard' ? 'bgCanvas' : 'bgSurface',
             boxShadow: mapMode === 'standard' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('standard')}
