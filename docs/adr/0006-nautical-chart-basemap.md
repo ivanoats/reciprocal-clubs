@@ -53,6 +53,9 @@ The style includes:
   of NOAA live tile availability.
 - If MBTiles are converted to PMTiles and served locally, chart mode can run
   with either XYZ tile requests or direct PMTiles archive loading.
+- The map depends on third-party tile/glyph infrastructure unless self-hosted;
+  provider availability, rate limits, and usage policies can affect runtime
+  reliability.
 - Users can opt into a cleaner standard basemap without leaving the map view.
 - The current approach is an interim nautical basemap, not a full ENC-style
   chart renderer.

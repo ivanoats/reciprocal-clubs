@@ -89,6 +89,7 @@ NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=xyz
 # Optional in `xyz` mode. Defaults to NOAA Chart Display Service if not set.
 # Example for a local XYZ tile server fronting MBTiles or PMTiles:
 # http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
+# Must include {z}, {x}, and {y}. Invalid values auto-fallback to NOAA default.
 NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=
 
 # Optional in `pmtiles` mode. Can be http(s) URL or full pmtiles:// URL.
@@ -98,6 +99,11 @@ NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=
 
 # Optional attribution override for the chart source.
 NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
+
+# Optional glyph endpoint for MapLibre symbol rendering.
+# Defaults to MapLibre demo glyphs; set this to a production-grade CDN
+# or self-hosted path.
+NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL=
 ```
 
 ### Using vokkim/noaa-nautical-charts regions 04-10
@@ -146,6 +152,10 @@ Notes:
 - MapLibre in the browser cannot read `.mbtiles` files directly.
 - Convert MBTiles to PMTiles first, then serve PMTiles over HTTP.
 - Keep `chart` mode pointed at NOAA/PMTiles data; `standard` mode remains OSM.
+- If PMTiles fails to load at runtime, chart mode automatically falls back to
+  NOAA XYZ tiles.
+- If a custom XYZ chart URL fails, chart mode automatically falls back to the
+  default NOAA chart URL.
 
 ## Available data files
 
