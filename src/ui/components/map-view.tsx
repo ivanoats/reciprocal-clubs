@@ -274,7 +274,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
 
     map.easeTo({
       center: [selectedClub.longitude, selectedClub.latitude],
-      zoom: Math.max(map.getZoom(), 7),
+      zoom: Math.max(map.getZoom(), 12),
       duration: 450,
     })
   }, [clubs, selectedClubName])

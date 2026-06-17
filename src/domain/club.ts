@@ -4,7 +4,7 @@ export type Club = {
   distanceNm: number
   website: string
   address: string
-  phone: string
+  phone?: string
   longitude: number
   latitude: number
 }

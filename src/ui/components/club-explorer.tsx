@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import type { Club } from '@/domain/club'
 
@@ -16,9 +15,6 @@ type ClubExplorerProps = {
 }
 
 export const ClubExplorer = ({ clubs, initialSelectedClubName }: ClubExplorerProps) => {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
   const [selectedClubName, setSelectedClubName] = useState<string | undefined>(initialSelectedClubName)
   const selectedClub = clubs.find((club) => club.name === selectedClubName)
   const mapWrapperClass = css({
@@ -29,23 +25,21 @@ export const ClubExplorer = ({ clubs, initialSelectedClubName }: ClubExplorerPro
   })
 
   useEffect(() => {
-    const currentSelected = searchParams.get('club') ?? undefined
-
+    if (typeof window === 'undefined') {
+      return
+    }
+    const url = new URL(window.location.href)
+    const currentSelected = url.searchParams.get('club') ?? undefined
     if (currentSelected === selectedClubName) {
       return
     }
-
-    const nextParams = new URLSearchParams(searchParams.toString())
-
     if (selectedClubName) {
-      nextParams.set('club', selectedClubName)
+      url.searchParams.set('club', selectedClubName)
     } else {
-      nextParams.delete('club')
+      url.searchParams.delete('club')
     }
-
-    const nextUrl = nextParams.toString() ? `${pathname}?${nextParams.toString()}` : pathname
-    router.replace(nextUrl, { scroll: false })
-  }, [pathname, router, searchParams, selectedClubName])
+    window.history.replaceState(window.history.state, '', url.toString())
+  }, [selectedClubName])
 
   return (
     <div className={css({ display: 'grid', gap: '6', gridTemplateColumns: { base: '1fr', lg: '1.2fr 1fr' } })}>

@@ -8,6 +8,8 @@ type ClubDetailsProps = {
 
 const normalizePhoneHref = (phone: string): string => phone.replace(/[^\d+]/g, '')
 
+const hasPhone = (phone: Club['phone']): phone is string => typeof phone === 'string' && phone.length > 0
+
 export const ClubDetails = ({ club }: ClubDetailsProps) => {
   return (
     <aside
@@ -36,9 +38,11 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
       >
         Website
       </a>
-      <a className={css({ color: 'accent', textDecoration: 'underline' })} href={`tel:${normalizePhoneHref(club.phone)}`}>
-        {club.phone}
-      </a>
+      {hasPhone(club.phone) ? (
+        <a className={css({ color: 'accent', textDecoration: 'underline' })} href={`tel:${normalizePhoneHref(club.phone)}`}>
+          {club.phone}
+        </a>
+      ) : null}
     </aside>
   )
 }
