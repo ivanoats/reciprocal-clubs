@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Sloop Tavern Yacht Club - Reciprocal Clubs</name>
+    <description>68 active reciprocal yacht clubs</description>
+    <Folder>
+      <name>BC Islands</name>
+      <Placemark>
+        <name>Ladysmith Yacht Club</name>
+        <description>Distance: 113 nm
+Website: http://www.ladysmithyc.bc.ca
+Address: 901 Gladden Rd, Ladysmith, BC V9G 1K4
+Phone: +1 250-245-4521
+</description>
+        <Point>
+          <coordinates>-123.82661666667,49.00655,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Maple Bay Yacht Club</name>
+        <description>Distance: 95 nm
+Website: http://www.mbyc.ca
+Address: 6337 Genoa Bay Rd, Duncan, BC V9L 5Y4
+Phone: +1 250-746-4521
+</description>
+        <Point>
+          <coordinates>-123.60216666667,48.803,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nanaimo Yacht Club</name>
+        <description>Distance: 125 nm
+Website: http://www.nanaimoyc.ca
+Address: 400 Newcastle Ave, Nanaimo, BC V9S 1C7
+Phone: +1 250-754-7011
+</description>
+        <Point>
+          <coordinates>-123.93991666667,49.177816666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Schooner Cove Yacht Club</name>
+        <description>Distance: 136 nm
+Website: http://www.scyc.ca
+Address: 3521 Dolphin Dr, Nanoose Bay, BC V9P 9J7
+Phone: +1 778-762-0544
+</description>
+        <Point>
+          <coordinates>-124.13416666667,49.2875,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Silva Bay Yacht Club</name>
+        <description>Distance: 117 nm
+Website: http://www.silvabayyachtclub.com
+Address: 3336 South Rd, Gabriola, BC V0R 1X6
+Phone: +1 778-674-8426
+</description>
+        <Point>
+          <coordinates>-123.69678333333,49.14815,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Columbia River</name>
+      <Placemark>
+        <name>Astoria Yacht Club</name>
+        <description>Distance: 124 nm
+Website: http://www.astoriayachtclub.com
+Address: 10 Pier 1 Ste 103, Astoria, OR 97103
+Phone: +1 503-610-3274
+</description>
+        <Point>
+          <coordinates>-123.85578333333,46.190833333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cathlamet Yacht Club</name>
+        <description>Distance: 112 nm
+Website: http://cathlametyachtclub.org
+Address: 500 2nd St, Cathlamet, WA 98612
+Phone: +1 360-795-3501
+</description>
+        <Point>
+          <coordinates>-123.38666666667,46.205833333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Longview Yacht Club</name>
+        <description>Distance: 109 nm
+Website: http://www.lyc1932.org
+Address: Longview, WA 98632
+Phone: +1 360-425-9377
+</description>
+        <Point>
+          <coordinates>-123.04926666667,46.16795,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Walla Walla Yacht Club</name>
+        <description>Distance: 200 nm
+Website: http://www.wallawallayachtclub.com
+Address: 539 Port Kelly Rd, Kennewick, WA 99337
+Phone: +1 509-547-4946
+</description>
+        <Point>
+          <coordinates>-118.9369,46.027233333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Columbia River OR</name>
+      <Placemark>
+        <name>Hood River Yacht Club</name>
+        <description>Distance: 143 nm
+Website: https://hryc.clubexpress.com/
+Address: 310 E Port Marina Dr, Hood River, OR 97031
+</description>
+        <Point>
+          <coordinates>-121.50288333333,45.712933333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Multnomah Channel Yacht Club</name>
+        <description>Distance: 136 nm
+Website: http://www.mcyc1.org
+Address: 50990 Dike Rd, Scappoose, OR 97056
+</description>
+        <Point>
+          <coordinates>-122.8505,45.735183333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Hawaii</name>
+      <Placemark>
+        <name>Lahaina Yacht Club</name>
+        <description>Distance: 2656 nm
+Website: http://www.lyc.us
+Address: 835 Front St, Lahaina, HI 96761
+Phone: +1 808-661-0191
+</description>
+        <Point>
+          <coordinates>-156.68,20.87565,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Inside Passage Alaska</name>
+      <Placemark>
+        <name>Juneau Yacht Club</name>
+        <description>Website: http://www.juneauyc.org
+Address: 1301 Harbor Way, Juneau, AK 99801
+Phone: +1 833-323-5111
+</description>
+        <Point>
+          <coordinates>-134.43436666667,58.3054,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>New Zealand</name>
+      <Placemark>
+        <name>Royal New Zealand Yacht Squadron</name>
+        <description>Distance: 2724 nm
+Website: http://www.rnzys.org.nz
+Address: 181 Westhaven Dr, Auckland 1011, New Zealand
+Phone: +64 9 360 6800
+</description>
+        <Point>
+          <coordinates>-174.74538333333,36.835583333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Northern California</name>
+      <Placemark>
+        <name>Oakland Yacht Club</name>
+        <description>Distance: 684 nm
+Website: http://www.oaklandyachtclub.net/
+Address: 1101 Pacific Marina, Alameda, CA 94501
+Phone: +1 510-522-6868
+</description>
+        <Point>
+          <coordinates>-122.2651,37.783466666667,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Northern Inland Waters</name>
+      <Placemark>
+        <name>Anacortes Yacht Club</name>
+        <description>Distance: 58 nm
+Website: http://www.anacortesyachtclub.org
+Address: 611 T Ave, Anacortes, WA 98221
+Phone: +1 360-293-5277
+</description>
+        <Point>
+          <coordinates>-122.605,48.5125,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bellingham Yacht Club</name>
+        <description>Distance: 75 nm
+Website: http://www.byc.org 
+Address: 2625 S Harbor Loop Dr, Bellingham, WA 98225
+Phone: +1 360-733-7390
+</description>
+        <Point>
+          <coordinates>-122.50508333333,48.757466666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Birch Bay Village Yacht Club</name>
+        <description>Distance: 88 nm
+Website: http://www.bbvyc.org
+Address: Birch Bay Village, Blaine, WA 98230
+</description>
+        <Point>
+          <coordinates>-122.78725,48.931333333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Corinthian Yacht Club of Bellingham</name>
+        <description>Distance: 75 nm
+Website: http://www.cycbellingham.org
+Address: Squalicum Harbor, Bellingham, WA 98225
+</description>
+        <Point>
+          <coordinates>-122.4992,48.75685,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Deer Harbor Yacht Club</name>
+        <description>Distance: 71 nm
+Website: http://dhyc.org
+Address: Deer Harbor, Orcas Island, WA 98245
+</description>
+        <Point>
+          <coordinates>-123.00273333333,48.620583333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fidalgo Yacht Club</name>
+        <description>Distance: 58 nm
+Website: http://www.fidalgoyachtclub.org
+Address: 6046 Sands Way, Anacortes, WA 98221
+Phone: +1 360-299-9123
+</description>
+        <Point>
+          <coordinates>-122.60466666667,48.513383333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Flounder Bay Yacht Club</name>
+        <description>Distance: 57 nm
+Website: http://www.FlounderBayYC.com
+Address: Flounder Bay (Skyline), Anacortes, WA 98221
+</description>
+        <Point>
+          <coordinates>-122.68071666667,48.491266666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Orcas Island Yacht Club</name>
+        <description>Distance: 71 nm
+Website: http://oiyc.org
+Address: 876 Deer Harbor Rd, Eastsound, WA 98245
+Phone: +1 360-376-5577
+</description>
+        <Point>
+          <coordinates>-122.95991666667,48.631166666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Point Roberts Marina Resort</name>
+        <description>Distance: 94 nm
+Website: http://www.pointrobertsmarina.com
+Address: 713 Simundson Dr, Point Roberts, WA 98281
+Phone: +1 360-945-2255
+</description>
+        <Point>
+          <coordinates>-123.06313333333,48.973933333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Point Roberts Yacht Club</name>
+        <description>Distance: 95 nm
+Website: http://www.pointrobertsyachtclub.com
+Address: Point Roberts Marina, Point Roberts, WA 98281
+</description>
+        <Point>
+          <coordinates>-123.06816666667,48.976833333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Semiahmoo Yacht Club</name>
+        <description>Distance: 92 nm
+Website: http://www.semiahmooyachtclub.org
+Address: 9540 Semiahmoo Pkwy, Blaine, WA 98230
+Phone: +1 360-371-0440
+</description>
+        <Point>
+          <coordinates>-122.765,48.991666666667,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Olympic & Hood Canal</name>
+      <Placemark>
+        <name>Port Angeles Yacht Club</name>
+        <description>Distance: 57 nm
+Website: http://www.payc.org
+Address: 1305 Marine Dr, Port Angeles, WA 98363
+Phone: +1 360-457-4132
+</description>
+        <Point>
+          <coordinates>-123.45258333333,48.126366666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Port Ludlow Yacht Club</name>
+        <description>Distance: 21 nm
+Website: http://www.plyc.us
+Address: 55 Heron Rd, Port Ludlow, WA 98365
+</description>
+        <Point>
+          <coordinates>-122.685,47.921666666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Port Townsend Yacht Club</name>
+        <description>Distance: 34 nm
+Website: http://ptyc.net
+Address: 2503 Washington St, Port Townsend, WA 98368
+</description>
+        <Point>
+          <coordinates>-122.77361666667,48.107633333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sequim Bay Yacht Club</name>
+        <description>Distance: 40 nm
+Website: http://www.sequimbayyacht.club
+Address: 2577 W Sequim Bay Rd, Sequim, WA 98382
+Phone: +1 360-683-3283
+</description>
+        <Point>
+          <coordinates>-123.04028333333,48.064683333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Portland Area</name>
+      <Placemark>
+        <name>Portland Yacht Club</name>
+        <description>Distance: 144 nm
+Website: http://www.portlandyc.com
+Address: 1241 NE Marine Dr, Portland, OR 97211
+Phone: +1 503-285-1922
+</description>
+        <Point>
+          <coordinates>-122.6519,45.600716666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rose City Yacht Club</name>
+        <description>Distance: 144 nm
+Website: http://rosecityyachtclub.org
+Address: 3737 NE Marine Dr, Portland, OR 97211
+Phone: +1 503-282-2049
+</description>
+        <Point>
+          <coordinates>-122.62626666667,45.6014,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sauvie Island Yacht Club</name>
+        <description>Distance: 144 nm
+Website: http://www.siyc.org
+Address: Sauvie Island / Multnomah Channel, Portland, OR 97231
+</description>
+        <Point>
+          <coordinates>-122.65833333333,45.605666666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Willamette Sailing Club</name>
+        <description>Distance: 153 nm
+Website: http://www.willamettesailingclub.com/
+Address: 6336 S Beaver Ave, Portland, OR 97239
+Phone: +1 503-246-5345
+</description>
+        <Point>
+          <coordinates>-122.66983333333,45.4785,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Puget Sound North</name>
+      <Placemark>
+        <name>Kingston Cove Yacht Club</name>
+        <description>Distance: 9 nm
+Website: http://kcyc.org
+Address: 25815 Washington Blvd NE, Kingston, WA 98346
+Phone: +1 360-297-3371
+</description>
+        <Point>
+          <coordinates>-122.495,47.791666666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>La Conner Yacht Club</name>
+        <description>Distance: 49 nm
+Website: http://laconneryc.org
+Address: N Second St, La Conner, WA 98257
+Phone: +1 360-466-3118
+</description>
+        <Point>
+          <coordinates>-122.4975,48.391,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Port Madison Yacht Club</name>
+        <description>Distance: 6 nm
+Website: http://portmadisonyc.org
+Address: 8478 NE Hidden Cove Rd, Bainbridge Island, WA 98110
+Phone: +1 206-842-8826
+</description>
+        <Point>
+          <coordinates>-122.53613333333,47.696266666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Roche Harbor Yacht Club</name>
+        <description>Distance: 13 nm
+Website: http://www.rhyc.org
+Address: 248 Reuben Memorial Dr, Roche Harbor, WA 98250
+Phone: +1 800-451-8910
+</description>
+        <Point>
+          <coordinates>-122.62246666667,47.561466666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sinclair Inlet Yacht Club</name>
+        <description>Distance: 14 nm
+Website: http://sinclairinletyachtclub.org
+Address: 707 Sidney Pkwy, Port Orchard, WA 98366
+Phone: +1 360-769-2213
+</description>
+        <Point>
+          <coordinates>-122.6395,47.544833333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>South Whidbey Yacht Club</name>
+        <description>Distance: 25 nm
+Website: http://swyachtclub.org
+Address: Holmes Harbor, Greenbank/Freeland, WA
+</description>
+        <Point>
+          <coordinates>-122.404275,48.0387,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>West Sound Corinthian Yacht Club</name>
+        <description>Distance: 14 nm
+Website: http://www.wscyc.net
+Address: Dyes Inlet / Tracyton area, WA
+</description>
+        <Point>
+          <coordinates>-122.63955,47.544366666667,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Puget Sound South</name>
+      <Placemark>
+        <name>Corinthian Yacht Club of Tacoma</name>
+        <description>Distance: 30 nm
+Website: http://www.cyct.com
+Address: 5624 Marine View Dr, Tacoma, WA 98422
+</description>
+        <Point>
+          <coordinates>-122.43251666667,47.2462,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Day Island Yacht Club</name>
+        <description>Distance: 31 nm
+Website: http://www.dayislandyc.org
+Address: 2120 91st Ave W, University Place, WA 98466
+Phone: +1 253-565-3777
+</description>
+        <Point>
+          <coordinates>-122.56103333333,47.23835,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Des Moines Yacht Club</name>
+        <description>Distance: 20 nm
+Website: http://www.desmoinesyachtclub.com
+Address: 22737 Marine View Dr S, Des Moines, WA 98198
+Phone: +1 206-878-7220
+</description>
+        <Point>
+          <coordinates>-122.33016666667,47.39685,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fircrest Yacht Club</name>
+        <description>Distance: 26 nm
+Website: http://www.fircrestyc.org
+Address: Day Island area, Tacoma, WA
+</description>
+        <Point>
+          <coordinates>-122.5115,47.305,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Olympia Yacht Club</name>
+        <description>Distance: 50 nm
+Website: https://www.theolympiayachtclub.com/
+Address: 201 Simmons St NW, Olympia, WA 98501
+Phone: +1 360-357-6767
+</description>
+        <Point>
+          <coordinates>-122.90586666667,47.047783333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Oro Bay Yacht Club</name>
+        <description>Distance: 40 nm
+Website: http://orobayyc.org
+Address: 13312 Agate Beach Rd, Anderson Island, WA 98303
+</description>
+        <Point>
+          <coordinates>-122.70206666667,47.136083333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Quartermaster Yacht Club</name>
+        <description>Distance: 20 nm
+Website: http://quartermasteryachtclub.org
+Address: 23428 Vashon Hwy SW, Vashon, WA 98070
+Phone: +1 206-498-8348
+</description>
+        <Point>
+          <coordinates>-122.464,47.393666666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Shelton Yacht Club</name>
+        <description>Distance: 45 nm
+Website: http://www.SheltonYachtClub.com
+Address: 701 E Pine St, Shelton, WA 98584
+Phone: +1 360-426-9476
+</description>
+        <Point>
+          <coordinates>-123.08493333333,47.213916666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Three Tree Point Yacht Club</name>
+        <description>Distance: 20 nm
+Website: http://www.ttpyc.org
+Address: Three Tree Point, Burien, WA 98166
+</description>
+        <Point>
+          <coordinates>-122.3308,47.401266666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Totem Yacht Club</name>
+        <description>Distance: 29 nm
+Website: https://totem.clubexpress.com
+Address: 5045 N Highland St, Ruston, WA 98407
+Phone: +1 253-759-9062
+</description>
+        <Point>
+          <coordinates>-122.43528333333,47.256283333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Seattle Area</name>
+      <Placemark>
+        <name>Bellevue Yacht Club</name>
+        <description>Distance: 12 nm
+Website: http://www.bellevueyachtclub.com
+Address: 3911 Lake Washington Blvd SE, Bellevue, WA 98006
+Phone: +1 206-914-6562
+</description>
+        <Point>
+          <coordinates>-122.18826666667,47.575833333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hidden Harbor Yacht Club</name>
+        <description>Distance: 2 nm
+Website: http://hhycseattle.com
+Address: Seattle, WA
+</description>
+        <Point>
+          <coordinates>-122.3783,47.658583333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Southern California</name>
+      <Placemark>
+        <name>Channel Islands Yacht Club</name>
+        <description>Distance: 949 nm
+Website: http://www.ciyc.com
+Address: 4100 Harbor Blvd, Oxnard, CA 93035
+Phone: +1 805-985-2492
+</description>
+        <Point>
+          <coordinates>-119.226589,34.163807,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ventura Yacht Club</name>
+        <description>Distance: 943 nm
+Website: http://www.venturayachtclub.org
+Address: 1755 Spinnaker Dr, Ventura, CA 93001
+Phone: +1 805-642-0426
+</description>
+        <Point>
+          <coordinates>-119.26563333333,34.245783333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Vancouver Area</name>
+      <Placemark>
+        <name>Crescent Beach Yacht Club</name>
+        <description>Distance: 98 nm
+Website: http://www.cbyachtclub.ca
+Address: 12555 Crescent Rd, Surrey, BC V4A 2P2
+Phone: +1 604-538-9559
+</description>
+        <Point>
+          <coordinates>-122.86751666667,49.05695,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Deep Cove Yacht Club</name>
+        <description>Distance: 117 nm
+Website: http://www.deepcoveyc.com
+Address: 4420 Gallant Ave, North Vancouver, BC V7G 1L2
+Phone: +1 604-929-1009
+</description>
+        <Point>
+          <coordinates>-122.94625,49.327866666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>False Creek Yacht Club</name>
+        <description>Distance: 115 nm
+Website: http://www.fcyc.com
+Address: 1661 Granville St, Vancouver, BC V6Z 1N3
+Phone: +1 604-682-3292
+</description>
+        <Point>
+          <coordinates>-123.13833333333,49.273333333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Royal City Yacht Club</name>
+        <description>Distance: 104 nm
+Website: https://www.royalcityyachtclub.com/
+Address: 6100 Ferry Rd #1, Delta, BC V4K 0E2
+Phone: +1 800-334-6629
+</description>
+        <Point>
+          <coordinates>-123.13083333333,49.114483333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Royal Vancouver Yacht Club - Coal Harbour</name>
+        <description>Distance: 116 nm
+Website: http://www.royalvan.com
+Address: Coal Harbour Station, Vancouver, BC
+</description>
+        <Point>
+          <coordinates>-123.13083333333,49.295,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Royal Vancouver Yacht Club - Jericho</name>
+        <description>Distance: 116 nm
+Website: http://www.royalvan.com
+Address: 3811 Point Grey Rd, Vancouver, BC V6R 1B3
+Phone: +1 604-224-1344
+</description>
+        <Point>
+          <coordinates>-123.18571666667,49.275216666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Vancouver Rowing Club</name>
+        <description>Distance: 117 nm
+Website: http://www.vancouverrowingclub.ca
+Address: 450 Stanley Park Dr, Vancouver, BC V6G 3E2
+Phone: +1 604-687-3400
+</description>
+        <Point>
+          <coordinates>-123.13385,49.296316666667,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Whidbey & Everett</name>
+      <Placemark>
+        <name>Dagmars Yacht Club</name>
+        <description>Distance: 25 nm
+Website: https://dagmarsyc.clubexpress.com/
+Address: 1870 Ross Ave, Everett, WA 98201
+Phone: +1 425-259-6124
+</description>
+        <Point>
+          <coordinates>-122.17958333333,48.01255,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Milltown Sailing Association</name>
+        <description>Distance: 24 nm
+Website: http://www.milltownsailing.org
+Address: 615 Millwright Lp N, Everett, WA 98201
+Phone: +1 425-259-5275
+</description>
+        <Point>
+          <coordinates>-122.22166666667,48.001666666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Navy Yacht Club - Everett</name>
+        <description>Distance: 24 nm
+Website: http://www.navyyachtclubeverett.com
+Address: Naval Station Everett, 2000 W Marine View Dr, Everett, WA 98201
+</description>
+        <Point>
+          <coordinates>-122.22333333333,48.000166666667,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Oak Harbor Yacht Club</name>
+        <description>Distance: 43 nm
+Website: http://www.ohyc.org
+Address: 1301 SE Catalina Dr, Oak Harbor, WA 98277
+Phone: +1 360-675-1314
+</description>
+        <Point>
+          <coordinates>-122.63366666667,48.286683333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Shelter Bay Yacht Club</name>
+        <description>Distance: 49 nm
+Website: http://shelterbayyachtclub.org
+Address: Shoshone Dr, La Conner, WA 98257
+</description>
+        <Point>
+          <coordinates>-122.5132,48.381033333333,0</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Swinomish Yacht Club</name>
+        <description>Distance: 50 nm
+Website: http://www.cruisesyc.org
+Address: 310 N 1st St, La Conner, WA 98257
+Phone: +1 360-466-4902
+</description>
+        <Point>
+          <coordinates>-122.4965,48.395233333333,0</coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

@@ -1,0 +1,15 @@
+{
+  "name": "reciprocal-clubs",
+  "version": "0.0.1",
+  "description": "styc reciprocal club geodata",
+  "license": "MIT",
+  "author": "Ivan Storck",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "^0.49.0"
+  }
+}

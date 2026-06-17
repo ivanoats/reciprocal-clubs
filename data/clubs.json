@@ -1,0 +1,882 @@
+{
+  "yacht_club": "Sloop Tavern Yacht Club",
+  "page_url": "https://yachtdestinations.org/ClubPages/clubpage.php?page=dt&club=63&account=72d331c5905e1bbe51588b9a2fba0487&css=default&hash=&title=yes&width=default&height=default",
+  "total_clubs": 175,
+  "clubs": [
+    {
+      "name": "Aeolian Yacht Club",
+      "latitude": 37.750666666667,
+      "longitude": -122.2354
+    },
+    {
+      "name": "Alameda Yacht Club",
+      "latitude": 37.77795,
+      "longitude": -122.2587
+    },
+    {
+      "name": "Alamitos Bay Yacht Club",
+      "latitude": 33.7457,
+      "longitude": -118.1169
+    },
+    {
+      "name": "American Yacht Club",
+      "latitude": 40.9408,
+      "longitude": -73.699133333333
+    },
+    {
+      "name": "Anacapa Yacht Club",
+      "latitude": 34.172516666667,
+      "longitude": -119.23065
+    },
+    {
+      "name": "Anacortes Yacht Club",
+      "latitude": 48.5125,
+      "longitude": -122.605
+    },
+    {
+      "name": "Annapolis Yacht Club",
+      "latitude": 38.9739,
+      "longitude": -76.4852
+    },
+    {
+      "name": "Astoria Yacht Club",
+      "latitude": 46.190833333333,
+      "longitude": -123.85578333333
+    },
+    {
+      "name": "Bahia Corinthian Yacht Club",
+      "latitude": 33.606666666667,
+      "longitude": -117.88478333333
+    },
+    {
+      "name": "Balboa Yacht Club",
+      "latitude": 33.604166666667,
+      "longitude": -117.883
+    },
+    {
+      "name": "Bellevue Yacht Club",
+      "latitude": 47.575833333333,
+      "longitude": -122.18826666667
+    },
+    {
+      "name": "Bellingham Yacht Club",
+      "latitude": 48.757466666667,
+      "longitude": -122.50508333333
+    },
+    {
+      "name": "Birch Bay Village Yacht Club",
+      "latitude": 48.931333333333,
+      "longitude": -122.78725
+    },
+    {
+      "name": "Bodensee Yacht Club",
+      "latitude": 47.723316666667,
+      "longitude": -9.2296666666667
+    },
+    {
+      "name": "Bremerton Yacht Club",
+      "latitude": 47.588166666667,
+      "longitude": -122.6625
+    },
+    {
+      "name": "Brownsville Yacht Club",
+      "latitude": 47.651666666667,
+      "longitude": -122.61555
+    },
+    {
+      "name": "Burrard Yacht Club",
+      "latitude": 49.3108,
+      "longitude": -123.09095
+    },
+    {
+      "name": "Cabrillo Beach Yacht Club",
+      "latitude": 33.72445,
+      "longitude": -118.2825
+    },
+    {
+      "name": "California Yacht Club",
+      "latitude": 33.982383333333,
+      "longitude": -118.44625
+    },
+    {
+      "name": "Camano Island Yacht Club",
+      "latitude": 48.216516666667,
+      "longitude": -122.53895
+    },
+    {
+      "name": "Campbell River Yacht Club",
+      "latitude": 50.02965,
+      "longitude": -125.24725
+    },
+    {
+      "name": "Canadian Forces Sailing Assoc.",
+      "latitude": 48.438166666667,
+      "longitude": -123.43416666667
+    },
+    {
+      "name": "Capital City Yacht Club",
+      "latitude": 48.672516666667,
+      "longitude": -123.41896666667
+    },
+    {
+      "name": "Carling Yacht Club",
+      "latitude": 47.209333333333,
+      "longitude": -122.75516666667
+    },
+    {
+      "name": "Cathlamet Yacht Club",
+      "latitude": 46.205833333333,
+      "longitude": -123.38666666667
+    },
+    {
+      "name": "Channel Islands Yacht Club",
+      "latitude": 34.163807,
+      "longitude": -119.226589
+    },
+    {
+      "name": "Clover Island Yacht Club",
+      "latitude": 46.215833333333,
+      "longitude": -119.1115
+    },
+    {
+      "name": "Columbia River Yacht Club",
+      "latitude": 45.609833333333,
+      "longitude": -122.6635
+    },
+    {
+      "name": "Comox Valley Yacht Club",
+      "latitude": 49.668333333333,
+      "longitude": -124.925
+    },
+    {
+      "name": "Corinthian Yacht Club of Bellingham",
+      "latitude": 48.75685,
+      "longitude": -122.4992
+    },
+    {
+      "name": "Corinthian Yacht Club of Edmonds",
+      "latitude": 47.809333333333,
+      "longitude": -122.39158333333
+    },
+    {
+      "name": "Corinthian Yacht Club of Seattle",
+      "latitude": 47.685416666667,
+      "longitude": -122.40366666667
+    },
+    {
+      "name": "Corinthian Yacht Club of Tacoma",
+      "latitude": 47.2462,
+      "longitude": -122.43251666667
+    },
+    {
+      "name": "Coronado Cays Yacht Club",
+      "latitude": 32.625,
+      "longitude": -117.1305
+    },
+    {
+      "name": "Coronado Yacht Club",
+      "latitude": 32.6825,
+      "longitude": -117.173
+    },
+    {
+      "name": "Crescent Beach Yacht Club",
+      "latitude": 49.05695,
+      "longitude": -122.86751666667
+    },
+    {
+      "name": "Dagmars Yacht Club",
+      "latitude": 48.01255,
+      "longitude": -122.17958333333
+    },
+    {
+      "name": "Dana Point Yacht Club",
+      "latitude": 33.460333333333,
+      "longitude": -117.70416666667
+    },
+    {
+      "name": "Dana West Yacht Club",
+      "latitude": 33.458666666667,
+      "longitude": -117.702
+    },
+    {
+      "name": "Day Island Yacht Club",
+      "latitude": 47.23835,
+      "longitude": -122.56103333333
+    },
+    {
+      "name": "Deas Island Yacht Club",
+      "latitude": 49.115366666667,
+      "longitude": -123.06345
+    },
+    {
+      "name": "Deep Bay Yacht Club",
+      "latitude": 0,
+      "longitude": 0
+    },
+    {
+      "name": "Deep Cove Yacht Club",
+      "latitude": 49.327866666667,
+      "longitude": -122.94625
+    },
+    {
+      "name": "Deer Harbor Yacht Club",
+      "latitude": 48.620583333333,
+      "longitude": -123.00273333333
+    },
+    {
+      "name": "Del Rey Yacht Club",
+      "latitude": 33.9815,
+      "longitude": -118.44983333333
+    },
+    {
+      "name": "Des Moines Yacht Club",
+      "latitude": 47.39685,
+      "longitude": -122.33016666667
+    },
+    {
+      "name": "Duwamish Yacht Club",
+      "latitude": 47.519866666667,
+      "longitude": -122.30745
+    },
+    {
+      "name": "Eagle Harbor Yacht Club",
+      "latitude": 47.622,
+      "longitude": -122.52141666667
+    },
+    {
+      "name": "Eagle Harbour Yacht Club",
+      "latitude": 49.35255,
+      "longitude": -123.27006666667
+    },
+    {
+      "name": "Edmonds Yacht Club",
+      "latitude": 47.809483333333,
+      "longitude": -122.39196666667
+    },
+    {
+      "name": "Emerald Rose Yacht Club",
+      "latitude": 48.3982,
+      "longitude": -122.62843333333
+    },
+    {
+      "name": "Everett Yacht Club",
+      "latitude": 47.994783333333,
+      "longitude": -122.22383333333
+    },
+    {
+      "name": "False Creek Yacht Club",
+      "latitude": 49.273333333333,
+      "longitude": -123.13833333333
+    },
+    {
+      "name": "Fidalgo Yacht Club",
+      "latitude": 48.513383333333,
+      "longitude": -122.60466666667
+    },
+    {
+      "name": "Fircrest Yacht Club",
+      "latitude": 47.305,
+      "longitude": -122.5115
+    },
+    {
+      "name": "Flounder Bay Yacht Club",
+      "latitude": 48.491266666667,
+      "longitude": -122.68071666667
+    },
+    {
+      "name": "Fox Island Yacht Club",
+      "latitude": 47.240183333333,
+      "longitude": -122.60151666667
+    },
+    {
+      "name": "Gig Harbor Yacht Club",
+      "latitude": 47.338333333333,
+      "longitude": -122.58833333333
+    },
+    {
+      "name": "Golden Gate Yacht Club",
+      "latitude": 37.8077,
+      "longitude": -122.4426
+    },
+    {
+      "name": "Half Moon Bay Yacht Club",
+      "latitude": 37.5028,
+      "longitude": -122.49085
+    },
+    {
+      "name": "Harrison Yacht Club",
+      "latitude": 49.306066666667,
+      "longitude": -121.7734
+    },
+    {
+      "name": "Hat Island Yacht & Golf Club",
+      "latitude": 48.02045,
+      "longitude": -122.3215
+    },
+    {
+      "name": "Hawaii Yacht Club",
+      "latitude": 21.2861,
+      "longitude": -157.8429
+    },
+    {
+      "name": "Hayden Island Yacht Club",
+      "latitude": 45.60765,
+      "longitude": -122.6758
+    },
+    {
+      "name": "Hebe Haven Yacht Club",
+      "latitude": 22.358666666667,
+      "longitude": -114.257
+    },
+    {
+      "name": "Hidden Harbor Yacht Club",
+      "latitude": 47.658583333333,
+      "longitude": -122.3783
+    },
+    {
+      "name": "Hilo Yacht Club",
+      "latitude": 19.736133333333,
+      "longitude": -155.03395
+    },
+    {
+      "name": "Hood River Yacht Club",
+      "latitude": 45.712933333333,
+      "longitude": -121.50288333333
+    },
+    {
+      "name": "International Yacht Club",
+      "latitude": 1.9916666666667,
+      "longitude": -1.7655
+    },
+    {
+      "name": "Juneau Yacht Club",
+      "latitude": 58.3054,
+      "longitude": -134.43436666667
+    },
+    {
+      "name": "Kelowna Yacht Club",
+      "latitude": 49.890166666667,
+      "longitude": -119.49783333333
+    },
+    {
+      "name": "Ketchikan Yacht Club",
+      "latitude": 55.340183333333,
+      "longitude": -131.6419
+    },
+    {
+      "name": "King Harbor Yacht Club",
+      "latitude": 33.8488,
+      "longitude": -118.4008
+    },
+    {
+      "name": "Kingston Cove Yacht Club",
+      "latitude": 47.791666666667,
+      "longitude": -122.495
+    },
+    {
+      "name": "Kitsilano Yacht Club",
+      "latitude": 49.275,
+      "longitude": -123.16
+    },
+    {
+      "name": "La Conner Yacht Club",
+      "latitude": 48.391,
+      "longitude": -122.4975
+    },
+    {
+      "name": "Ladner Yacht Club",
+      "latitude": 49.095266666667,
+      "longitude": -123.08428333333
+    },
+    {
+      "name": "Ladysmith Yacht Club",
+      "latitude": 49.00655,
+      "longitude": -123.82661666667
+    },
+    {
+      "name": "Lahaina Yacht Club",
+      "latitude": 20.87565,
+      "longitude": -156.68
+    },
+    {
+      "name": "Long Beach Yacht Club",
+      "latitude": 33.753,
+      "longitude": -118.11366666667
+    },
+    {
+      "name": "Longview Yacht Club",
+      "latitude": 46.16795,
+      "longitude": -123.04926666667
+    },
+    {
+      "name": "Lopez Island Yacht Club",
+      "latitude": 48.5132,
+      "longitude": -122.91585
+    },
+    {
+      "name": "Los Angeles Yacht Club",
+      "latitude": 33.723333333333,
+      "longitude": -118.276
+    },
+    {
+      "name": "Maple Bay Yacht Club",
+      "latitude": 48.803,
+      "longitude": -123.60216666667
+    },
+    {
+      "name": "Meydenbauer Bay Yacht Club",
+      "latitude": 47.608183333333,
+      "longitude": -122.20908333333
+    },
+    {
+      "name": "Milltown Sailing Association",
+      "latitude": 48.001666666667,
+      "longitude": -122.22166666667
+    },
+    {
+      "name": "Mission Bay Yacht Club",
+      "latitude": 32.766666666667,
+      "longitude": -117.25
+    },
+    {
+      "name": "Morro Bay Yacht Club",
+      "latitude": 35.361833333333,
+      "longitude": -120.8545
+    },
+    {
+      "name": "Mukilteo Yacht Club",
+      "latitude": 47.997583333333,
+      "longitude": -122.22331666667
+    },
+    {
+      "name": "Multnomah Channel Yacht Club",
+      "latitude": 45.735183333333,
+      "longitude": -122.8505
+    },
+    {
+      "name": "Nanaimo Yacht Club",
+      "latitude": 49.177816666667,
+      "longitude": -123.93991666667
+    },
+    {
+      "name": "Navy Yacht Club",
+      "latitude": 32.651,
+      "longitude": -117.14911666667
+    },
+    {
+      "name": "Navy Yacht Club - Everett",
+      "latitude": 48.000166666667,
+      "longitude": -122.22333333333
+    },
+    {
+      "name": "Newport Harbor Yacht Club",
+      "latitude": 33.605276666667,
+      "longitude": -117.90916666667
+    },
+    {
+      "name": "Oak Harbor Yacht Club",
+      "latitude": 48.286683333333,
+      "longitude": -122.63366666667
+    },
+    {
+      "name": "Oakland Yacht Club",
+      "latitude": 37.783466666667,
+      "longitude": -122.2651
+    },
+    {
+      "name": "Oceanside Yacht Club",
+      "latitude": 33.178833333333,
+      "longitude": -117.4
+    },
+    {
+      "name": "Olympia Yacht Club",
+      "latitude": 47.047783333333,
+      "longitude": -122.90586666667
+    },
+    {
+      "name": "Orcas Island Yacht Club",
+      "latitude": 48.631166666667,
+      "longitude": -122.95991666667
+    },
+    {
+      "name": "Oro Bay Yacht Club",
+      "latitude": 47.136083333333,
+      "longitude": -122.70206666667
+    },
+    {
+      "name": "Pacific Corinthian Yacht Club",
+      "latitude": 34.25,
+      "longitude": -119.25
+    },
+    {
+      "name": "Pleasant Harbor Yacht Club",
+      "latitude": 47.6622,
+      "longitude": -122.91426666667
+    },
+    {
+      "name": "Point Roberts Marina Resort",
+      "latitude": 48.973933333333,
+      "longitude": -123.06313333333
+    },
+    {
+      "name": "Point Roberts Yacht Club",
+      "latitude": 48.976833333333,
+      "longitude": -123.06816666667
+    },
+    {
+      "name": "Port Angeles Yacht Club",
+      "latitude": 48.126366666667,
+      "longitude": -123.45258333333
+    },
+    {
+      "name": "Port Credit Yacht Club",
+      "latitude": 43.556333333333,
+      "longitude": -79.547833333333
+    },
+    {
+      "name": "Port Ludlow Yacht Club",
+      "latitude": 47.921666666667,
+      "longitude": -122.685
+    },
+    {
+      "name": "Port Madison Yacht Club",
+      "latitude": 47.696266666667,
+      "longitude": -122.53613333333
+    },
+    {
+      "name": "Port Orchard Yacht Club",
+      "latitude": 47.5375,
+      "longitude": -122.64083333333
+    },
+    {
+      "name": "Port Townsend Yacht Club",
+      "latitude": 48.107633333333,
+      "longitude": -122.77361666667
+    },
+    {
+      "name": "Portland Yacht Club",
+      "latitude": 45.600716666667,
+      "longitude": -122.6519
+    },
+    {
+      "name": "Poulsbo Yacht Club",
+      "latitude": 47.726666666667,
+      "longitude": -122.63833333333
+    },
+    {
+      "name": "Puget Sound Yacht Club",
+      "latitude": 47.649,
+      "longitude": -122.33016666667
+    },
+    {
+      "name": "Quartermaster Yacht Club",
+      "latitude": 47.393666666667,
+      "longitude": -122.464
+    },
+    {
+      "name": "Queen City Yacht Club",
+      "latitude": 47.643333333333,
+      "longitude": -122.315
+    },
+    {
+      "name": "Rainier Yacht Club",
+      "latitude": 47.521733333333,
+      "longitude": -122.26116666667
+    },
+    {
+      "name": "Richland Yacht Club",
+      "latitude": 46.265033333333,
+      "longitude": -119.25285
+    },
+    {
+      "name": "Richmond Yacht Club",
+      "latitude": 49.182133333333,
+      "longitude": -123.14153333333
+    },
+    {
+      "name": "Roche Harbor Yacht Club",
+      "latitude": 47.561466666667,
+      "longitude": -122.62246666667
+    },
+    {
+      "name": "Rose City Yacht Club",
+      "latitude": 45.6014,
+      "longitude": -122.62626666667
+    },
+    {
+      "name": "Royal City Yacht Club",
+      "latitude": 49.114483333333,
+      "longitude": -123.07696666667
+    },
+    {
+      "name": "Royal New Zealand Yacht Squadron",
+      "latitude": 36.835583333333,
+      "longitude": -174.74538333333
+    },
+    {
+      "name": "Royal Vancouver Yacht Club - Coal Harbour",
+      "latitude": 49.295,
+      "longitude": -123.13083333333
+    },
+    {
+      "name": "Royal Vancouver Yacht Club - Jericho",
+      "latitude": 49.275216666667,
+      "longitude": -123.18571666667
+    },
+    {
+      "name": "Royal Victoria Yacht Club",
+      "latitude": 48.4525,
+      "longitude": -123.2945
+    },
+    {
+      "name": "Sacramento Yacht Club",
+      "latitude": 38.535166666667,
+      "longitude": -121.5185
+    },
+    {
+      "name": "Salt Spring Island Sailing Club",
+      "latitude": 48.845966666667,
+      "longitude": -123.48875
+    },
+    {
+      "name": "San Diego Yacht Club",
+      "latitude": 32.718055,
+      "longitude": -117.22861166667
+    },
+    {
+      "name": "San Francisco Yacht Club",
+      "latitude": 37.8722,
+      "longitude": -122.4628
+    },
+    {
+      "name": "San Juan Island Yacht Club",
+      "latitude": 48.539316666667,
+      "longitude": -123.01553333333
+    },
+    {
+      "name": "Santa Barbara Yacht Club",
+      "latitude": 34.40355,
+      "longitude": -119.6927
+    },
+    {
+      "name": "Santa Monica Windjammers Yacht Club",
+      "latitude": 33.977766666667,
+      "longitude": -118.44443333333
+    },
+    {
+      "name": "Sausalito Yacht Club",
+      "latitude": 37.856666666667,
+      "longitude": -122.478
+    },
+    {
+      "name": "Sauvie Island Yacht Club",
+      "latitude": 45.605666666667,
+      "longitude": -122.65833333333
+    },
+    {
+      "name": "Schooner Cove Yacht Club",
+      "latitude": 49.2875,
+      "longitude": -124.13416666667
+    },
+    {
+      "name": "Seabacs Yacht Club (Boeing Co.)",
+      "latitude": 47.651666666667,
+      "longitude": -122.61333333333
+    },
+    {
+      "name": "Seattle Singles Yacht Club",
+      "latitude": 47.658583333333,
+      "longitude": -122.37816666667
+    },
+    {
+      "name": "Seattle Yacht Club",
+      "latitude": 0,
+      "longitude": 0
+    },
+    {
+      "name": "Semiahmoo Marina Yacht Club",
+      "latitude": 48.9882,
+      "longitude": -122.77108333333
+    },
+    {
+      "name": "Semiahmoo Yacht Club",
+      "latitude": 48.991666666667,
+      "longitude": -122.765
+    },
+    {
+      "name": "Sequim Bay Yacht Club",
+      "latitude": 48.064683333333,
+      "longitude": -123.04028333333
+    },
+    {
+      "name": "Shelter Bay Yacht Club",
+      "latitude": 48.381033333333,
+      "longitude": -122.5132
+    },
+    {
+      "name": "Shelton Yacht Club",
+      "latitude": 47.213916666667,
+      "longitude": -123.08493333333
+    },
+    {
+      "name": "Shilshole Bay Yacht Club",
+      "latitude": 0.68416666666667,
+      "longitude": -0.4045
+    },
+    {
+      "name": "Sidney North Saanich Yacht Club",
+      "latitude": 48.673333333333,
+      "longitude": -123.417
+    },
+    {
+      "name": "Silva Bay Yacht Club",
+      "latitude": 49.14815,
+      "longitude": -123.69678333333
+    },
+    {
+      "name": "Sinclair Inlet Yacht Club",
+      "latitude": 47.544833333333,
+      "longitude": -122.6395
+    },
+    {
+      "name": "Sloop Tavern Yacht Club",
+      "latitude": 47.679716666667,
+      "longitude": -122.40663333333
+    },
+    {
+      "name": "South Sound Sailing Society",
+      "latitude": 47.046316666667,
+      "longitude": -122.90476666667
+    },
+    {
+      "name": "South Whidbey Yacht Club",
+      "latitude": 48.0387,
+      "longitude": -122.404275
+    },
+    {
+      "name": "Southwestern Yacht Club",
+      "latitude": 32.745,
+      "longitude": -117.2338
+    },
+    {
+      "name": "Squalicum Yacht Club",
+      "latitude": 48.757783333333,
+      "longitude": -122.50533333333
+    },
+    {
+      "name": "Squamish Yacht Club",
+      "latitude": 49.6945,
+      "longitude": -123.15433333333
+    },
+    {
+      "name": "St. Francis Yacht Club",
+      "latitude": 37.8,
+      "longitude": -122.4
+    },
+    {
+      "name": "Stockton Sailing Club",
+      "latitude": 37.9759346,
+      "longitude": -121.3739359
+    },
+    {
+      "name": "Swinomish Yacht Club",
+      "latitude": 48.395233333333,
+      "longitude": -122.4965
+    },
+    {
+      "name": "Tacoma Yacht Club",
+      "latitude": 47.305866666667,
+      "longitude": -122.5122
+    },
+    {
+      "name": "Three Tree Point Yacht Club",
+      "latitude": 47.401266666667,
+      "longitude": -122.3308
+    },
+    {
+      "name": "Totem Yacht Club",
+      "latitude": 47.256283333333,
+      "longitude": -122.43528333333
+    },
+    {
+      "name": "Tyee Yacht Club - Portland",
+      "latitude": 45.60125,
+      "longitude": -122.63286666667
+    },
+    {
+      "name": "Tyee Yacht Club - Seattle",
+      "latitude": 47.650666666667,
+      "longitude": -122.32333333333
+    },
+    {
+      "name": "Vallarta Yacht Club",
+      "latitude": 20.693266666667,
+      "longitude": -105.29316666667
+    },
+    {
+      "name": "Vallejo Yacht Club",
+      "latitude": 38.105233333333,
+      "longitude": -122.26653333333
+    },
+    {
+      "name": "Vancouver Rowing Club",
+      "latitude": 49.296316666667,
+      "longitude": -123.13385
+    },
+    {
+      "name": "Ventura Yacht Club",
+      "latitude": 34.245783333333,
+      "longitude": -119.26563333333
+    },
+    {
+      "name": "Viking Yacht Club",
+      "latitude": 47.280766666667,
+      "longitude": -122.39303333333
+    },
+    {
+      "name": "Waikiki Yacht Club",
+      "latitude": 21.286616666667,
+      "longitude": -157.84328333333
+    },
+    {
+      "name": "Walla Walla Yacht Club",
+      "latitude": 46.027233333333,
+      "longitude": -118.9369
+    },
+    {
+      "name": "Washington Yacht Club",
+      "latitude": 0,
+      "longitude": 0
+    },
+    {
+      "name": "West Seattle Yacht Club",
+      "latitude": 47.651666666667,
+      "longitude": -122.61083333333
+    },
+    {
+      "name": "West Sound Corinthian Yacht Club",
+      "latitude": 47.544366666667,
+      "longitude": -122.63955
+    },
+    {
+      "name": "West Vancouver Yacht Club",
+      "latitude": 49.355733333333,
+      "longitude": -123.27348333333
+    },
+    {
+      "name": "Willamette Sailing Club",
+      "latitude": 45.4785,
+      "longitude": -122.66983333333
+    },
+    {
+      "name": "William H Seward Yacht Club",
+      "latitude": 60.11735,
+      "longitude": -149.43306666667
+    },
+    {
+      "name": "Yakima Valley Boat Club",
+      "latitude": 46.63535,
+      "longitude": -121.16916666667
+    }
+  ]
+}

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>STYC Reciprocal Yacht Clubs</name>
+<description>68 reciprocal moorage clubs for Sloop Tavern Yacht Club. Distances are nautical miles from STYC (Shilshole Bay).</description>
+<Style id="s_Seattle_Central_Sound"><IconStyle><color>ff1565c0</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_Puget_Sound_North"><IconStyle><color>ff00897b</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_Puget_Sound_South"><IconStyle><color>ff43a047</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_Whidbey_Everett"><IconStyle><color>ff00acc1</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_Olympic_Peninsula_Hood_Canal"><IconStyle><color>ff5e35b1</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_San_Juans_North_Sound"><IconStyle><color>ff039be5</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_British_Columbia"><IconStyle><color>ffe53935</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_Columbia_River_Portland"><IconStyle><color>fffb8c00</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_California"><IconStyle><color>ff8e24aa</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Style id="s_Distant_HI_AK_NZ"><IconStyle><color>ff6d4c41</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon></IconStyle></Style>
+<Folder><name>British Columbia</name>
+<Placemark><name>Crescent Beach Yacht Club</name><description>Region: Vancouver Area
+Distance from STYC: 98 nm
+Address: 12555 Crescent Rd, Surrey, BC V4A 2P2
+Phone: +1 604-538-9559
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-122.870585,49.056416,0</coordinates></Point></Placemark>
+<Placemark><name>Deep Cove Yacht Club</name><description>Region: Vancouver Area
+Distance from STYC: 117 nm
+Address: 4420 Gallant Ave, North Vancouver, BC V7G 1L2
+Phone: +1 604-929-1009
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-122.948771,49.327255,0</coordinates></Point></Placemark>
+<Placemark><name>False Creek Yacht Club</name><description>Region: Vancouver Area
+Distance from STYC: 115 nm
+Address: 1661 Granville St, Vancouver, BC V6Z 1N3
+Phone: +1 604-682-3292
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.132662,49.273315,0</coordinates></Point></Placemark>
+<Placemark><name>Ladysmith Yacht Club</name><description>Region: BC Islands
+Distance from STYC: 113 nm
+Address: 901 Gladden Rd, Ladysmith, BC V9G 1K4 (Ladysmith Marina)
+Phone: +1 250-245-4521
+Pin: Moorage marina/harbor</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.827736,49.006954,0</coordinates></Point></Placemark>
+<Placemark><name>Maple Bay Yacht Club</name><description>Region: BC Islands
+Distance from STYC: 95 nm
+Address: 6337 Genoa Bay Rd, Duncan, BC V9L 5Y4
+Phone: +1 250-746-4521
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.604154,48.801777,0</coordinates></Point></Placemark>
+<Placemark><name>Nanaimo Yacht Club</name><description>Region: BC Islands
+Distance from STYC: 125 nm
+Address: 400 Newcastle Ave, Nanaimo, BC V9S 1C7
+Phone: +1 250-754-7011
+Pin: Moorage marina/harbor</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.942591,49.177074,0</coordinates></Point></Placemark>
+<Placemark><name>Royal City Yacht Club</name><description>Region: Vancouver Area
+Distance from STYC: 104 nm
+Address: 6100 Ferry Rd #1, Delta, BC V4K 0E2
+Phone: +1 800-334-6629
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.076858,49.113631,0</coordinates></Point></Placemark>
+<Placemark><name>Royal Vancouver Yacht Club - Coal Harbour</name><description>Region: Vancouver Area
+Distance from STYC: 116 nm
+Address: Coal Harbour Station, Vancouver, BC
+Pin: Approximate</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.128,49.2905,0</coordinates></Point></Placemark>
+<Placemark><name>Royal Vancouver Yacht Club - Jericho</name><description>Region: Vancouver Area
+Distance from STYC: 116 nm
+Address: 3811 Point Grey Rd, Vancouver, BC V6R 1B3
+Phone: +1 604-224-1344
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.187778,49.272778,0</coordinates></Point></Placemark>
+<Placemark><name>Schooner Cove Yacht Club</name><description>Region: BC Islands
+Distance from STYC: 136 nm
+Address: 3521 Dolphin Dr, Nanoose Bay, BC V9P 9J7
+Phone: +1 778-762-0544
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-124.135806,49.285526,0</coordinates></Point></Placemark>
+<Placemark><name>Silva Bay Yacht Club</name><description>Region: BC Islands
+Distance from STYC: 117 nm
+Address: 3336 South Rd, Gabriola, BC V0R 1X6
+Phone: +1 778-674-8426
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.70278,49.149322,0</coordinates></Point></Placemark>
+<Placemark><name>Vancouver Rowing Club</name><description>Region: Vancouver Area
+Distance from STYC: 117 nm
+Address: 450 Stanley Park Dr, Vancouver, BC V6G 3E2
+Phone: +1 604-687-3400
+Pin: Club location</description><styleUrl>#s_British_Columbia</styleUrl><Point><coordinates>-123.134294,49.296612,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>California</name>
+<Placemark><name>Channel Islands Yacht Club</name><description>Region: Southern California
+Distance from STYC: 949 nm
+Address: 4100 Harbor Blvd, Oxnard, CA 93035
+Phone: +1 805-985-2492
+Pin: Club location</description><styleUrl>#s_California</styleUrl><Point><coordinates>-119.226588,34.163673,0</coordinates></Point></Placemark>
+<Placemark><name>Oakland Yacht Club</name><description>Region: Northern California
+Distance from STYC: 684 nm
+Address: 1101 Pacific Marina, Alameda, CA 94501
+Phone: +1 510-522-6868
+Pin: Club location</description><styleUrl>#s_California</styleUrl><Point><coordinates>-122.264747,37.78345,0</coordinates></Point></Placemark>
+<Placemark><name>Ventura Yacht Club</name><description>Region: Southern California
+Distance from STYC: 943 nm
+Address: 1755 Spinnaker Dr, Ventura, CA 93001
+Phone: +1 805-642-0426
+Pin: Club location</description><styleUrl>#s_California</styleUrl><Point><coordinates>-119.265494,34.244982,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Columbia River &amp; Portland</name>
+<Placemark><name>Astoria Yacht Club</name><description>Region: Columbia River
+Distance from STYC: 124 nm
+Address: 10 Pier 1 Ste 103, Astoria, OR 97103
+Phone: +1 503-610-3274
+Pin: Club location</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-123.857089,46.18968,0</coordinates></Point></Placemark>
+<Placemark><name>Cathlamet Yacht Club</name><description>Region: Columbia River
+Distance from STYC: 112 nm
+Address: 500 2nd St, Cathlamet, WA 98612 (Elochoman Slough Marina)
+Phone: +1 360-795-3501
+Pin: Moorage marina/harbor</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-123.387483,46.205453,0</coordinates></Point></Placemark>
+<Placemark><name>Hood River Yacht Club</name><description>Region: Columbia River OR
+Distance from STYC: 143 nm
+Address: 310 E Port Marina Dr, Hood River, OR 97031
+Pin: Moorage marina/harbor</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-121.506216,45.711774,0</coordinates></Point></Placemark>
+<Placemark><name>Longview Yacht Club</name><description>Region: Columbia River
+Distance from STYC: 109 nm
+Address: Longview, WA 98632
+Phone: +1 360-425-9377
+Pin: Club location</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-123.050192,46.168993,0</coordinates></Point></Placemark>
+<Placemark><name>Multnomah Channel Yacht Club</name><description>Region: Columbia River OR
+Distance from STYC: 136 nm
+Address: 50990 Dike Rd, Scappoose, OR 97056
+Pin: Club location</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-122.850929,45.735531,0</coordinates></Point></Placemark>
+<Placemark><name>Portland Yacht Club</name><description>Region: Portland Area
+Distance from STYC: 144 nm
+Address: 1241 NE Marine Dr, Portland, OR 97211
+Phone: +1 503-285-1922
+Pin: Club location</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-122.651944,45.600833,0</coordinates></Point></Placemark>
+<Placemark><name>Rose City Yacht Club</name><description>Region: Portland Area
+Distance from STYC: 144 nm
+Address: 3737 NE Marine Dr, Portland, OR 97211
+Phone: +1 503-282-2049
+Pin: Club location</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-122.626404,45.601357,0</coordinates></Point></Placemark>
+<Placemark><name>Sauvie Island Yacht Club</name><description>Region: Portland Area
+Distance from STYC: 144 nm
+Address: Sauvie Island / Multnomah Channel, Portland, OR 97231
+Pin: Approximate</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-122.834485,45.652553,0</coordinates></Point></Placemark>
+<Placemark><name>Walla Walla Yacht Club</name><description>Region: Columbia River
+Distance from STYC: 200 nm
+Address: 539 Port Kelly Rd, Kennewick, WA 99337
+Phone: +1 509-547-4946
+Pin: Moorage marina/harbor</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-118.935922,46.027035,0</coordinates></Point></Placemark>
+<Placemark><name>Willamette Sailing Club</name><description>Region: Portland Area
+Distance from STYC: 153 nm
+Address: 6336 S Beaver Ave, Portland, OR 97239
+Phone: +1 503-246-5345
+Pin: Club location</description><styleUrl>#s_Columbia_River_Portland</styleUrl><Point><coordinates>-122.671006,45.47847,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Distant (HI / AK / NZ)</name>
+<Placemark><name>Juneau Yacht Club</name><description>Region: Inside Passage Alaska
+Distance from STYC: 0 nm
+Address: 1301 Harbor Way, Juneau, AK 99801
+Phone: +1 833-323-5111
+Pin: Club location</description><styleUrl>#s_Distant_HI_AK_NZ</styleUrl><Point><coordinates>-134.440157,58.308477,0</coordinates></Point></Placemark>
+<Placemark><name>Lahaina Yacht Club</name><description>Region: Hawaii
+Distance from STYC: 2656 nm
+Address: 835 Front St, Lahaina, HI 96761
+Phone: +1 808-661-0191
+Pin: Club location</description><styleUrl>#s_Distant_HI_AK_NZ</styleUrl><Point><coordinates>-156.680453,20.87575,0</coordinates></Point></Placemark>
+<Placemark><name>Royal New Zealand Yacht Squadron</name><description>Region: New Zealand
+Distance from STYC: 2724 nm
+Address: 181 Westhaven Dr, Auckland 1011, New Zealand
+Phone: +64 9 360 6800
+Pin: Club location</description><styleUrl>#s_Distant_HI_AK_NZ</styleUrl><Point><coordinates>174.745337,-36.835519,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Olympic Peninsula &amp; Hood Canal</name>
+<Placemark><name>Port Angeles Yacht Club</name><description>Region: Olympic &amp; Hood Canal
+Distance from STYC: 57 nm
+Address: 1305 Marine Dr, Port Angeles, WA 98363
+Phone: +1 360-457-4132
+Pin: Club location</description><styleUrl>#s_Olympic_Peninsula_Hood_Canal</styleUrl><Point><coordinates>-123.4566,48.127739,0</coordinates></Point></Placemark>
+<Placemark><name>Port Ludlow Yacht Club</name><description>Region: Olympic &amp; Hood Canal
+Distance from STYC: 21 nm
+Address: 55 Heron Rd, Port Ludlow, WA 98365
+Pin: Club location</description><styleUrl>#s_Olympic_Peninsula_Hood_Canal</styleUrl><Point><coordinates>-122.68368,47.923707,0</coordinates></Point></Placemark>
+<Placemark><name>Port Townsend Yacht Club</name><description>Region: Olympic &amp; Hood Canal
+Distance from STYC: 34 nm
+Address: 2503 Washington St, Port Townsend, WA 98368
+Pin: Club location</description><styleUrl>#s_Olympic_Peninsula_Hood_Canal</styleUrl><Point><coordinates>-122.77306,48.108262,0</coordinates></Point></Placemark>
+<Placemark><name>Sequim Bay Yacht Club</name><description>Region: Olympic &amp; Hood Canal
+Distance from STYC: 40 nm
+Address: 2577 W Sequim Bay Rd, Sequim, WA 98382
+Phone: +1 360-683-3283
+Pin: Club location</description><styleUrl>#s_Olympic_Peninsula_Hood_Canal</styleUrl><Point><coordinates>-123.040689,48.062133,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Puget Sound North</name>
+<Placemark><name>Kingston Cove Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 9 nm
+Address: 25815 Washington Blvd NE, Kingston, WA 98346
+Phone: +1 360-297-3371
+Pin: Club location</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-122.497753,47.796928,0</coordinates></Point></Placemark>
+<Placemark><name>La Conner Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 49 nm
+Address: N Second St, La Conner, WA 98257 (La Conner Marina)
+Phone: +1 360-466-3118
+Pin: Moorage marina/harbor</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-122.494796,48.398048,0</coordinates></Point></Placemark>
+<Placemark><name>Port Madison Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 6 nm
+Address: 8478 NE Hidden Cove Rd, Bainbridge Island, WA 98110
+Phone: +1 206-842-8826
+Pin: Club location</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-122.535584,47.693726,0</coordinates></Point></Placemark>
+<Placemark><name>Roche Harbor Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 13 nm
+Address: 248 Reuben Memorial Dr, Roche Harbor, WA 98250 (Roche Harbor Resort)
+Phone: +1 800-451-8910
+Pin: Moorage marina/harbor</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-123.151812,48.60813,0</coordinates></Point></Placemark>
+<Placemark><name>Sinclair Inlet Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 14 nm
+Address: 707 Sidney Pkwy, Port Orchard, WA 98366
+Phone: +1 360-769-2213
+Pin: Club location</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-122.637152,47.542226,0</coordinates></Point></Placemark>
+<Placemark><name>South Whidbey Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 25 nm
+Address: Holmes Harbor, Greenbank/Freeland, WA - approximate, verify
+Pin: ESTIMATE - verify</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-122.54,48.04,0</coordinates></Point></Placemark>
+<Placemark><name>West Sound Corinthian Yacht Club</name><description>Region: Puget Sound North
+Distance from STYC: 14 nm
+Address: Dyes Inlet / Tracyton area, WA - approximate, verify
+Pin: ESTIMATE - verify</description><styleUrl>#s_Puget_Sound_North</styleUrl><Point><coordinates>-122.665,47.61,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Puget Sound South</name>
+<Placemark><name>Corinthian Yacht Club of Tacoma</name><description>Region: Puget Sound South
+Distance from STYC: 30 nm
+Address: 5624 Marine View Dr, Tacoma, WA 98422
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.423965,47.296856,0</coordinates></Point></Placemark>
+<Placemark><name>Day Island Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 31 nm
+Address: 2120 91st Ave W, University Place, WA 98466
+Phone: +1 253-565-3777
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.559558,47.240136,0</coordinates></Point></Placemark>
+<Placemark><name>Des Moines Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 20 nm
+Address: 22737 Marine View Dr S, Des Moines, WA 98198
+Phone: +1 206-878-7220
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.327815,47.396867,0</coordinates></Point></Placemark>
+<Placemark><name>Fircrest Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 26 nm
+Address: Day Island area, Tacoma, WA
+Pin: Approximate</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.507713,47.300649,0</coordinates></Point></Placemark>
+<Placemark><name>Olympia Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 50 nm
+Address: 201 Simmons St NW, Olympia, WA 98501
+Phone: +1 360-357-6767
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.906864,47.045367,0</coordinates></Point></Placemark>
+<Placemark><name>Oro Bay Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 40 nm
+Address: 13312 Agate Beach Rd, Anderson Island, WA 98303 (Oro Bay Marina)
+Pin: Moorage marina/harbor</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.700284,47.135484,0</coordinates></Point></Placemark>
+<Placemark><name>Quartermaster Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 20 nm
+Address: 23428 Vashon Hwy SW, Vashon, WA 98070
+Phone: +1 206-498-8348
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.466089,47.393866,0</coordinates></Point></Placemark>
+<Placemark><name>Shelton Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 45 nm
+Address: 701 E Pine St, Shelton, WA 98584
+Phone: +1 360-426-9476
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-123.086489,47.214364,0</coordinates></Point></Placemark>
+<Placemark><name>Three Tree Point Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 20 nm
+Address: Three Tree Point, Burien, WA 98166
+Pin: Approximate</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.382348,47.450377,0</coordinates></Point></Placemark>
+<Placemark><name>Totem Yacht Club</name><description>Region: Puget Sound South
+Distance from STYC: 29 nm
+Address: 5045 N Highland St, Ruston, WA 98407
+Phone: +1 253-759-9062
+Pin: Club location</description><styleUrl>#s_Puget_Sound_South</styleUrl><Point><coordinates>-122.514071,47.297903,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>San Juans &amp; North Sound</name>
+<Placemark><name>Anacortes Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 58 nm
+Address: 611 T Ave, Anacortes, WA 98221
+Phone: +1 360-293-5277
+Pin: Club location</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.605008,48.516769,0</coordinates></Point></Placemark>
+<Placemark><name>Bellingham Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 75 nm
+Address: 2625 S Harbor Loop Dr, Bellingham, WA 98225
+Phone: +1 360-733-7390
+Pin: Club location</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.504986,48.757603,0</coordinates></Point></Placemark>
+<Placemark><name>Birch Bay Village Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 88 nm
+Address: Birch Bay Village, Blaine, WA 98230
+Pin: Moorage marina/harbor</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.785327,48.935821,0</coordinates></Point></Placemark>
+<Placemark><name>Corinthian Yacht Club of Bellingham</name><description>Region: Northern Inland Waters
+Distance from STYC: 75 nm
+Address: Squalicum Harbor, Bellingham, WA 98225
+Pin: Approximate</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.51,48.7545,0</coordinates></Point></Placemark>
+<Placemark><name>Deer Harbor Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 71 nm
+Address: Deer Harbor, Orcas Island, WA 98245
+Pin: Approximate</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.999084,48.630181,0</coordinates></Point></Placemark>
+<Placemark><name>Fidalgo Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 58 nm
+Address: 6046 Sands Way, Anacortes, WA 98221
+Phone: +1 360-299-9123
+Pin: Club location</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.686786,48.494998,0</coordinates></Point></Placemark>
+<Placemark><name>Flounder Bay Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 57 nm
+Address: Flounder Bay (Skyline), Anacortes, WA 98221
+Pin: Moorage marina/harbor</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.680598,48.49237,0</coordinates></Point></Placemark>
+<Placemark><name>Orcas Island Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 71 nm
+Address: 876 Deer Harbor Rd, Eastsound, WA 98245
+Phone: +1 360-376-5577
+Pin: Club location</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.959787,48.632335,0</coordinates></Point></Placemark>
+<Placemark><name>Point Roberts Marina Resort</name><description>Region: Northern Inland Waters
+Distance from STYC: 94 nm
+Address: 713 Simundson Dr, Point Roberts, WA 98281
+Phone: +1 360-945-2255
+Pin: Club location</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-123.06315,48.977275,0</coordinates></Point></Placemark>
+<Placemark><name>Point Roberts Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 95 nm
+Address: Point Roberts Marina, Point Roberts, WA 98281
+Pin: Moorage marina/harbor</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-123.0622,48.9768,0</coordinates></Point></Placemark>
+<Placemark><name>Semiahmoo Yacht Club</name><description>Region: Northern Inland Waters
+Distance from STYC: 92 nm
+Address: 9540 Semiahmoo Pkwy, Blaine, WA 98230 (Semiahmoo Marina)
+Phone: +1 360-371-0440
+Pin: Moorage marina/harbor</description><styleUrl>#s_San_Juans_North_Sound</styleUrl><Point><coordinates>-122.772435,48.989014,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Seattle &amp; Central Sound</name>
+<Placemark><name>Bellevue Yacht Club</name><description>Region: Seattle Area
+Distance from STYC: 12 nm
+Address: 3911 Lake Washington Blvd SE, Bellevue, WA 98006
+Phone: +1 206-914-6562
+Pin: Club location</description><styleUrl>#s_Seattle_Central_Sound</styleUrl><Point><coordinates>-122.187588,47.575434,0</coordinates></Point></Placemark>
+<Placemark><name>Hidden Harbor Yacht Club</name><description>Region: Seattle Area
+Distance from STYC: 2 nm
+Address: Seattle, WA - approximate, verify
+Pin: ESTIMATE - verify</description><styleUrl>#s_Seattle_Central_Sound</styleUrl><Point><coordinates>-122.376,47.668,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Whidbey &amp; Everett</name>
+<Placemark><name>Dagmars Yacht Club</name><description>Region: Whidbey &amp; Everett
+Distance from STYC: 25 nm
+Address: 1870 Ross Ave, Everett, WA 98201 (Dagmars Marina)
+Phone: +1 425-259-6124
+Pin: Moorage marina/harbor</description><styleUrl>#s_Whidbey_Everett</styleUrl><Point><coordinates>-122.178341,48.011766,0</coordinates></Point></Placemark>
+<Placemark><name>Milltown Sailing Association</name><description>Region: Whidbey &amp; Everett
+Distance from STYC: 24 nm
+Address: 615 Millwright Lp N, Everett, WA 98201
+Phone: +1 425-259-5275
+Pin: Club location</description><styleUrl>#s_Whidbey_Everett</styleUrl><Point><coordinates>-122.220652,48.001502,0</coordinates></Point></Placemark>
+<Placemark><name>Navy Yacht Club - Everett</name><description>Region: Whidbey &amp; Everett
+Distance from STYC: 24 nm
+Address: Naval Station Everett, 2000 W Marine View Dr, Everett, WA 98201
+Pin: Approximate</description><styleUrl>#s_Whidbey_Everett</styleUrl><Point><coordinates>-122.218525,47.989953,0</coordinates></Point></Placemark>
+<Placemark><name>Oak Harbor Yacht Club</name><description>Region: Whidbey &amp; Everett
+Distance from STYC: 43 nm
+Address: 1301 SE Catalina Dr, Oak Harbor, WA 98277
+Phone: +1 360-675-1314
+Pin: Club location</description><styleUrl>#s_Whidbey_Everett</styleUrl><Point><coordinates>-122.632496,48.28785,0</coordinates></Point></Placemark>
+<Placemark><name>Shelter Bay Yacht Club</name><description>Region: Whidbey &amp; Everett
+Distance from STYC: 49 nm
+Address: Shoshone Dr, La Conner, WA 98257
+Pin: Club location</description><styleUrl>#s_Whidbey_Everett</styleUrl><Point><coordinates>-122.515746,48.380783,0</coordinates></Point></Placemark>
+<Placemark><name>Swinomish Yacht Club</name><description>Region: Whidbey &amp; Everett
+Distance from STYC: 50 nm
+Address: 310 N 1st St, La Conner, WA 98257
+Phone: +1 360-466-4902
+Pin: Club location</description><styleUrl>#s_Whidbey_Everett</styleUrl><Point><coordinates>-122.495381,48.39401,0</coordinates></Point></Placemark>
+</Folder>
+</Document></kml>

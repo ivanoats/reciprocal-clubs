@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Sloop Tavern Yacht Club Reciprocal Mooring Page</title>    
+<meta NAME="Author" CONTENT="Bob Brunius">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+
+<style>
+body{margin:0; padding:0; background-color:#333; font-family: 'Open Sans',arial,sans-serif; font-size:14px}
+#page{position:relative; margin:12px auto; padding:0; border-radius:10px 10px 0 0;  width:900px; background-color:#FFF}
+h1.ycname, h1#YCname{text-align:center; font-weight:normal; margin:0; padding:0; font-size:1.6em; color:#444}
+h2.recip{text-align:center; font-weight:normal; padding:0; margin:0 0 15px 0; font-size:1.0em; color:#444}
+#padding{height:12px; line-height:3px}
+#menu{background-color:#FFFFFF; padding-top:10px; border-radius:10px 10px 0 0;}
+#menu a,#menu a:visited{display:inline-block; margin:0 0 0 20px; padding:4px; color:#FFFFFF; text-decoration:none; text-align:center; width:120px;  border:1px; border-bottom:0; border-style:solid; border-color:#D7D7D0; border-radius:6px 6px 0 0}
+#menu a.active{background-color:#E5E5D9; color:#333}
+#menu a.passive{background-color:#FFFFFF; color:#333; border-color:#E5E5D9}
+#menu a.passive:hover{background-color:#E5E5D5; color:#004; text-decoration:underline; border-color:#E5E5D9}
+#select-row{height:30px;  background-color:#E5E5D9; padding-top:10px;}
+#container {margin:0; padding:15px 0; background-color:#E5E5D9}
+#tabs{padding:2px; margin-top:10px; min-height:445px }
+#tabs li a {padding:3px; margin:0; font-size:12px}
+#recip-table td{font-size:1.0em}
+#topSection{padding:10px}
+</style>
+<link rel="stylesheet" href="recip_tabular_cp.css" type="text/css" media="all" />    
+<link rel="stylesheet" href="../scripts/css/smoothness/jquery-ui-1.8.18.custom.css" type="text/css" media="all" />  
+<script type="text/javascript" src="../scripts/jQuery-1.7.1.min.js"></script>    
+<script type="text/javascript" src="../scripts/jquery-ui-1.8.18.custom.min.js"></script>
+<script type="text/javascript" src="../scripts/jquery.cookies.2.2.0.min.js"></script>
+
+    <script type="text/javascript">
+        function callbackStub(){
+            console.log(this);
+        }
+    </script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWXduiVYKEOm9cJi6_FAIK4M9xPAZTUTw&callback=callbackStub"></script>
+
+<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3.46&key=AIzaSyDWXduiVYKEOm9cJi6_FAIK4M9xPAZTUTw"></script> -->
+<script type="text/javascript" src="../scripts/yd_functions.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28575916-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+<script type="text/javascript">
+    var url_hash = "";
+    function sendSizeInfo(line){
+        window.setTimeout(function(){
+            var height = jQuery('#page').height();
+            var postData = {};
+            postData.height = height;
+            postData.hash = url_hash;
+            jQuery.post("recordPageInfo.php",postData,function(data){
+                //console.log(data);
+            });
+        },100);
+    }
+
+    function resizeHeight(){
+        var avaliable = $(window).height() - 150;
+        // if(avaliable > 1000) avaliable = 1000;
+        $('#map_canvas').css("height", avaliable + "px");
+        $('#container, #page').css("min-height","100px");
+    }
+    function resizeWidth(){
+        var avaliable = $(window).width() - 20;
+        if(avaliable > 1500) avaliable = 1500;
+        $('#page').css("width", avaliable + "px");
+    }
+</script>
+</head>
+<body>
+<div id="page">
+    <img style="position:absolute; top:10px; left:10px" id="ajax-loaded-icon" src="../misc/ajax-loader.gif" />
+    <!-- master menu for iframe -->
+    <div id="menu">
+<h1 class='ycname'> Sloop Tavern Yacht Club </h1>
+<h2 class='recip'>Our Reciprocal Clubs</h2><a class="active" href='clubpage.php?page=dt&club=63&account=72d331c5905e1bbe51588b9a2fba0487&css=default&hash=&title=yes&width=default&height=default'>Details</a>
+	<a class="passive" href='clubpage.php?page=gm&club=63&account=72d331c5905e1bbe51588b9a2fba0487&css=default&hash=&title=yes&width=default&height=default'>Map</a>
+	<a class="passive" href='clubpage.php?page=ourClub&club=63&account=72d331c5905e1bbe51588b9a2fba0487&css=default&hash=&title=yes&width=default&height=default'>Our Facilities</a>
+</div> <!-- end of menu -->
+<!-- load selected library -->
+<script type="text/javascript">
+    var clubMembership = "Sloop Tavern Yacht Club";
+    var clubId = "63";
+</script>
+<script type="text/javascript" src="recip_tabular_cp.js"></script>
+
+<div id="table-view">
+    <div id="select-row">
+        <div id="state-select">
+        State/Province: <select id="state">
+            <option selected=selected value='all'>All</option>    
+            <option  value='AK'>Alaska</option>            
+            <option  value='BC'>British Columbia</option> 
+            <option  value='CA'>California</option> 
+            <option  value='HI'>Hawaii</option>            
+            <option  value='OR'>Oregon</option>            
+            <option  value='WA'>Washington</option>
+            <option  value='NA'>Nayarit, Mexico</option>
+        </select>
+        </div>
+        <div  id='region-select'>
+        Region: <select id="region">
+        <option class="all" selected=selected value='all'>All</option> 
+	<option class='' style='display:none' value='33'>Africa</option>
+	<option class='' style='display:none' value='27'>Asia</option>
+	<option class='' style='display:none' value='31'>Australia</option>
+	<option class='' style='display:none' value='28'>Central America</option>
+	<option class='' style='display:none' value='26'>Europe</option>
+	<option class='' style='display:none' value='34'>Mediterranean </option>
+	<option class='' style='display:none' value='30'>New Zealand</option>
+	<option class='' style='display:none' value='32'>Pacific Islands</option>
+	<option class='' style='display:none' value='29'>South America</option>
+	<option class='BC' style='display:none' value='11'>BC Islands</option>
+	<option class='BC' style='display:none' value='24'>Northern Coast</option>
+	<option class='BC' style='display:none' value='10'>Other/Inland BC</option>
+	<option class='BC' style='display:none' value='23'>Southwestern Coast</option>
+	<option class='BC' style='display:none' value='9'>Vancouver Area</option>
+	<option class='NA' style='display:none' value='25'>Bahis de Banderas</option>
+	<option class='*' style='display:none' value='14'>Columbia River</option>
+	<option class='AK' style='display:none' value='22'>Alaska</option>
+	<option class='AK' style='display:none' value='21'>Inside Passage Alaska</option>
+	<option class='CA' style='display:none' value='17'>Northern California</option>
+	<option class='CA' style='display:none' value='18'>Southern California</option>
+	<option class='HI' style='display:none' value='20'>Hawaii</option>
+	<option class='MD' style='display:none' value='37'>Maryland</option>
+	<option class='NY' style='display:none' value='36'>New York</option>
+	<option class='OR' style='display:none' value='13'>Columbia River OR</option>
+	<option class='OR' style='display:none' value='16'>Other</option>
+	<option class='OR' style='display:none' value='12'>Portland Area</option>
+	<option class='WA' style='display:none' value='3'>Northern Inland Waters</option>
+	<option class='WA' style='display:none' value='4'>Olympic & Hood Canal</option>
+	<option class='WA' style='display:none' value='15'>Other/Inland WA</option>
+	<option class='WA' style='display:none' value='6'>Puget Sound North</option>
+	<option class='WA' style='display:none' value='7'>Puget Sound South</option>
+	<option class='WA' style='display:none' value='8'>Seattle Area</option>
+	<option class='WA' style='display:none' value='5'>Whidbey & Everett</option>
+ 
+        </select>
+        </div>
+<script type="text/javascript">
+var regionArray = [];
+regionArray[33] = {'state':'','name':'Africa'};
+regionArray[27] = {'state':'','name':'Asia'};
+regionArray[31] = {'state':'','name':'Australia'};
+regionArray[28] = {'state':'','name':'Central America'};
+regionArray[26] = {'state':'','name':'Europe'};
+regionArray[34] = {'state':'','name':'Mediterranean '};
+regionArray[30] = {'state':'','name':'New Zealand'};
+regionArray[32] = {'state':'','name':'Pacific Islands'};
+regionArray[29] = {'state':'','name':'South America'};
+regionArray[11] = {'state':'BC','name':'BC Islands'};
+regionArray[24] = {'state':'BC','name':'Northern Coast'};
+regionArray[10] = {'state':'BC','name':'Other/Inland BC'};
+regionArray[23] = {'state':'BC','name':'Southwestern Coast'};
+regionArray[9] = {'state':'BC','name':'Vancouver Area'};
+regionArray[25] = {'state':'NA','name':'Bahis de Banderas'};
+regionArray[14] = {'state':'*','name':'Columbia River'};
+regionArray[22] = {'state':'AK','name':'Alaska'};
+regionArray[21] = {'state':'AK','name':'Inside Passage Alaska'};
+regionArray[17] = {'state':'CA','name':'Northern California'};
+regionArray[18] = {'state':'CA','name':'Southern California'};
+regionArray[20] = {'state':'HI','name':'Hawaii'};
+regionArray[37] = {'state':'MD','name':'Maryland'};
+regionArray[36] = {'state':'NY','name':'New York'};
+regionArray[13] = {'state':'OR','name':'Columbia River OR'};
+regionArray[16] = {'state':'OR','name':'Other'};
+regionArray[12] = {'state':'OR','name':'Portland Area'};
+regionArray[3] = {'state':'WA','name':'Northern Inland Waters'};
+regionArray[4] = {'state':'WA','name':'Olympic & Hood Canal'};
+regionArray[15] = {'state':'WA','name':'Other/Inland WA'};
+regionArray[6] = {'state':'WA','name':'Puget Sound North'};
+regionArray[7] = {'state':'WA','name':'Puget Sound South'};
+regionArray[8] = {'state':'WA','name':'Seattle Area'};
+regionArray[5] = {'state':'WA','name':'Whidbey & Everett'};
+</script>        
+    </div>
+    <div id="container">
+        <div id="map_container">
+            <div id="map_canvas"></div>
+            <button id="close_map">Close</button>
+        </div>
+        <div id="opacityScreen" style="display:none; width:0; height:0; background-color:#000;  position:absolute; z-index:3"></div>
+    </div>
+</div><br/></div> <!-- end of page -->
+</body>
+</html>

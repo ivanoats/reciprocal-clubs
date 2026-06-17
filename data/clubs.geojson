@@ -1,0 +1,1239 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "name": "Sloop Tavern Yacht Club - Reciprocal Clubs",
+    "description": "68 active reciprocal clubs with coordinates and full details extracted from the club details page.",
+    "dataSource": "https://yachtdestinations.org",
+    "extractedDate": "2026-06-16",
+    "totalClubs": 68,
+    "clubsWithCoordinates": 68,
+    "clubsWithWebsites": 68,
+    "clubsWithContactInfo": 68
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Anacortes Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 58,
+        "website": "http://www.anacortesyachtclub.org",
+        "address": "611 T Ave, Anacortes, WA 98221",
+        "phone": "+1 360-293-5277"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.605,
+          48.5125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Astoria Yacht Club",
+        "region": "Columbia River",
+        "distance_nm": 124,
+        "website": "http://www.astoriayachtclub.com",
+        "address": "10 Pier 1 Ste 103, Astoria, OR 97103",
+        "phone": "+1 503-610-3274"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.85578333333,
+          46.190833333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bellevue Yacht Club",
+        "region": "Seattle Area",
+        "distance_nm": 12,
+        "website": "http://www.bellevueyachtclub.com",
+        "address": "3911 Lake Washington Blvd SE, Bellevue, WA 98006",
+        "phone": "+1 206-914-6562"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.18826666667,
+          47.575833333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bellingham Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 75,
+        "website": "http://www.byc.org ",
+        "address": "2625 S Harbor Loop Dr, Bellingham, WA 98225",
+        "phone": "+1 360-733-7390"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.50508333333,
+          48.757466666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Birch Bay Village Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 88,
+        "website": "http://www.bbvyc.org",
+        "address": "Birch Bay Village, Blaine, WA 98230",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.78725,
+          48.931333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cathlamet Yacht Club",
+        "region": "Columbia River",
+        "distance_nm": 112,
+        "website": "http://cathlametyachtclub.org",
+        "address": "500 2nd St, Cathlamet, WA 98612",
+        "phone": "+1 360-795-3501"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.38666666667,
+          46.205833333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Channel Islands Yacht Club",
+        "region": "Southern California",
+        "distance_nm": 949,
+        "website": "http://www.ciyc.com",
+        "address": "4100 Harbor Blvd, Oxnard, CA 93035",
+        "phone": "+1 805-985-2492"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.226589,
+          34.163807
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Corinthian Yacht Club of Bellingham",
+        "region": "Northern Inland Waters",
+        "distance_nm": 75,
+        "website": "http://www.cycbellingham.org",
+        "address": "Squalicum Harbor, Bellingham, WA 98225",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4992,
+          48.75685
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Corinthian Yacht Club of Tacoma",
+        "region": "Puget Sound South",
+        "distance_nm": 30,
+        "website": "http://www.cyct.com",
+        "address": "5624 Marine View Dr, Tacoma, WA 98422",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.43251666667,
+          47.2462
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Crescent Beach Yacht Club",
+        "region": "Vancouver Area",
+        "distance_nm": 98,
+        "website": "http://www.cbyachtclub.ca",
+        "address": "12555 Crescent Rd, Surrey, BC V4A 2P2",
+        "phone": "+1 604-538-9559"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.86751666667,
+          49.05695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dagmars Yacht Club",
+        "region": "Whidbey & Everett",
+        "distance_nm": 25,
+        "website": "https://dagmarsyc.clubexpress.com/",
+        "address": "1870 Ross Ave, Everett, WA 98201",
+        "phone": "+1 425-259-6124"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.17958333333,
+          48.01255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Day Island Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 31,
+        "website": "http://www.dayislandyc.org",
+        "address": "2120 91st Ave W, University Place, WA 98466",
+        "phone": "+1 253-565-3777"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.56103333333,
+          47.23835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Deep Cove Yacht Club",
+        "region": "Vancouver Area",
+        "distance_nm": 117,
+        "website": "http://www.deepcoveyc.com",
+        "address": "4420 Gallant Ave, North Vancouver, BC V7G 1L2",
+        "phone": "+1 604-929-1009"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.94625,
+          49.327866666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Deer Harbor Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 71,
+        "website": "http://dhyc.org",
+        "address": "Deer Harbor, Orcas Island, WA 98245",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.00273333333,
+          48.620583333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Des Moines Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 20,
+        "website": "http://www.desmoinesyachtclub.com",
+        "address": "22737 Marine View Dr S, Des Moines, WA 98198",
+        "phone": "+1 206-878-7220"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.33016666667,
+          47.39685
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "False Creek Yacht Club",
+        "region": "Vancouver Area",
+        "distance_nm": 115,
+        "website": "http://www.fcyc.com",
+        "address": "1661 Granville St, Vancouver, BC V6Z 1N3",
+        "phone": "+1 604-682-3292"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13833333333,
+          49.273333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fidalgo Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 58,
+        "website": "http://www.fidalgoyachtclub.org",
+        "address": "6046 Sands Way, Anacortes, WA 98221",
+        "phone": "+1 360-299-9123"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.60466666667,
+          48.513383333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fircrest Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 26,
+        "website": "http://www.fircrestyc.org",
+        "address": "Day Island area, Tacoma, WA",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5115,
+          47.305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Flounder Bay Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 57,
+        "website": "http://www.FlounderBayYC.com",
+        "address": "Flounder Bay (Skyline), Anacortes, WA 98221",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.68071666667,
+          48.491266666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hidden Harbor Yacht Club",
+        "region": "Seattle Area",
+        "distance_nm": 2,
+        "website": "http://hhycseattle.com",
+        "address": "Seattle, WA",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3783,
+          47.658583333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hood River Yacht Club",
+        "region": "Columbia River OR",
+        "distance_nm": 143,
+        "website": "https://hryc.clubexpress.com/",
+        "address": "310 E Port Marina Dr, Hood River, OR 97031",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.50288333333,
+          45.712933333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Juneau Yacht Club",
+        "region": "Inside Passage Alaska",
+        "distance_nm": 0,
+        "website": "http://www.juneauyc.org",
+        "address": "1301 Harbor Way, Juneau, AK 99801",
+        "phone": "+1 833-323-5111"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -134.43436666667,
+          58.3054
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kingston Cove Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 9,
+        "website": "http://kcyc.org",
+        "address": "25815 Washington Blvd NE, Kingston, WA 98346",
+        "phone": "+1 360-297-3371"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.495,
+          47.791666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "La Conner Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 49,
+        "website": "http://laconneryc.org",
+        "address": "N Second St, La Conner, WA 98257",
+        "phone": "+1 360-466-3118"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4975,
+          48.391
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ladysmith Yacht Club",
+        "region": "BC Islands",
+        "distance_nm": 113,
+        "website": "http://www.ladysmithyc.bc.ca",
+        "address": "901 Gladden Rd, Ladysmith, BC V9G 1K4",
+        "phone": "+1 250-245-4521"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.82661666667,
+          49.00655
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lahaina Yacht Club",
+        "region": "Hawaii",
+        "distance_nm": 2656,
+        "website": "http://www.lyc.us",
+        "address": "835 Front St, Lahaina, HI 96761",
+        "phone": "+1 808-661-0191"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -156.68,
+          20.87565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Longview Yacht Club",
+        "region": "Columbia River",
+        "distance_nm": 109,
+        "website": "http://www.lyc1932.org",
+        "address": "Longview, WA 98632",
+        "phone": "+1 360-425-9377"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.04926666667,
+          46.16795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Maple Bay Yacht Club",
+        "region": "BC Islands",
+        "distance_nm": 95,
+        "website": "http://www.mbyc.ca",
+        "address": "6337 Genoa Bay Rd, Duncan, BC V9L 5Y4",
+        "phone": "+1 250-746-4521"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.60216666667,
+          48.803
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Milltown Sailing Association",
+        "region": "Whidbey & Everett",
+        "distance_nm": 24,
+        "website": "http://www.milltownsailing.org",
+        "address": "615 Millwright Lp N, Everett, WA 98201",
+        "phone": "+1 425-259-5275"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.22166666667,
+          48.001666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Multnomah Channel Yacht Club",
+        "region": "Columbia River OR",
+        "distance_nm": 136,
+        "website": "http://www.mcyc1.org",
+        "address": "50990 Dike Rd, Scappoose, OR 97056",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8505,
+          45.735183333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nanaimo Yacht Club",
+        "region": "BC Islands",
+        "distance_nm": 125,
+        "website": "http://www.nanaimoyc.ca",
+        "address": "400 Newcastle Ave, Nanaimo, BC V9S 1C7",
+        "phone": "+1 250-754-7011"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.93991666667,
+          49.177816666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Navy Yacht Club - Everett",
+        "region": "Whidbey & Everett",
+        "distance_nm": 24,
+        "website": "http://www.navyyachtclubeverett.com",
+        "address": "Naval Station Everett, 2000 W Marine View Dr, Everett, WA 98201",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.22333333333,
+          48.000166666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Oak Harbor Yacht Club",
+        "region": "Whidbey & Everett",
+        "distance_nm": 43,
+        "website": "http://www.ohyc.org",
+        "address": "1301 SE Catalina Dr, Oak Harbor, WA 98277",
+        "phone": "+1 360-675-1314"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.63366666667,
+          48.286683333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Oakland Yacht Club",
+        "region": "Northern California",
+        "distance_nm": 684,
+        "website": "http://www.oaklandyachtclub.net/",
+        "address": "1101 Pacific Marina, Alameda, CA 94501",
+        "phone": "+1 510-522-6868"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2651,
+          37.783466666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Olympia Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 50,
+        "website": "https://www.theolympiayachtclub.com/",
+        "address": "201 Simmons St NW, Olympia, WA 98501",
+        "phone": "+1 360-357-6767"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.90586666667,
+          47.047783333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Orcas Island Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 71,
+        "website": "http://oiyc.org",
+        "address": "876 Deer Harbor Rd, Eastsound, WA 98245",
+        "phone": "+1 360-376-5577"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.95991666667,
+          48.631166666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Oro Bay Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 40,
+        "website": "http://orobayyc.org",
+        "address": "13312 Agate Beach Rd, Anderson Island, WA 98303",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.70206666667,
+          47.136083333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Point Roberts Marina Resort",
+        "region": "Northern Inland Waters",
+        "distance_nm": 94,
+        "website": "http://www.pointrobertsmarina.com",
+        "address": "713 Simundson Dr, Point Roberts, WA 98281",
+        "phone": "+1 360-945-2255"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.06313333333,
+          48.973933333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Point Roberts Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 95,
+        "website": "http://www.pointrobertsyachtclub.com",
+        "address": "Point Roberts Marina, Point Roberts, WA 98281",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.06816666667,
+          48.976833333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Port Angeles Yacht Club",
+        "region": "Olympic & Hood Canal",
+        "distance_nm": 57,
+        "website": "http://www.payc.org",
+        "address": "1305 Marine Dr, Port Angeles, WA 98363",
+        "phone": "+1 360-457-4132"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.45258333333,
+          48.126366666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Port Ludlow Yacht Club",
+        "region": "Olympic & Hood Canal",
+        "distance_nm": 21,
+        "website": "http://www.plyc.us",
+        "address": "55 Heron Rd, Port Ludlow, WA 98365",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.685,
+          47.921666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Port Madison Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 6,
+        "website": "http://portmadisonyc.org",
+        "address": "8478 NE Hidden Cove Rd, Bainbridge Island, WA 98110",
+        "phone": "+1 206-842-8826"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.53613333333,
+          47.696266666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Port Townsend Yacht Club",
+        "region": "Olympic & Hood Canal",
+        "distance_nm": 34,
+        "website": "http://ptyc.net",
+        "address": "2503 Washington St, Port Townsend, WA 98368",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.77361666667,
+          48.107633333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Portland Yacht Club",
+        "region": "Portland Area",
+        "distance_nm": 144,
+        "website": "http://www.portlandyc.com",
+        "address": "1241 NE Marine Dr, Portland, OR 97211",
+        "phone": "+1 503-285-1922"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6519,
+          45.600716666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Quartermaster Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 20,
+        "website": "http://quartermasteryachtclub.org",
+        "address": "23428 Vashon Hwy SW, Vashon, WA 98070",
+        "phone": "+1 206-498-8348"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.464,
+          47.393666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Roche Harbor Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 13,
+        "website": "http://www.rhyc.org",
+        "address": "248 Reuben Memorial Dr, Roche Harbor, WA 98250",
+        "phone": "+1 800-451-8910"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.62246666667,
+          47.561466666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rose City Yacht Club",
+        "region": "Portland Area",
+        "distance_nm": 144,
+        "website": "http://rosecityyachtclub.org",
+        "address": "3737 NE Marine Dr, Portland, OR 97211",
+        "phone": "+1 503-282-2049"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.62626666667,
+          45.6014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Royal City Yacht Club",
+        "region": "Vancouver Area",
+        "distance_nm": 104,
+        "website": "https://www.royalcityyachtclub.com/",
+        "address": "6100 Ferry Rd #1, Delta, BC V4K 0E2",
+        "phone": "+1 800-334-6629"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13083333333,
+          49.114483333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Royal New Zealand Yacht Squadron",
+        "region": "New Zealand",
+        "distance_nm": 2724,
+        "website": "http://www.rnzys.org.nz",
+        "address": "181 Westhaven Dr, Auckland 1011, New Zealand",
+        "phone": "+64 9 360 6800"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -174.74538333333,
+          36.835583333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Royal Vancouver Yacht Club - Coal Harbour",
+        "region": "Vancouver Area",
+        "distance_nm": 116,
+        "website": "http://www.royalvan.com",
+        "address": "Coal Harbour Station, Vancouver, BC",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13083333333,
+          49.295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Royal Vancouver Yacht Club - Jericho",
+        "region": "Vancouver Area",
+        "distance_nm": 116,
+        "website": "http://www.royalvan.com",
+        "address": "3811 Point Grey Rd, Vancouver, BC V6R 1B3",
+        "phone": "+1 604-224-1344"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.18571666667,
+          49.275216666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sauvie Island Yacht Club",
+        "region": "Portland Area",
+        "distance_nm": 144,
+        "website": "http://www.siyc.org",
+        "address": "Sauvie Island / Multnomah Channel, Portland, OR 97231",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.65833333333,
+          45.605666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Schooner Cove Yacht Club",
+        "region": "BC Islands",
+        "distance_nm": 136,
+        "website": "http://www.scyc.ca",
+        "address": "3521 Dolphin Dr, Nanoose Bay, BC V9P 9J7",
+        "phone": "+1 778-762-0544"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.13416666667,
+          49.2875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Semiahmoo Yacht Club",
+        "region": "Northern Inland Waters",
+        "distance_nm": 92,
+        "website": "http://www.semiahmooyachtclub.org",
+        "address": "9540 Semiahmoo Pkwy, Blaine, WA 98230",
+        "phone": "+1 360-371-0440"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.765,
+          48.991666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sequim Bay Yacht Club",
+        "region": "Olympic & Hood Canal",
+        "distance_nm": 40,
+        "website": "http://www.sequimbayyacht.club",
+        "address": "2577 W Sequim Bay Rd, Sequim, WA 98382",
+        "phone": "+1 360-683-3283"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.04028333333,
+          48.064683333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Shelter Bay Yacht Club",
+        "region": "Whidbey & Everett",
+        "distance_nm": 49,
+        "website": "http://shelterbayyachtclub.org",
+        "address": "Shoshone Dr, La Conner, WA 98257",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5132,
+          48.381033333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Shelton Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 45,
+        "website": "http://www.SheltonYachtClub.com",
+        "address": "701 E Pine St, Shelton, WA 98584",
+        "phone": "+1 360-426-9476"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.08493333333,
+          47.213916666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Silva Bay Yacht Club",
+        "region": "BC Islands",
+        "distance_nm": 117,
+        "website": "http://www.silvabayyachtclub.com",
+        "address": "3336 South Rd, Gabriola, BC V0R 1X6",
+        "phone": "+1 778-674-8426"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.69678333333,
+          49.14815
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sinclair Inlet Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 14,
+        "website": "http://sinclairinletyachtclub.org",
+        "address": "707 Sidney Pkwy, Port Orchard, WA 98366",
+        "phone": "+1 360-769-2213"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6395,
+          47.544833333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "South Whidbey Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 25,
+        "website": "http://swyachtclub.org",
+        "address": "Holmes Harbor, Greenbank/Freeland, WA",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.404275,
+          48.0387
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Swinomish Yacht Club",
+        "region": "Whidbey & Everett",
+        "distance_nm": 50,
+        "website": "http://www.cruisesyc.org",
+        "address": "310 N 1st St, La Conner, WA 98257",
+        "phone": "+1 360-466-4902"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4965,
+          48.395233333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Three Tree Point Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 20,
+        "website": "http://www.ttpyc.org",
+        "address": "Three Tree Point, Burien, WA 98166",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3308,
+          47.401266666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Totem Yacht Club",
+        "region": "Puget Sound South",
+        "distance_nm": 29,
+        "website": "https://totem.clubexpress.com",
+        "address": "5045 N Highland St, Ruston, WA 98407",
+        "phone": "+1 253-759-9062"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.43528333333,
+          47.256283333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vancouver Rowing Club",
+        "region": "Vancouver Area",
+        "distance_nm": 117,
+        "website": "http://www.vancouverrowingclub.ca",
+        "address": "450 Stanley Park Dr, Vancouver, BC V6G 3E2",
+        "phone": "+1 604-687-3400"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13385,
+          49.296316666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ventura Yacht Club",
+        "region": "Southern California",
+        "distance_nm": 943,
+        "website": "http://www.venturayachtclub.org",
+        "address": "1755 Spinnaker Dr, Ventura, CA 93001",
+        "phone": "+1 805-642-0426"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.26563333333,
+          34.245783333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Walla Walla Yacht Club",
+        "region": "Columbia River",
+        "distance_nm": 200,
+        "website": "http://www.wallawallayachtclub.com",
+        "address": "539 Port Kelly Rd, Kennewick, WA 99337",
+        "phone": "+1 509-547-4946"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.9369,
+          46.027233333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "West Sound Corinthian Yacht Club",
+        "region": "Puget Sound North",
+        "distance_nm": 14,
+        "website": "http://www.wscyc.net",
+        "address": "Dyes Inlet / Tracyton area, WA",
+        "phone": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.63955,
+          47.544366666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Willamette Sailing Club",
+        "region": "Portland Area",
+        "distance_nm": 153,
+        "website": "http://www.willamettesailingclub.com/",
+        "address": "6336 S Beaver Ave, Portland, OR 97239",
+        "phone": "+1 503-246-5345"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.66983333333,
+          45.4785
+        ]
+      }
+    }
+  ]
+}
