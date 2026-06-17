@@ -44,8 +44,8 @@ const NOAA_CHART_ATTRIBUTION =
 
 let hasRegisteredPmtilesProtocol = false
 
-const getNauticalSourceConfig = () => {
-  if (NAUTICAL_CHART_SOURCE_MODE === 'pmtiles') {
+const getNauticalSourceConfig = (sourceMode: NauticalChartSourceMode) => {
+  if (sourceMode === 'pmtiles') {
     return {
       type: 'raster' as const,
       url: PMTILES_ARCHIVE_URL,
@@ -62,7 +62,10 @@ const getNauticalSourceConfig = () => {
   }
 }
 
-const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
+const createBaseStyle = (
+  mapMode: MapMode,
+  nauticalSourceMode: NauticalChartSourceMode,
+): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
   const baseSourceId = isNautical ? 'noaa' : 'osm'
 
@@ -92,7 +95,7 @@ const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         attribution: '&copy; OpenStreetMap contributors',
       },
       noaa: {
-        ...getNauticalSourceConfig(),
+        ...getNauticalSourceConfig(nauticalSourceMode),
       },
     },
     layers,
@@ -104,7 +107,12 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
   const [mapMode, setMapMode] = useState<MapMode>('nautical')
-  const mapStyle = useMemo(() => createBaseStyle(mapMode), [mapMode])
+  const [useNauticalXyzFallback, setUseNauticalXyzFallback] = useState(false)
+  const nauticalSourceMode = useNauticalXyzFallback ? 'xyz' : NAUTICAL_CHART_SOURCE_MODE
+  const mapStyle = useMemo(
+    () => createBaseStyle(mapMode, nauticalSourceMode),
+    [mapMode, nauticalSourceMode],
+  )
 
   const featureCollection = useMemo(
     () => ({
@@ -286,6 +294,17 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     map.on('error', (event) => {
       // Surface map loading failures during development.
       console.error('MapLibre error', event.error)
+      const sourceId = (event as { sourceId?: string }).sourceId
+
+      if (
+        mapMode === 'nautical' &&
+        nauticalSourceMode === 'pmtiles' &&
+        sourceId === 'noaa' &&
+        !useNauticalXyzFallback
+      ) {
+        console.warn('PMTiles nautical source failed; falling back to NOAA XYZ tiles.')
+        setUseNauticalXyzFallback(true)
+      }
     })
 
     return () => {
@@ -295,7 +314,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     }
     // The map is recreated when the selected basemap mode changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mapStyle])
+  }, [mapMode, mapStyle, nauticalSourceMode, useNauticalXyzFallback])
 
   useEffect(() => {
     const map = mapRef.current
