@@ -1,5 +1,7 @@
 # Reciprocal Clubs
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5e99940d-be1e-4d3a-b6dc-317c7a494c0c/deploy-status)](https://app.netlify.com/projects/styc-recip/deploys)
+
 This repository serves two purposes:
 
 1. It is the authoritative geodata source for **68 active reciprocal
@@ -70,6 +72,39 @@ npm run export:kml
 # Lint all Markdown files
 npx markdownlint-cli "**/*.md" --ignore node_modules
 ```
+
+## Nautical chart source configuration
+
+The chart basemap mode can use either the default NOAA live tile service or a
+custom MBTiles-backed tile server URL.
+
+Set these variables in `.env.local`:
+
+```sh
+# Optional. Defaults to NOAA Chart Display Service if not set.
+# Example for a local XYZ tile server fronting MBTiles:
+# http://localhost:8080/data/{z}/{x}/{y}.png
+NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=
+
+# Optional attribution override for the chart source.
+NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
+```
+
+### Using vokkim/noaa-nautical-charts regions 04-10
+
+The repository lists MBTiles downloads from NOAA for regions 04 through 10,
+which cover the needed U.S. areas.
+
+1. Download:
+  `MBTILES_04.mbtiles` through `MBTILES_10.mbtiles`
+2. Serve them with a local tile server that exposes an XYZ endpoint.
+3. Point `NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL` to that endpoint.
+
+Notes:
+
+- MapLibre in the browser cannot read `.mbtiles` files directly.
+- The MBTiles files must be served through an HTTP tile server first.
+- Keep `chart` mode pointed at the local URL and `standard` mode remains OSM.
 
 ## Available data files
 

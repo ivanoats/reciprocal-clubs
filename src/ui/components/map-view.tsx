@@ -20,8 +20,14 @@ const CLUSTER_LAYER_ID = 'clusters'
 const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
-const NOAA_CHART_TILE_URL =
+const DEFAULT_NOAA_CHART_TILE_URL =
   'https://gis.charttools.noaa.gov/arcgis/rest/services/MarineChart_Services/NOAACharts/MapServer/tile/{z}/{y}/{x}'
+const NOAA_CHART_TILE_URL =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL?.trim() ||
+  DEFAULT_NOAA_CHART_TILE_URL
+const NOAA_CHART_ATTRIBUTION =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
+  '&copy; NOAA Office of Coast Survey'
 
 const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
@@ -56,7 +62,7 @@ const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         type: 'raster',
         tiles: [NOAA_CHART_TILE_URL],
         tileSize: 256,
-        attribution: '&copy; NOAA Office of Coast Survey',
+        attribution: NOAA_CHART_ATTRIBUTION,
       },
     },
     layers,
