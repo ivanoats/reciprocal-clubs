@@ -1,149 +1,195 @@
-# Reciprocal Clubs Data
+# Reciprocal Clubs
 
-Comprehensive dataset of **68 active reciprocal yacht clubs** for Sloop Tavern
-Yacht Club, with GPS coordinates, contact information, websites, and regional
-organization.
+This repository serves two purposes:
 
-## Overview
+1. It is the authoritative geodata source for **68 active reciprocal
+   yacht clubs** for Sloop Tavern Yacht Club (STYC).
+2. It is the home of a **Next.js 19 web app** that will provide an
+   interactive club directory and map on top of that data.
 
-This repository contains extracted data from the Sloop Tavern Yacht Club
-reciprocal mooring pages at
-[yachtdestinations.org](https://yachtdestinations.org). The data includes:
+The authoritative dataset is `data/clubs.geojson`. Other formats such as
+KML, CSV, and JSON are derived exports.
 
-- 68 active reciprocal clubs
-- GPS coordinates (latitude/longitude)
-- Regional organization
-- Contact information (addresses, phone numbers)
-- Website URLs
-- Distance in nautical miles from Seattle
+## Current status
 
-## Data Sources
+The repository already contains the curated club dataset and supporting
+conversion and validation scripts. The Next.js app architecture,
+tooling, and delivery conventions are defined, but the application
+implementation is still being built out.
 
-**Details Page** (68 clubs with full information):
-[Details Page](https://yachtdestinations.org/ClubPages/clubpage.php?page=dt&club=63)
+## Data source of truth
 
-This page contains the authoritative list of active reciprocal mooring partners
-with contact details and websites.
+`data/clubs.geojson` is the single source of truth for reciprocal club records.
 
-## Available Formats
+```text
+data/clubs.geojson  ->  geojson-to-kml.js  ->  data/clubs.kml
+                    ->  manual export      ->  data/clubs.csv
+                    ->  derived export     ->  data/clubs.json
+```
+
+Each feature includes:
+
+- club name
+- region
+- distance from Seattle in nautical miles
+- website
+- address
+- phone number
+- point coordinates in GeoJSON order: `[longitude, latitude]`
+
+## Current commands
+
+These commands exist today in the repository:
+
+```sh
+# Validate GeoJSON against the expected club list
+node validate.js
+
+# Regenerate KML from GeoJSON
+node geojson-to-kml.js
+
+# Lint all Markdown files
+npx markdownlint-cli "**/*.md" --ignore node_modules
+```
+
+The Next.js, test, and CI scripts will be added as the app scaffold lands.
+
+## Available data files
 
 | Format | File | Purpose |
 | --- | --- | --- |
-| GeoJSON | `clubs.geojson` | Modern GIS format for mapping |
-| KML | `clubs.kml` | Google Earth, Google Maps |
-| JSON | `clubs.json` | Structured data for applications |
-| CSV | `clubs.csv` | Spreadsheet import (Excel, Sheets) |
+| GeoJSON | `data/clubs.geojson` | Authoritative mapping dataset |
+| KML | `data/clubs.kml` | Google Earth and other KML consumers |
+| JSON | `data/clubs.json` | Derived structured export |
+| CSV | `data/clubs.csv` | Spreadsheet-friendly export |
+| KML (original) | `data/STYC_Reciprocal_Clubs.kml` | Legacy source reference |
+| CSV (original) | `data/STYC_Reciprocal_Clubs.csv` | Legacy source reference |
 
-## Data Schema
+## Dataset conventions
 
-### GeoJSON Features
+- **Club count**: exactly 68 active reciprocal clubs in the curated dataset
+- **Coordinates**: GeoJSON-standard `[longitude, latitude]`
+- **Distance**: stored as `distance_nm`
+- **Phone format**: E.164-style strings such as `+1 360-293-5277`
+- **Regions**: use the existing 16 region names from the dataset; do
+  not invent new names casually
 
-Each feature in `clubs.geojson` contains:
+### Regions in the curated dataset
+
+- BC Islands
+- Columbia River
+- Columbia River OR
+- Hawaii
+- Inside Passage Alaska
+- New Zealand
+- Northern California
+- Northern Inland Waters
+- Olympic & Hood Canal
+- Portland Area
+- Puget Sound North
+- Puget Sound South
+- Seattle Area
+- Southern California
+- Vancouver Area
+- Whidbey & Everett
+
+## GeoJSON schema
 
 ```json
 {
   "type": "Feature",
   "properties": {
-    "name": "Club Name",
-    "region": "Region Name",
+    "name": "Anacortes Yacht Club",
+    "region": "Northern Inland Waters",
     "distance_nm": 58,
-    "website": "http://example.com",
-    "address": "Street Address, City, State ZIP",
-    "phone": "+1 206-123-4567"
+    "website": "http://www.anacortesyachtclub.org",
+    "address": "611 T Ave, Anacortes, WA 98221",
+    "phone": "+1 360-293-5277"
   },
   "geometry": {
     "type": "Point",
-    "coordinates": [-122.6050, 48.5125]
+    "coordinates": [-122.605, 48.5125]
   }
 }
 ```
 
-## Geographic Distribution
+## Planned application stack
 
-Clubs are organized by 16 regions:
+The app will be built with:
 
-- BC Islands (British Columbia)
-- British Columbia (mainland)
-- Columbia River (Washington/Oregon)
-- Hawaii
-- Inside Passage Alaska
-- Mexico
-- New Zealand
-- Northern California
-- Northern Inland Waters (Washington)
-- Olympic & Hood Canal (Washington)
-- Portland Area (Oregon)
-- Puget Sound North (Washington)
-- Puget Sound South (Washington)
-- Seattle Area (Washington)
-- Southern California
-- Vancouver Area (British Columbia)
-- Whidbey & Everett (Washington)
+- **Next.js 19** with the App Router and React Server Components
+- **Panda CSS** for all styling
+- **Ark UI** for accessible headless primitives
+- **MapLibre GL JS** for interactive mapping
+- **Netlify** for deployment
 
-## Extraction Methods
+Important implementation constraints:
 
-### Details Page Data
+- No Tailwind
+- App code should use ESM `import`/`export`
+- MapLibre stays in client components only
+- Theme follows system `prefers-color-scheme`
 
-Data was extracted from HTML table using Playwright:
+## Planned architecture
 
-1. Parsed table rows for club information
-2. Extracted: name, city, region, distance, website
-3. Cross-referenced with KML for address and phone data
-4. Verified all 68 clubs present on the page
+The app will follow a hexagonal architecture so domain logic stays
+independent from Next.js and UI details.
 
-### Coordinate Data
-
-GPS coordinates sourced from:
-
-- Map page JavaScript (initial extraction)
-- Details page region/website linking (validation)
-- Existing KML file (reference data)
-
-## Files in This Repository
-
-- `clubs.geojson` - GeoJSON FeatureCollection (68 clubs)
-- `clubs.kml` - KML file with regional folders (68 clubs)
-- `clubs.json` - JSON with structured data
-- `clubs.csv` - CSV export for spreadsheets
-- `README.md` - This file
-- `.gitignore` - Git ignore rules
-- `validate.js` - Validation script
-- `geojson-to-kml.js` - GeoJSON to KML converter
-
-## Usage
-
-### Import to Google Earth
-
-1. Download `clubs.kml`
-2. Open Google Earth
-3. File → Import → Select `clubs.kml`
-4. Clubs appear organized by region
-
-### Import to Google Maps
-
-1. Create a new map at [maps.google.com](https://maps.google.com)
-2. Click menu → Import → Upload `clubs.kml`
-3. View all 68 reciprocal clubs with information
-
-### Use in Applications
-
-Load `clubs.geojson` into any GIS or mapping library:
-
-```javascript
-const clubs = require('./clubs.geojson');
-clubs.features.forEach(club => {
-  console.log(club.properties.name);
-});
+```mermaid
+graph TD
+  UI --> Application
+  Application --> Domain
+  Adapters --> Application
 ```
 
-## Data Quality
+Expected structure:
 
-- **Last Updated**: June 16, 2026
-- **Validation**: All 68 clubs verified against live website
-- **Coordinate Coverage**: 68/68 clubs with valid coordinates (100%)
-- **Contact Info**: 68/68 clubs with full details (100%)
-- **Websites**: 68/68 clubs with active websites (100%)
+```text
+src/
+  domain/
+  application/
+  adapters/
+  ui/
+```
+
+- `domain/` contains pure business logic
+- `application/` contains use cases and ports
+- `adapters/` contains implementations for Next.js, data loading, and
+  mapping integration
+- `ui/` contains thin React components
+
+## Quality and delivery conventions
+
+- Tests should target **80% coverage** across statements, branches,
+  functions, and lines
+- Markdown is linted with `markdownlint`
+- CI/CD runs on **GitHub Actions**
+- Code quality is enforced with **DeepSource** and **SonarQube**
+- Pull requests follow **Conventional Commits** and **conventional
+  branching**
+- PRs are **squash-merged**
+- Releases and changelog generation are handled by **semantic-release**
+
+## Architectural decisions
+
+Significant architectural and tooling decisions should be recorded as
+ADRs in `docs/adr/` using numbered kebab-case filenames such as:
+
+```text
+docs/adr/0001-hexagonal-architecture.md
+```
+
+Use MermaidJS for architectural diagrams in ADRs and other project documentation.
+
+## Data sources
+
+Primary upstream references:
+
+- [yachtdestinations.org](https://yachtdestinations.org)
+- `data/STYC_Reciprocal_Clubs.kml`
+- `data/clubpage.php?page=dt&club=63&account=72d331c5905e1bbe51588b9a2fba0487&css=default&hash=&title=yes&width=default&height=default`
 
 ## License
 
-Data extracted from yachtdestinations.org. Subject to the website's terms of use.
+MIT for repository code and configuration. Source data remains subject
+to the upstream website's terms of use.
