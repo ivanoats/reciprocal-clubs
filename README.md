@@ -86,7 +86,8 @@ Set these variables in `.env.local`:
 # Optional. `xyz` (default) or `pmtiles`.
 NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=xyz
 
-# Optional in `xyz` mode. Defaults to NOAA Chart Display Service if not set.
+# Optional in `xyz` mode. Defaults to local NOAA proxy route if not set:
+# /api/noaa-tiles/{z}/{y}/{x}
 # Example for a local XYZ tile server fronting MBTiles or PMTiles:
 # http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
 # Must include {z}, {x}, and {y}. Invalid values auto-fallback to NOAA default.
@@ -156,6 +157,8 @@ Notes:
   NOAA XYZ tiles.
 - If a custom XYZ chart URL fails, chart mode automatically falls back to the
   default NOAA chart URL.
+- The default NOAA chart URL uses a same-origin Next.js proxy route to avoid
+  browser CORS issues with direct upstream tile requests.
 
 ## Available data files
 

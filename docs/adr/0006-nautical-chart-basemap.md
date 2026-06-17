@@ -27,6 +27,9 @@ Support a configurable chart tile URL via environment variable so chart mode
 can point at a local MBTiles-backed tile server (for example, NOAA MBTiles
 regions 04-10 from `vokkim/noaa-nautical-charts`) without code changes.
 
+Default chart tile requests go through a same-origin Next.js route proxy to
+reduce browser CORS/runtime failures from direct third-party tile calls.
+
 Support an optional PMTiles mode for chart source loading in MapLibre by using
 the PMTiles protocol (`pmtiles://`). This allows direct use of a `.pmtiles`
 archive URL while preserving the same chart/standard UI behavior.
@@ -56,6 +59,8 @@ The style includes:
 - The map depends on third-party tile/glyph infrastructure unless self-hosted;
   provider availability, rate limits, and usage policies can affect runtime
   reliability.
+- The proxy route improves client compatibility but adds a lightweight app-side
+  runtime dependency for NOAA tile forwarding.
 - Users can opt into a cleaner standard basemap without leaving the map view.
 - The current approach is an interim nautical basemap, not a full ENC-style
   chart renderer.

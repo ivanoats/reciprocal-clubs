@@ -22,8 +22,7 @@ const CLUSTER_LAYER_ID = 'clusters'
 const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
-const DEFAULT_NOAA_CHART_TILE_URL =
-  'https://gis.charttools.noaa.gov/arcgis/rest/services/MarineChart_Services/NOAACharts/MapServer/tile/{z}/{y}/{x}'
+const DEFAULT_NOAA_CHART_TILE_URL = '/api/noaa-tiles/{z}/{y}/{x}'
 const DEFAULT_GLYPHS_URL = 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf'
 const RAW_NAUTICAL_CHART_SOURCE_MODE =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE?.trim().toLowerCase() ||
