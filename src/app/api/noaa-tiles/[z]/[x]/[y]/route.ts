@@ -6,17 +6,17 @@ export const runtime = 'nodejs'
 type RouteParams = {
   params: Promise<{
     z: string
-    y: string
     x: string
+    y: string
   }>
 }
 
 const isNumericPathToken = (token: string) => /^\d+$/.test(token)
 
 export async function GET(_request: Request, context: RouteParams) {
-  const { z, y, x } = await context.params
+  const { z, x, y } = await context.params
 
-  if (!isNumericPathToken(z) || !isNumericPathToken(y) || !isNumericPathToken(x)) {
+  if (!isNumericPathToken(z) || !isNumericPathToken(x) || !isNumericPathToken(y)) {
     return new Response('Invalid tile coordinates', { status: 400 })
   }
 

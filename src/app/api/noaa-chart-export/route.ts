@@ -2,7 +2,6 @@ const NOAA_EXPORT_BASE_URL =
   'https://gis.charttools.noaa.gov/arcgis/rest/services/MarineChart_Services/Gridded_NOAA_ENC/MapServer/export'
 
 export const runtime = 'nodejs'
-const MIN_USEFUL_TILE_BYTES = 3000
 
 const isNumeric = (value: string) => /^-?\d+(\.\d+)?$/.test(value)
 
@@ -39,11 +38,6 @@ export async function GET(request: Request) {
   const contentType = upstream.headers.get('content-type') || 'image/png'
   const cacheControl = upstream.headers.get('cache-control') || 'public, max-age=3600'
   const imageBuffer = Buffer.from(await upstream.arrayBuffer())
-
-  // NOAA sometimes serves very small color-index tiles that are not useful chart detail.
-  if (imageBuffer.byteLength < MIN_USEFUL_TILE_BYTES) {
-    return new Response('NOAA chart tile contains no useful detail', { status: 502 })
-  }
 
   return new Response(imageBuffer, {
     status: 200,

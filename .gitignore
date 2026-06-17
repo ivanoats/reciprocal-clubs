@@ -50,3 +50,7 @@ Thumbs.db
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
+
+data/*.mbtiles
+data/nautical-charts/*.pmtiles
+data/nautical-charts/**/*.pmtiles
