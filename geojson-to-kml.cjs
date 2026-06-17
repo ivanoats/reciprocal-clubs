@@ -1,5 +1,19 @@
 const fs = require('fs');
-const geojson = JSON.parse(fs.readFileSync('clubs.geojson', 'utf8'));
+const path = require('path');
+
+const dataDir = path.join(__dirname, 'data');
+const geojsonPath = path.join(dataDir, 'clubs.geojson');
+const kmlPath = path.join(dataDir, 'clubs.kml');
+const geojson = JSON.parse(fs.readFileSync(geojsonPath, 'utf8'));
+
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
 
 // Start building KML
 let kml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -21,7 +35,7 @@ geojson.features.forEach(feature => {
 // Create a folder for each region
 Object.keys(regions).sort().forEach(region => {
   kml += '    <Folder>\n';
-  kml += '      <name>' + region + '</name>\n';
+  kml += '      <name>' + escapeXml(region) + '</name>\n';
   
   regions[region].forEach(feature => {
     const props = feature.properties;
@@ -45,9 +59,9 @@ Object.keys(regions).sort().forEach(region => {
     }
     
     kml += '      <Placemark>\n';
-    kml += '        <name>' + props.name + '</name>\n';
+    kml += '        <name>' + escapeXml(props.name) + '</name>\n';
     if (description) {
-      kml += '        <description>' + description.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</description>\n';
+      kml += '        <description>' + escapeXml(description) + '</description>\n';
     }
     kml += '        <Point>\n';
     kml += '          <coordinates>' + lng + ',' + lat + ',0</coordinates>\n';
@@ -59,9 +73,9 @@ Object.keys(regions).sort().forEach(region => {
 });
 
 kml += '  </Document>\n';
-kml += '</kml>';
+kml += '</kml>\n';
 
-fs.writeFileSync('clubs.kml', kml);
-console.log('✅ KML file created: clubs.kml');
+fs.writeFileSync(kmlPath, kml);
+console.log('✅ KML file created: data/clubs.kml');
 console.log('   Clubs: ' + geojson.features.length);
 console.log('   Regions: ' + Object.keys(regions).length);

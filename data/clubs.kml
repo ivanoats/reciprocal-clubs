@@ -306,7 +306,7 @@ Phone: +1 360-371-0440
       </Placemark>
     </Folder>
     <Folder>
-      <name>Olympic & Hood Canal</name>
+      <name>Olympic &amp; Hood Canal</name>
       <Placemark>
         <name>Port Angeles Yacht Club</name>
         <description>Distance: 57 nm
@@ -712,7 +712,7 @@ Phone: +1 604-687-3400
       </Placemark>
     </Folder>
     <Folder>
-      <name>Whidbey & Everett</name>
+      <name>Whidbey &amp; Everett</name>
       <Placemark>
         <name>Dagmars Yacht Club</name>
         <description>Distance: 25 nm

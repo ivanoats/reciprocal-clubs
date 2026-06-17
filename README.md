@@ -12,17 +12,21 @@ KML, CSV, and JSON are derived exports.
 
 ## Current status
 
-The repository already contains the curated club dataset and supporting
-conversion and validation scripts. The Next.js app architecture,
-tooling, and delivery conventions are defined, but the application
-implementation is still being built out.
+The repository now includes a working Next.js + TypeScript scaffold with
+an initial vertical slice:
+
+- hexagonal folder structure (`domain`, `application`, `adapters`, `ui`)
+- GeoJSON adapter and application use case pipeline
+- initial synchronized list + map route (`/`)
+- Panda CSS toolchain and generated style artifacts
+- Vitest baseline tests for domain and application behavior
 
 ## Data source of truth
 
 `data/clubs.geojson` is the single source of truth for reciprocal club records.
 
 ```text
-data/clubs.geojson  ->  geojson-to-kml.js  ->  data/clubs.kml
+data/clubs.geojson  ->  geojson-to-kml.cjs  ->  data/clubs.kml
                     ->  manual export      ->  data/clubs.csv
                     ->  derived export     ->  data/clubs.json
 ```
@@ -39,20 +43,33 @@ Each feature includes:
 
 ## Current commands
 
-These commands exist today in the repository:
+Primary commands:
 
 ```sh
+# Start the Next.js app
+npm run dev
+
+# Build a production bundle
+npm run build
+
+# Lint app code
+npm run lint
+
+# Run test suite
+npm run test
+
+# Run tests with coverage
+npm run test:coverage
+
 # Validate GeoJSON against the expected club list
-node validate.js
+npm run validate:data
 
 # Regenerate KML from GeoJSON
-node geojson-to-kml.js
+npm run export:kml
 
 # Lint all Markdown files
 npx markdownlint-cli "**/*.md" --ignore node_modules
 ```
-
-The Next.js, test, and CI scripts will be added as the app scaffold lands.
 
 ## Available data files
 
@@ -115,9 +132,9 @@ The Next.js, test, and CI scripts will be added as the app scaffold lands.
 
 ## Planned application stack
 
-The app will be built with:
+The app is built with:
 
-- **Next.js 19** with the App Router and React Server Components
+- **Next.js 16** with the App Router and React Server Components
 - **Panda CSS** for all styling
 - **Ark UI** for accessible headless primitives
 - **MapLibre GL JS** for interactive mapping
@@ -130,7 +147,7 @@ Important implementation constraints:
 - MapLibre stays in client components only
 - Theme follows system `prefers-color-scheme`
 
-## Planned architecture
+## Architecture
 
 The app will follow a hexagonal architecture so domain logic stays
 independent from Next.js and UI details.
@@ -142,7 +159,7 @@ graph TD
   Adapters --> Application
 ```
 
-Expected structure:
+Current structure:
 
 ```text
 src/
