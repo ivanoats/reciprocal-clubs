@@ -236,9 +236,11 @@ Manual workflow inputs:
 For local uploads (also suitable for large files), use:
 
 ```sh
-R2_BUCKET=styc R2_ACCOUNT_ID=<cloudflare-account-id> \
+R2_BUCKET=styc R2_ACCOUNT_ID=<cloudflare-account-id> R2_AWS_PROFILE=r2 \
 npm run nautical:pmtiles:upload:r2 -- data/nautical-charts/pmtiles/ncds_20c.pmtiles ncds_20c.pmtiles
 ```
+
+If `R2_AWS_PROFILE` is omitted, the script defaults to `r2`.
 
 ## Available data files
 
