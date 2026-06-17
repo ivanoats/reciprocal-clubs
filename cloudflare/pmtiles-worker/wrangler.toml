@@ -13,4 +13,4 @@ bucket_name = "styc"
 # Comma-separated allowed origins for browser access.
 # Include localhost for local development, production Netlify domain,
 # and wildcard preview domains when needed.
-ALLOWED_ORIGINS = "http://localhost:3000,https://styc-recip.netlify.app,https://*.netlify.app"
+ALLOWED_ORIGINS = "http://localhost:3000,http://localhost:3001,https://styc-recip.netlify.app,https://*.netlify.app"

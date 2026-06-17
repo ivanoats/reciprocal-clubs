@@ -6,6 +6,19 @@ const parseAllowedOrigins = (raw) =>
     .map((value) => value.trim())
     .filter(Boolean)
 
+const isLocalDevOrigin = (requestOrigin) => {
+  if (!requestOrigin) {
+    return false
+  }
+
+  try {
+    const { hostname, protocol } = new URL(requestOrigin)
+    return protocol === 'http:' && (hostname === 'localhost' || hostname === '127.0.0.1')
+  } catch {
+    return false
+  }
+}
+
 const matchesAllowedOrigin = (requestOrigin, allowedOrigin) => {
   if (allowedOrigin === '*') {
     return true
@@ -32,6 +45,11 @@ const matchesAllowedOrigin = (requestOrigin, allowedOrigin) => {
 const resolveCorsOrigin = (requestOrigin, allowedOrigins) => {
   if (!requestOrigin) {
     return '*'
+  }
+
+  // Always allow local development origins, regardless of explicit port.
+  if (isLocalDevOrigin(requestOrigin)) {
+    return requestOrigin
   }
 
   if (allowedOrigins.some((allowedOrigin) => matchesAllowedOrigin(requestOrigin, allowedOrigin))) {
