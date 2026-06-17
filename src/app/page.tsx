@@ -5,7 +5,7 @@ import { ClubFilters } from '@/ui/components/club-filters'
 import { css } from '../../styled-system/css'
 
 type HomePageProps = {
-  searchParams: Promise<{ q?: string; region?: string }>
+  searchParams: Promise<{ q?: string; region?: string; club?: string }>
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
@@ -18,6 +18,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   const allClubs = await useCase.execute()
   const regions = Array.from(new Set(allClubs.map((club) => club.region))).sort()
+  const selectedClubName = clubs.find((club) => club.name === params.club)?.name
 
   return (
     <main
@@ -38,7 +39,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
         <ClubFilters query={params.q} regions={regions} selectedRegion={params.region} />
 
-        <ClubExplorerIsland clubs={clubs} />
+        <ClubExplorerIsland clubs={clubs} initialSelectedClubName={selectedClubName} />
       </section>
     </main>
   )

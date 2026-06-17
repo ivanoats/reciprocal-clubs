@@ -17,8 +17,9 @@ const ClubExplorer = dynamic(() => import('./club-explorer').then((mod) => mod.C
 
 type ClubExplorerIslandProps = {
   clubs: Club[]
+  initialSelectedClubName?: string
 }
 
-export const ClubExplorerIsland = ({ clubs }: ClubExplorerIslandProps) => {
-  return <ClubExplorer clubs={clubs} />
+export const ClubExplorerIsland = ({ clubs, initialSelectedClubName }: ClubExplorerIslandProps) => {
+  return <ClubExplorer key={initialSelectedClubName ?? clubs[0]?.name ?? 'none'} clubs={clubs} initialSelectedClubName={initialSelectedClubName} />
 }

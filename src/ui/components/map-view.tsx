@@ -220,7 +220,9 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       map.remove()
       mapRef.current = null
     }
-  }, [clubs, featureCollection])
+    // Map is created once on mount; data updates flow through the next effect.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const map = mapRef.current
@@ -277,5 +279,5 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     })
   }, [clubs, selectedClubName])
 
-  return <div className={css({ w: 'full', h: 'full' })} ref={containerRef} />
+  return <div aria-label="Club map" className={css({ w: 'full', h: 'full' })} ref={containerRef} role="region" />
 }
