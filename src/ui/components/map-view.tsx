@@ -22,7 +22,11 @@ const CLUSTER_LAYER_ID = 'clusters'
 const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
-const DEFAULT_NOAA_CHART_TILE_URL = '/api/noaa-tiles/{z}/{y}/{x}'
+const INITIAL_PNW_BOUNDS: [[number, number], [number, number]] = [
+  [-125.6, 45.3],
+  [-122.2, 49.9],
+]
+const DEFAULT_NOAA_CHART_TILE_URL = '/api/noaa-chart-export?bbox={bbox-epsg-3857}'
 const DEFAULT_GLYPHS_URL = 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf'
 const RAW_NAUTICAL_CHART_SOURCE_MODE =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE?.trim().toLowerCase() ||
@@ -42,11 +46,17 @@ const NOAA_CHART_ATTRIBUTION =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
   '&copy; NOAA Office of Coast Survey'
 
-const isValidXyzTemplateUrl = (url: string) =>
+const hasZxyPlaceholders = (url: string) =>
   url.includes('{z}') && url.includes('{x}') && url.includes('{y}')
 
+const hasBboxPlaceholder = (url: string) =>
+  url.includes('{bbox-epsg-3857}')
+
+const isValidRasterTemplateUrl = (url: string) =>
+  hasZxyPlaceholders(url) || hasBboxPlaceholder(url)
+
 const NOAA_CHART_TILE_URL =
-  NOAA_CHART_TILE_URL_RAW && isValidXyzTemplateUrl(NOAA_CHART_TILE_URL_RAW)
+  NOAA_CHART_TILE_URL_RAW && isValidRasterTemplateUrl(NOAA_CHART_TILE_URL_RAW)
     ? NOAA_CHART_TILE_URL_RAW
     : DEFAULT_NOAA_CHART_TILE_URL
 
@@ -93,19 +103,11 @@ const createBaseStyle = (
           },
         },
         {
-          id: 'osm-underlay',
-          type: 'raster',
-          source: 'osm',
-          paint: {
-            'raster-opacity': 1,
-          },
-        },
-        {
-          id: 'nautical-overlay',
+          id: 'nautical-base',
           type: 'raster',
           source: 'noaa',
           paint: {
-            'raster-opacity': 0.96,
+            'raster-opacity': 1,
           },
         },
       ]
@@ -149,6 +151,8 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const [mapMode, setMapMode] = useState<MapMode>('nautical')
   const [useNauticalXyzModeFallback, setUseNauticalXyzModeFallback] = useState(false)
   const [useDefaultNoaaTileFallback, setUseDefaultNoaaTileFallback] = useState(false)
+  const [noaaLoaded, setNoaaLoaded] = useState(false)
+  const [noaaErrorCount, setNoaaErrorCount] = useState(0)
   const nauticalSourceMode = useNauticalXyzModeFallback ? 'xyz' : NAUTICAL_CHART_SOURCE_MODE
   const noaaTileUrl = useDefaultNoaaTileFallback
     ? DEFAULT_NOAA_CHART_TILE_URL
@@ -182,9 +186,9 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   }, [onSelectClub])
 
   useEffect(() => {
-    if (NOAA_CHART_TILE_URL_RAW && !isValidXyzTemplateUrl(NOAA_CHART_TILE_URL_RAW)) {
+    if (NOAA_CHART_TILE_URL_RAW && !isValidRasterTemplateUrl(NOAA_CHART_TILE_URL_RAW)) {
       console.warn(
-        'NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL must include {z}, {x}, and {y}; falling back to default NOAA tiles.',
+        'NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL must include {z}/{x}/{y} or {bbox-epsg-3857}; falling back to default NOAA chart source.',
       )
     }
   }, [])
@@ -256,6 +260,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
 
       if (sourceId === 'noaa' && isSourceLoaded) {
         hasLoadedNauticalSource = true
+        setNoaaLoaded(true)
       }
     })
 
@@ -379,20 +384,20 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         map.getCanvas().style.cursor = ''
       })
 
-      const bounds = new maplibregl.LngLatBounds()
-      clubs.forEach((club) => bounds.extend([club.longitude, club.latitude]))
-
-      if (!bounds.isEmpty()) {
-        map.fitBounds(bounds, {
-          padding: 48,
-          maxZoom: 8,
-        })
-      }
+      map.fitBounds(INITIAL_PNW_BOUNDS, {
+        padding: 36,
+        duration: 0,
+      })
     })
 
     map.on('error', (event) => {
       // Surface map loading failures during development.
       console.error('MapLibre error', event.error)
+      const sourceId = (event as { sourceId?: string }).sourceId
+
+      if (sourceId === 'noaa') {
+        setNoaaErrorCount((current) => current + 1)
+      }
 
       if (mapMode !== 'nautical') {
         return
@@ -442,16 +447,8 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       source.setData(featureCollection)
     }
 
-    const bounds = new maplibregl.LngLatBounds()
-    clubs.forEach((club) => bounds.extend([club.longitude, club.latitude]))
-
-    if (!bounds.isEmpty()) {
-      map.fitBounds(bounds, {
-        padding: 48,
-        maxZoom: 8,
-      })
-    }
-  }, [clubs, featureCollection, mapStyle])
+    // Keep current viewport stable after initial load.
+  }, [clubs, featureCollection, mapMode, mapStyle])
 
   useEffect(() => {
     const map = mapRef.current
@@ -522,7 +519,11 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             bg: mapMode === 'nautical' ? 'bgCanvas' : 'bgSurface',
             boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
           })}
-          onClick={() => setMapMode('nautical')}
+          onClick={() => {
+            setNoaaLoaded(false)
+            setNoaaErrorCount(0)
+            setMapMode('nautical')
+          }}
           type="button"
         >
           Chart
@@ -545,6 +546,28 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           Standard
         </button>
       </div>
+      {mapMode === 'nautical' ? (
+        <div
+          className={css({
+            position: 'absolute',
+            left: '3',
+            bottom: '3',
+            zIndex: 1,
+            rounded: 'md',
+            border: '1px solid',
+            borderColor: 'borderSubtle',
+            bg: 'bgSurface',
+            px: '2.5',
+            py: '1.5',
+            fontSize: 'xs',
+            color: 'textMuted',
+            boxShadow: 'sm',
+            opacity: 0.96,
+          })}
+        >
+          {`Chart ${nauticalSourceMode === 'pmtiles' ? 'PMTiles' : 'NOAA'} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}`}
+        </div>
+      ) : null}
       <div
         aria-label="Club map"
         className={css({
