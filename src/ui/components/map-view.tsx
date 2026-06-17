@@ -82,22 +82,47 @@ const createBaseStyle = (
   noaaTileUrl: string,
 ): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
-  const baseSourceId = isNautical ? 'noaa' : 'osm'
 
-  const layers: NonNullable<StyleSpecification['layers']> = [
-    {
-      id: 'map-background',
-      type: 'background',
-      paint: {
-        'background-color': isNautical ? '#d8efe8' : '#d7e3ef',
-      },
-    },
-    {
-      id: 'base-map',
-      type: 'raster',
-      source: baseSourceId,
-    },
-  ]
+  const layers: NonNullable<StyleSpecification['layers']> = isNautical
+    ? [
+        {
+          id: 'map-background',
+          type: 'background',
+          paint: {
+            'background-color': '#d8efe8',
+          },
+        },
+        {
+          id: 'osm-underlay',
+          type: 'raster',
+          source: 'osm',
+          paint: {
+            'raster-opacity': 1,
+          },
+        },
+        {
+          id: 'nautical-overlay',
+          type: 'raster',
+          source: 'noaa',
+          paint: {
+            'raster-opacity': 0.96,
+          },
+        },
+      ]
+    : [
+        {
+          id: 'map-background',
+          type: 'background',
+          paint: {
+            'background-color': '#d7e3ef',
+          },
+        },
+        {
+          id: 'base-map',
+          type: 'raster',
+          source: 'osm',
+        },
+      ]
 
   return {
     version: 8,
