@@ -86,6 +86,13 @@ const createBaseStyle = (
 
   const layers: NonNullable<StyleSpecification['layers']> = [
     {
+      id: 'map-background',
+      type: 'background',
+      paint: {
+        'background-color': isNautical ? '#d8efe8' : '#d7e3ef',
+      },
+    },
+    {
       id: 'base-map',
       type: 'raster',
       source: baseSourceId,
