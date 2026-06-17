@@ -26,6 +26,7 @@ const INITIAL_PNW_BOUNDS: [[number, number], [number, number]] = [
   [-125.6, 45.3],
   [-122.2, 49.9],
 ]
+const OPEN_SEA_MAP_TILE_URL = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'
 const DEFAULT_NOAA_CHART_TILE_URL = '/api/noaa-chart-export?bbox={bbox-epsg-3857}'
 const DEFAULT_GLYPHS_URL = 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf'
 const RAW_NAUTICAL_CHART_SOURCE_MODE =
@@ -90,6 +91,7 @@ const createBaseStyle = (
   mapMode: MapMode,
   nauticalSourceMode: NauticalChartSourceMode,
   noaaTileUrl: string,
+  useOpenSeaMapFallback: boolean,
 ): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
 
@@ -102,14 +104,32 @@ const createBaseStyle = (
             'background-color': '#d8efe8',
           },
         },
-        {
-          id: 'nautical-base',
-          type: 'raster',
-          source: 'noaa',
-          paint: {
-            'raster-opacity': 1,
-          },
-        },
+        ...(useOpenSeaMapFallback
+          ? [
+              {
+                id: 'osm-nautical-fallback',
+                type: 'raster' as const,
+                source: 'osm',
+              },
+              {
+                id: 'seamark-overlay',
+                type: 'raster' as const,
+                source: 'seamark',
+                paint: {
+                  'raster-opacity': 0.95,
+                },
+              },
+            ]
+          : [
+              {
+                id: 'nautical-base',
+                type: 'raster' as const,
+                source: 'noaa',
+                paint: {
+                  'raster-opacity': 1,
+                },
+              },
+            ]),
       ]
     : [
         {
@@ -136,6 +156,12 @@ const createBaseStyle = (
         tileSize: 256,
         attribution: '&copy; OpenStreetMap contributors',
       },
+      seamark: {
+        type: 'raster',
+        tiles: [OPEN_SEA_MAP_TILE_URL],
+        tileSize: 256,
+        attribution: '&copy; OpenSeaMap contributors',
+      },
       noaa: {
         ...getNauticalSourceConfig(nauticalSourceMode, noaaTileUrl),
       },
@@ -151,6 +177,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const [mapMode, setMapMode] = useState<MapMode>('nautical')
   const [useNauticalXyzModeFallback, setUseNauticalXyzModeFallback] = useState(false)
   const [useDefaultNoaaTileFallback, setUseDefaultNoaaTileFallback] = useState(false)
+  const [useOpenSeaMapFallback, setUseOpenSeaMapFallback] = useState(false)
   const [noaaLoaded, setNoaaLoaded] = useState(false)
   const [noaaErrorCount, setNoaaErrorCount] = useState(0)
   const nauticalSourceMode = useNauticalXyzModeFallback ? 'xyz' : NAUTICAL_CHART_SOURCE_MODE
@@ -158,8 +185,8 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     ? DEFAULT_NOAA_CHART_TILE_URL
     : NOAA_CHART_TILE_URL
   const mapStyle = useMemo(
-    () => createBaseStyle(mapMode, nauticalSourceMode, noaaTileUrl),
-    [mapMode, nauticalSourceMode, noaaTileUrl],
+    () => createBaseStyle(mapMode, nauticalSourceMode, noaaTileUrl, useOpenSeaMapFallback),
+    [mapMode, nauticalSourceMode, noaaTileUrl, useOpenSeaMapFallback],
   )
 
   const featureCollection = useMemo(
@@ -233,6 +260,13 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       }
     }
 
+    const fallbackToOpenSeaMap = () => {
+      if (mapMode === 'nautical' && !useOpenSeaMapFallback) {
+        console.warn('NOAA chart source unavailable; falling back to OpenSeaMap seamarks.')
+        setUseOpenSeaMapFallback(true)
+      }
+    }
+
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: mapStyle,
@@ -247,8 +281,10 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             if (!hasLoadedNauticalSource) {
               if (nauticalSourceMode === 'pmtiles') {
                 fallbackToXyzMode()
-              } else {
+              } else if (HAS_CUSTOM_NOAA_TILE_URL && !useDefaultNoaaTileFallback) {
                 fallbackToDefaultNoaaTiles()
+              } else {
+                fallbackToOpenSeaMap()
               }
             }
           }, 2500)
@@ -397,6 +433,14 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
 
       if (sourceId === 'noaa') {
         setNoaaErrorCount((current) => current + 1)
+
+        if (mapMode === 'nautical' && nauticalSourceMode === 'xyz') {
+          if (HAS_CUSTOM_NOAA_TILE_URL && !useDefaultNoaaTileFallback) {
+            fallbackToDefaultNoaaTiles()
+          } else {
+            fallbackToOpenSeaMap()
+          }
+        }
       }
 
       if (mapMode !== 'nautical') {
@@ -406,7 +450,11 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       if (nauticalSourceMode === 'pmtiles') {
         fallbackToXyzMode()
       } else {
-        fallbackToDefaultNoaaTiles()
+        if (HAS_CUSTOM_NOAA_TILE_URL && !useDefaultNoaaTileFallback) {
+          fallbackToDefaultNoaaTiles()
+        } else {
+          fallbackToOpenSeaMap()
+        }
       }
     })
 
@@ -426,6 +474,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     nauticalSourceMode,
     useNauticalXyzModeFallback,
     useDefaultNoaaTileFallback,
+    useOpenSeaMapFallback,
   ])
 
   useEffect(() => {
@@ -522,6 +571,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           onClick={() => {
             setNoaaLoaded(false)
             setNoaaErrorCount(0)
+            setUseOpenSeaMapFallback(false)
             setMapMode('nautical')
           }}
           type="button"
@@ -565,7 +615,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             opacity: 0.96,
           })}
         >
-          {`Chart ${nauticalSourceMode === 'pmtiles' ? 'PMTiles' : 'NOAA'} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}`}
+          {`Chart ${useOpenSeaMapFallback ? 'OpenSeaMap fallback' : nauticalSourceMode === 'pmtiles' ? 'PMTiles' : 'NOAA'} • ${noaaLoaded || useOpenSeaMapFallback ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}`}
         </div>
       ) : null}
       <div
