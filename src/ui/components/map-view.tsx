@@ -152,6 +152,19 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       return
     }
 
+    let hasLoadedNauticalSource = false
+
+    const fallbackToXyz = () => {
+      if (
+        mapMode === 'nautical' &&
+        nauticalSourceMode === 'pmtiles' &&
+        !useNauticalXyzFallback
+      ) {
+        console.warn('PMTiles nautical source failed; falling back to NOAA XYZ tiles.')
+        setUseNauticalXyzFallback(true)
+      }
+    }
+
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: mapStyle,
@@ -159,6 +172,24 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       zoom: 4.5,
     })
     mapRef.current = map
+
+    const fallbackTimer =
+      mapMode === 'nautical' && nauticalSourceMode === 'pmtiles'
+        ? window.setTimeout(() => {
+            if (!hasLoadedNauticalSource) {
+              fallbackToXyz()
+            }
+          }, 2500)
+        : null
+
+    map.on('sourcedata', (event) => {
+      const sourceId = (event as { sourceId?: string }).sourceId
+      const isSourceLoaded = (event as { isSourceLoaded?: boolean }).isSourceLoaded
+
+      if (sourceId === 'noaa' && isSourceLoaded) {
+        hasLoadedNauticalSource = true
+      }
+    })
 
     const resizeObserver = new ResizeObserver(() => {
       map.resize()
@@ -294,20 +325,16 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     map.on('error', (event) => {
       // Surface map loading failures during development.
       console.error('MapLibre error', event.error)
-      const sourceId = (event as { sourceId?: string }).sourceId
 
-      if (
-        mapMode === 'nautical' &&
-        nauticalSourceMode === 'pmtiles' &&
-        sourceId === 'noaa' &&
-        !useNauticalXyzFallback
-      ) {
-        console.warn('PMTiles nautical source failed; falling back to NOAA XYZ tiles.')
-        setUseNauticalXyzFallback(true)
+      if (mapMode === 'nautical' && nauticalSourceMode === 'pmtiles') {
+        fallbackToXyz()
       }
     })
 
     return () => {
+      if (fallbackTimer !== null) {
+        window.clearTimeout(fallbackTimer)
+      }
       resizeObserver.disconnect()
       map.remove()
       mapRef.current = null
