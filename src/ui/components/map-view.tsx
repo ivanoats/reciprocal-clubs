@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import maplibregl from 'maplibre-gl'
 import type { StyleSpecification } from 'maplibre-gl'
+import { Protocol } from 'pmtiles'
 
 import type { Club } from '@/domain/club'
 import { css } from '../../../styled-system/css'
@@ -13,35 +14,197 @@ type MapViewProps = {
   onSelectClub?: (clubName: string) => void
 }
 
+type MapMode = 'nautical' | 'standard'
+type NauticalChartSourceMode = 'xyz' | 'pmtiles'
+
 const SOURCE_ID = 'clubs-source'
 const CLUSTER_LAYER_ID = 'clusters'
 const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
+const INITIAL_PNW_BOUNDS: [[number, number], [number, number]] = [
+  [-125.6, 45.3],
+  [-122.2, 49.9],
+]
+const OPEN_SEA_MAP_TILE_URL = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'
+const DEFAULT_NOAA_XYZ_TILE_URL = '/api/noaa-tiles/{z}/{x}/{y}'
+const DEFAULT_NOAA_EXPORT_TILE_URL = '/api/noaa-chart-export?bbox={bbox-epsg-3857}'
+const DEFAULT_GLYPHS_URL = 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf'
+const SOFT_FALLBACK_TIMEOUT_MS = 8000
+const HARD_FALLBACK_TIMEOUT_MS = 18000
+const MAX_NAUTICAL_SOURCE_ERRORS_BEFORE_FALLBACK = 4
+const RAW_NAUTICAL_CHART_SOURCE_MODE =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE?.trim().toLowerCase() ||
+  'pmtiles'
+const NAUTICAL_CHART_SOURCE_MODE: NauticalChartSourceMode =
+  RAW_NAUTICAL_CHART_SOURCE_MODE === 'pmtiles' ? 'pmtiles' : 'xyz'
+const NOAA_CHART_TILE_URL_RAW = process.env.NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL?.trim()
+const MAPLIBRE_GLYPHS_URL =
+  process.env.NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL?.trim() || DEFAULT_GLYPHS_URL
+const PMTILES_ARCHIVE_URL_RAW =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL?.trim() ||
+  'http://localhost:8081/ncds_20c.pmtiles'
+const PMTILES_ARCHIVE_URL = PMTILES_ARCHIVE_URL_RAW.startsWith('pmtiles://')
+  ? PMTILES_ARCHIVE_URL_RAW
+  : `pmtiles://${PMTILES_ARCHIVE_URL_RAW}`
+const NOAA_CHART_ATTRIBUTION =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
+  '&copy; NOAA Office of Coast Survey'
 
-const BASE_MAP_STYLE: StyleSpecification = {
-  version: 8,
-  sources: {
-    osm: {
-      type: 'raster',
-      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+const hasZxyPlaceholders = (url: string) =>
+  url.includes('{z}') && url.includes('{x}') && url.includes('{y}')
+
+const hasBboxPlaceholder = (url: string) =>
+  url.includes('{bbox-epsg-3857}')
+
+const isValidRasterTemplateUrl = (url: string) =>
+  hasZxyPlaceholders(url) || hasBboxPlaceholder(url)
+
+const NOAA_CHART_TILE_URL =
+  NOAA_CHART_TILE_URL_RAW && isValidRasterTemplateUrl(NOAA_CHART_TILE_URL_RAW)
+    ? NOAA_CHART_TILE_URL_RAW
+    : DEFAULT_NOAA_XYZ_TILE_URL
+
+const HAS_CUSTOM_NOAA_TILE_URL =
+  Boolean(NOAA_CHART_TILE_URL_RAW) && NOAA_CHART_TILE_URL !== DEFAULT_NOAA_XYZ_TILE_URL
+
+let hasRegisteredPmtilesProtocol = false
+
+const getNauticalSourceConfig = (
+  sourceMode: NauticalChartSourceMode,
+  noaaTileUrl: string,
+) => {
+  if (sourceMode === 'pmtiles') {
+    return {
+      type: 'raster' as const,
+      url: PMTILES_ARCHIVE_URL,
       tileSize: 256,
-      attribution: '&copy; OpenStreetMap contributors',
+      attribution: NOAA_CHART_ATTRIBUTION,
+    }
+  }
+
+  return {
+    type: 'raster' as const,
+    tiles: [noaaTileUrl],
+    tileSize: 256,
+    attribution: NOAA_CHART_ATTRIBUTION,
+  }
+}
+
+const createBaseStyle = (
+  mapMode: MapMode,
+  nauticalSourceMode: NauticalChartSourceMode,
+  noaaTileUrl: string,
+  useOpenSeaMapFallback: boolean,
+): StyleSpecification => {
+  const isNautical = mapMode === 'nautical'
+
+  const layers: NonNullable<StyleSpecification['layers']> = isNautical
+    ? [
+        {
+          id: 'map-background',
+          type: 'background',
+          paint: {
+            'background-color': '#d8efe8',
+          },
+        },
+        {
+          id: 'osm-nautical-underlay',
+          type: 'raster',
+          source: 'osm',
+        },
+        ...(useOpenSeaMapFallback
+          ? [
+              {
+                id: 'seamark-overlay',
+                type: 'raster' as const,
+                source: 'seamark',
+                paint: {
+                  'raster-opacity': 0.95,
+                },
+              },
+            ]
+          : [
+              {
+                id: 'nautical-base',
+                type: 'raster' as const,
+                source: 'noaa',
+                paint: {
+                  'raster-opacity': 0.95,
+                },
+              },
+            ]),
+      ]
+    : [
+        {
+          id: 'map-background',
+          type: 'background',
+          paint: {
+            'background-color': '#d7e3ef',
+          },
+        },
+        {
+          id: 'base-map',
+          type: 'raster',
+          source: 'osm',
+        },
+      ]
+
+  return {
+    version: 8,
+    glyphs: MAPLIBRE_GLYPHS_URL,
+    sources: {
+      osm: {
+        type: 'raster',
+        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+        tileSize: 256,
+        attribution: '&copy; OpenStreetMap contributors',
+      },
+      seamark: {
+        type: 'raster',
+        tiles: [OPEN_SEA_MAP_TILE_URL],
+        tileSize: 256,
+        attribution: '&copy; OpenSeaMap contributors',
+      },
+      noaa: {
+        ...getNauticalSourceConfig(nauticalSourceMode, noaaTileUrl),
+      },
     },
-  },
-  layers: [
-    {
-      id: 'osm-base',
-      type: 'raster',
-      source: 'osm',
-    },
-  ],
+    layers,
+  }
 }
 
 export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
+  const [mapMode, setMapMode] = useState<MapMode>('nautical')
+  const [useNauticalXyzModeFallback, setUseNauticalXyzModeFallback] = useState(false)
+  const [useDefaultNoaaTileFallback, setUseDefaultNoaaTileFallback] = useState(false)
+  const [useNoaaExportTileFallback, setUseNoaaExportTileFallback] = useState(false)
+  const [useOpenSeaMapFallback, setUseOpenSeaMapFallback] = useState(false)
+  const [noaaLoaded, setNoaaLoaded] = useState(false)
+  const [noaaErrorCount, setNoaaErrorCount] = useState(0)
+  const [lastNauticalError, setLastNauticalError] = useState<string>('')
+  const nauticalSourceMode = useNauticalXyzModeFallback ? 'xyz' : NAUTICAL_CHART_SOURCE_MODE
+  const noaaTileUrl = useNoaaExportTileFallback
+    ? DEFAULT_NOAA_EXPORT_TILE_URL
+    : useDefaultNoaaTileFallback
+      ? DEFAULT_NOAA_XYZ_TILE_URL
+    : NOAA_CHART_TILE_URL
+  const activeNauticalSourceLabel = useOpenSeaMapFallback
+    ? 'OpenSeaMap fallback'
+    : nauticalSourceMode === 'pmtiles'
+      ? 'PMTiles'
+      : useNoaaExportTileFallback
+        ? 'NOAA export'
+        : useDefaultNoaaTileFallback || !HAS_CUSTOM_NOAA_TILE_URL
+          ? 'NOAA XYZ'
+          : 'Custom XYZ'
+  const mapStyle = useMemo(
+    () => createBaseStyle(mapMode, nauticalSourceMode, noaaTileUrl, useOpenSeaMapFallback),
+    [mapMode, nauticalSourceMode, noaaTileUrl, useOpenSeaMapFallback],
+  )
 
   const featureCollection = useMemo(
     () => ({
@@ -67,17 +230,138 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   }, [onSelectClub])
 
   useEffect(() => {
+    if (NOAA_CHART_TILE_URL_RAW && !isValidRasterTemplateUrl(NOAA_CHART_TILE_URL_RAW)) {
+      console.warn(
+        'NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL must include {z}/{x}/{y} or {bbox-epsg-3857}; falling back to default NOAA chart source.',
+      )
+    }
+  }, [])
+
+  useEffect(() => {
+    if (NAUTICAL_CHART_SOURCE_MODE !== 'pmtiles' || hasRegisteredPmtilesProtocol) {
+      return
+    }
+
+    const protocol = new Protocol()
+    maplibregl.addProtocol('pmtiles', protocol.tile)
+    hasRegisteredPmtilesProtocol = true
+  }, [])
+
+  useEffect(() => {
     if (!containerRef.current) {
       return
     }
 
+    let hasLoadedNauticalSource = false
+    let nauticalSourceErrorCount = 0
+
+    const isNauticalSourceError = (event: maplibregl.ErrorEvent) => {
+      const sourceId = (event as { sourceId?: string }).sourceId
+      if (sourceId === 'noaa') {
+        return true
+      }
+
+      const message =
+        event.error instanceof Error ? event.error.message.toLowerCase() : String(event.error).toLowerCase()
+
+      return message.includes('pmtiles') || message.includes('source "noaa"') || message.includes('noaa')
+    }
+
+    const markNauticalSourceError = (reason: string) => {
+      nauticalSourceErrorCount += 1
+      setNoaaErrorCount((current) => current + 1)
+      setLastNauticalError(reason)
+    }
+
+    const fallbackToXyzMode = () => {
+      if (
+        mapMode === 'nautical' &&
+        nauticalSourceMode === 'pmtiles' &&
+        !useNauticalXyzModeFallback
+      ) {
+        console.warn('PMTiles nautical source failed; falling back to NOAA XYZ tiles.')
+        setLastNauticalError('PMTiles source failed; switched to NOAA XYZ.')
+        setUseNauticalXyzModeFallback(true)
+      }
+    }
+
+    const fallbackToDefaultNoaaTiles = () => {
+      if (
+        mapMode === 'nautical' &&
+        nauticalSourceMode === 'xyz' &&
+        HAS_CUSTOM_NOAA_TILE_URL &&
+        !useDefaultNoaaTileFallback
+      ) {
+        console.warn('Custom nautical XYZ source failed; falling back to default NOAA tiles.')
+        setLastNauticalError('Custom XYZ failed; switched to NOAA XYZ.')
+        setUseDefaultNoaaTileFallback(true)
+      }
+    }
+
+    const fallbackToNoaaExportTiles = () => {
+      if (
+        mapMode === 'nautical' &&
+        nauticalSourceMode === 'xyz' &&
+        !useNoaaExportTileFallback
+      ) {
+        console.warn('NOAA XYZ source failed; falling back to NOAA export tiles.')
+        setLastNauticalError('NOAA XYZ failed; switched to NOAA export route.')
+        setUseNoaaExportTileFallback(true)
+      }
+    }
+
+    const fallbackToOpenSeaMap = () => {
+      if (mapMode === 'nautical' && !useOpenSeaMapFallback) {
+        console.warn('NOAA chart source unavailable; falling back to OpenSeaMap seamarks.')
+        setLastNauticalError('NOAA source unavailable; switched to OpenSeaMap fallback.')
+        setUseOpenSeaMapFallback(true)
+      }
+    }
+
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: BASE_MAP_STYLE,
+      style: mapStyle,
       center: INITIAL_CENTER,
       zoom: 4.5,
     })
     mapRef.current = map
+
+    const fallbackTimer =
+      mapMode === 'nautical'
+        ? window.setTimeout(() => {
+            if (!hasLoadedNauticalSource) {
+              setLastNauticalError('Chart source is slow to respond; waiting before fallback.')
+            }
+          }, SOFT_FALLBACK_TIMEOUT_MS)
+        : null
+
+    const hardFallbackTimer =
+      mapMode === 'nautical'
+        ? window.setTimeout(() => {
+            if (!hasLoadedNauticalSource) {
+              if (nauticalSourceMode === 'pmtiles') {
+                fallbackToXyzMode()
+              } else if (HAS_CUSTOM_NOAA_TILE_URL && !useDefaultNoaaTileFallback) {
+                fallbackToDefaultNoaaTiles()
+              } else if (!useNoaaExportTileFallback) {
+                fallbackToNoaaExportTiles()
+              } else {
+                fallbackToOpenSeaMap()
+              }
+            }
+          }, HARD_FALLBACK_TIMEOUT_MS)
+        : null
+
+    map.on('sourcedata', (event) => {
+      const sourceId = (event as { sourceId?: string }).sourceId
+      const isSourceLoaded = (event as { isSourceLoaded?: boolean }).isSourceLoaded
+
+      if (sourceId === 'noaa' && isSourceLoaded) {
+        hasLoadedNauticalSource = true
+        setNoaaLoaded(true)
+        setLastNauticalError('')
+      }
+    })
 
     const resizeObserver = new ResizeObserver(() => {
       map.resize()
@@ -199,30 +483,67 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         map.getCanvas().style.cursor = ''
       })
 
-      const bounds = new maplibregl.LngLatBounds()
-      clubs.forEach((club) => bounds.extend([club.longitude, club.latitude]))
-
-      if (!bounds.isEmpty()) {
-        map.fitBounds(bounds, {
-          padding: 48,
-          maxZoom: 8,
-        })
-      }
+      map.fitBounds(INITIAL_PNW_BOUNDS, {
+        padding: 36,
+        duration: 0,
+      })
     })
 
     map.on('error', (event) => {
       // Surface map loading failures during development.
       console.error('MapLibre error', event.error)
+
+      if (mapMode !== 'nautical') {
+        return
+      }
+
+      if (!isNauticalSourceError(event)) {
+        return
+      }
+
+      const errorMessage =
+        event.error instanceof Error ? event.error.message : 'Unknown chart source error'
+      markNauticalSourceError(errorMessage)
+
+      if (nauticalSourceErrorCount < MAX_NAUTICAL_SOURCE_ERRORS_BEFORE_FALLBACK) {
+        return
+      }
+
+      if (nauticalSourceMode === 'pmtiles') {
+        fallbackToXyzMode()
+      } else {
+        if (HAS_CUSTOM_NOAA_TILE_URL && !useDefaultNoaaTileFallback) {
+          fallbackToDefaultNoaaTiles()
+        } else if (!useNoaaExportTileFallback) {
+          fallbackToNoaaExportTiles()
+        } else {
+          fallbackToOpenSeaMap()
+        }
+      }
     })
 
     return () => {
+      if (fallbackTimer !== null) {
+        window.clearTimeout(fallbackTimer)
+      }
+      if (hardFallbackTimer !== null) {
+        window.clearTimeout(hardFallbackTimer)
+      }
       resizeObserver.disconnect()
       map.remove()
       mapRef.current = null
     }
-    // Map is created once on mount; data updates flow through the next effect.
+    // The map is recreated when the selected basemap mode changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [
+    mapMode,
+    mapStyle,
+    nauticalSourceMode,
+    useNauticalXyzModeFallback,
+    useDefaultNoaaTileFallback,
+    useNoaaExportTileFallback,
+    useOpenSeaMapFallback,
+  ])
 
   useEffect(() => {
     const map = mapRef.current
@@ -243,41 +564,139 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       source.setData(featureCollection)
     }
 
-    const bounds = new maplibregl.LngLatBounds()
-    clubs.forEach((club) => bounds.extend([club.longitude, club.latitude]))
-
-    if (!bounds.isEmpty()) {
-      map.fitBounds(bounds, {
-        padding: 48,
-        maxZoom: 8,
-      })
-    }
-  }, [clubs, featureCollection])
+    // Keep current viewport stable after initial load.
+  }, [clubs, featureCollection, mapMode, mapStyle])
 
   useEffect(() => {
     const map = mapRef.current
-    if (!map || !map.getLayer(CLUB_LAYER_ID)) {
+    if (!map) {
       return
     }
 
-    map.setPaintProperty(CLUB_LAYER_ID, 'circle-color', [
-      'case',
-      ['==', ['get', 'name'], selectedClubName ?? ''],
-      '#f97316',
-      '#0891b2',
-    ])
+    const applySelectedClubStyle = () => {
+      if (!map.getLayer(CLUB_LAYER_ID)) {
+        return
+      }
 
-    const selectedClub = clubs.find((club) => club.name === selectedClubName)
-    if (!selectedClub) {
+      map.setPaintProperty(CLUB_LAYER_ID, 'circle-color', [
+        'case',
+        ['==', ['get', 'name'], selectedClubName ?? ''],
+        '#f97316',
+        '#0891b2',
+      ])
+
+      const selectedClub = clubs.find((club) => club.name === selectedClubName)
+      if (!selectedClub) {
+        return
+      }
+
+      map.easeTo({
+        center: [selectedClub.longitude, selectedClub.latitude],
+        zoom: Math.max(map.getZoom(), 12),
+        duration: 450,
+      })
+    }
+
+    if (!map.getLayer(CLUB_LAYER_ID)) {
+      map.once('load', applySelectedClubStyle)
       return
     }
 
-    map.easeTo({
-      center: [selectedClub.longitude, selectedClub.latitude],
-      zoom: Math.max(map.getZoom(), 12),
-      duration: 450,
-    })
-  }, [clubs, selectedClubName])
+    applySelectedClubStyle()
+  }, [clubs, selectedClubName, mapStyle])
 
-  return <div aria-label="Club map" className={css({ w: 'full', h: 'full' })} ref={containerRef} role="region" />
+  return (
+    <div className={css({ position: 'relative', w: 'full', h: 'full' })}>
+      <div
+        className={css({
+          position: 'absolute',
+          top: '3',
+          right: '3',
+          zIndex: 1,
+          display: 'flex',
+          gap: '1',
+          rounded: 'full',
+          border: '1px solid',
+          borderColor: 'borderSubtle',
+          bg: 'bgSurface',
+          p: '1',
+          boxShadow: 'md',
+          opacity: 0.98,
+        })}
+      >
+        <button
+          className={css({
+            cursor: 'pointer',
+            rounded: 'full',
+            px: '3',
+            py: '1.5',
+            fontSize: 'sm',
+            fontWeight: '600',
+            color: mapMode === 'nautical' ? 'textPrimary' : 'textMuted',
+            bg: mapMode === 'nautical' ? 'bgCanvas' : 'bgSurface',
+            boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
+          })}
+          onClick={() => {
+            setNoaaLoaded(false)
+            setNoaaErrorCount(0)
+            setLastNauticalError('')
+            setUseOpenSeaMapFallback(false)
+            setMapMode('nautical')
+          }}
+          type="button"
+        >
+          Chart
+        </button>
+        <button
+          className={css({
+            cursor: 'pointer',
+            rounded: 'full',
+            px: '3',
+            py: '1.5',
+            fontSize: 'sm',
+            fontWeight: '600',
+            color: mapMode === 'standard' ? 'textPrimary' : 'textMuted',
+            bg: mapMode === 'standard' ? 'bgCanvas' : 'bgSurface',
+            boxShadow: mapMode === 'standard' ? 'sm' : 'none',
+          })}
+          onClick={() => setMapMode('standard')}
+          type="button"
+        >
+          Standard
+        </button>
+      </div>
+      {mapMode === 'nautical' ? (
+        <div
+          className={css({
+            position: 'absolute',
+            left: '3',
+            bottom: '3',
+            zIndex: 1,
+            rounded: 'md',
+            border: '1px solid',
+            borderColor: 'borderSubtle',
+            bg: 'bgSurface',
+            px: '2.5',
+            py: '1.5',
+            fontSize: 'xs',
+            color: 'textMuted',
+            boxShadow: 'sm',
+            opacity: 0.96,
+          })}
+        >
+          {`Chart ${activeNauticalSourceLabel} • ${noaaLoaded || useOpenSeaMapFallback ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}${lastNauticalError ? ` • ${lastNauticalError}` : ''}`}
+        </div>
+      ) : null}
+      <div
+        aria-label="Club map"
+        className={css({
+          w: 'full',
+          h: 'full',
+          bg: 'bgCanvas',
+        })}
+        ref={containerRef}
+        role="region"
+      />
+    </div>
+  )
 }

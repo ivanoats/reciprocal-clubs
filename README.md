@@ -1,5 +1,7 @@
 # Reciprocal Clubs
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5e99940d-be1e-4d3a-b6dc-317c7a494c0c/deploy-status)](https://app.netlify.com/projects/styc-recip/deploys)
+
 This repository serves two purposes:
 
 1. It is the authoritative geodata source for **68 active reciprocal
@@ -70,6 +72,176 @@ npm run export:kml
 # Lint all Markdown files
 npx markdownlint-cli "**/*.md" --ignore node_modules
 ```
+
+## Nautical chart source configuration
+
+The chart basemap mode supports two source modes:
+
+- `pmtiles` (default): direct `pmtiles://` access in MapLibre via the PMTiles protocol
+- `xyz`: NOAA live tile service or any XYZ endpoint
+
+Start from the template and then adjust values as needed:
+
+```sh
+cp .env.example .env.local
+```
+
+Set these variables in `.env.local`:
+
+```sh
+# Optional. `pmtiles` (default) or `xyz`.
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
+
+# Optional in `xyz` mode. Defaults to local NOAA proxy route if not set:
+# /api/noaa-tiles/{z}/{x}/{y}
+# Example for a local XYZ tile server fronting MBTiles or PMTiles:
+# http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
+# Must include {z}, {x}, and {y}. Invalid values auto-fallback to NOAA default.
+NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=
+
+# Optional in `pmtiles` mode. Can be http(s) URL or full pmtiles:// URL.
+# Example:
+# http://localhost:8081/ncds_20c.pmtiles
+NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=
+
+# Optional attribution override for the chart source.
+NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
+
+# Optional glyph endpoint for MapLibre symbol rendering.
+# Defaults to MapLibre demo glyphs; set this to a production-grade CDN
+# or self-hosted path.
+NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL=
+```
+
+### Using vokkim/noaa-nautical-charts regions 04-10
+
+The repository lists MBTiles downloads from NOAA for regions 04 through 10,
+which cover the needed U.S. areas.
+
+1. Download `MBTILES_04.mbtiles` through `MBTILES_10.mbtiles`.
+2. Place them in `data/nautical-charts/mbtiles/`.
+3. Convert to PMTiles:
+
+```sh
+npm run nautical:pmtiles:convert
+```
+
+1. Merge into one archive (recommended):
+
+```sh
+npm run nautical:pmtiles:merge
+```
+
+1. Serve local PMTiles data:
+
+```sh
+npm run nautical:pmtiles:serve
+```
+
+### Converting a single MBTiles file (for example ncds_20c.mbtiles)
+
+```sh
+mkdir -p data/nautical-charts/pmtiles
+pmtiles convert data/ncds_20c.mbtiles data/nautical-charts/pmtiles/ncds_20c.pmtiles
+```
+
+Then run the PMTiles server:
+
+```sh
+npm run nautical:pmtiles:serve
+```
+
+1. Choose one app mode:
+
+- `xyz` mode from PMTiles server endpoint:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=xyz
+NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
+```
+
+- `pmtiles` mode from archive URL:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
+NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=http://localhost:8081/ncds_20c.pmtiles
+```
+
+Notes:
+
+- MapLibre in the browser cannot read `.mbtiles` files directly.
+- Convert MBTiles to PMTiles first, then serve PMTiles over HTTP.
+- Keep `chart` mode pointed at NOAA/PMTiles data; `standard` mode remains OSM.
+- If PMTiles fails to load at runtime, chart mode automatically falls back to
+  NOAA XYZ tiles.
+- If a custom XYZ chart URL fails, chart mode automatically falls back to the
+  default NOAA XYZ proxy route.
+- If the NOAA XYZ route fails, chart mode falls back to the NOAA export route,
+  then to OpenSeaMap seamarks.
+- The default NOAA chart URL uses a same-origin Next.js proxy route to avoid
+  browser CORS issues with direct upstream tile requests.
+
+### Cloudflare R2 + Worker deployment (recommended for production PMTiles)
+
+After uploading `ncds_20c.pmtiles` to your R2 bucket, deploy the included
+Worker template to serve PMTiles with CORS + range requests.
+
+1. Prepare Worker config:
+
+```sh
+cp cloudflare/pmtiles-worker/wrangler.toml.example cloudflare/pmtiles-worker/wrangler.toml
+```
+
+1. Edit `cloudflare/pmtiles-worker/wrangler.toml`:
+
+- set `account_id`
+- set `bucket_name` if not `styc`
+- set `ALLOWED_ORIGINS` for local + production origins
+
+1. Deploy:
+
+```sh
+cd cloudflare/pmtiles-worker
+wrangler login
+wrangler deploy
+```
+
+1. Point app config to the deployed Worker URL:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
+NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=https://<worker-subdomain>/ncds_20c.pmtiles
+```
+
+See `cloudflare/pmtiles-worker/README.md` for details.
+
+For infrastructure-as-code deployment, use the GitHub Actions workflow in
+`.github/workflows/deploy-pmtiles-worker.yml` with repository secrets
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+
+To upload PMTiles archives to R2 without dashboard clicks, use
+`.github/workflows/upload-pmtiles-r2.yml` (manual workflow dispatch).
+Required repository secrets:
+
+- `CLOUDFLARE_R2_ACCESS_KEY_ID`
+- `CLOUDFLARE_R2_SECRET_ACCESS_KEY`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+Manual workflow inputs:
+
+- `pmtiles_download_url` (public URL to the `.pmtiles` file)
+- `object_key` (for example `ncds_20c.pmtiles`)
+- `bucket_name` (for example `styc`)
+
+For local uploads (also suitable for large files), use:
+
+```sh
+R2_BUCKET=styc R2_ACCOUNT_ID=<cloudflare-account-id> \
+npm run nautical:pmtiles:upload:r2 -- \
+  data/nautical-charts/pmtiles/ncds_20c.pmtiles ncds_20c.pmtiles
+```
+
+If `R2_AWS_PROFILE` is omitted, the script defaults to `r2`.
 
 ## Available data files
 

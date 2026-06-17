@@ -1,0 +1,16 @@
+name = "styc-pmtiles"
+main = "src/index.js"
+compatibility_date = "2026-06-17"
+
+# Replace with your Cloudflare account ID.
+account_id = "e8f7987244b0746942aebda85e5d5c71"
+
+[[r2_buckets]]
+binding = "CHARTS_BUCKET"
+bucket_name = "styc"
+
+[vars]
+# Comma-separated allowed origins for browser access.
+# Include localhost for local development, production Netlify domain,
+# and wildcard preview domains when needed.
+ALLOWED_ORIGINS = "http://localhost:3000,http://localhost:3001,https://styc-recip.netlify.app,https://*.netlify.app"

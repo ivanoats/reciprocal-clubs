@@ -1,0 +1,55 @@
+name: Upload PMTiles To R2
+
+on:
+  workflow_dispatch:
+    inputs:
+      pmtiles_download_url:
+        description: Public URL to download the .pmtiles file from
+        required: true
+        type: string
+      object_key:
+        description: Destination object key in R2 bucket
+        required: true
+        default: ncds_20c.pmtiles
+        type: string
+      bucket_name:
+        description: Destination R2 bucket name
+        required: true
+        default: styc
+        type: string
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Download PMTiles archive
+        run: |
+          set -euo pipefail
+          curl -fL "${{ github.event.inputs.pmtiles_download_url }}" -o /tmp/archive.pmtiles
+          test -s /tmp/archive.pmtiles
+          ls -lh /tmp/archive.pmtiles
+
+      - name: Upload archive to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          AWS_REGION: auto
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          aws s3 cp /tmp/archive.pmtiles "s3://${{ github.event.inputs.bucket_name }}/${{ github.event.inputs.object_key }}" \
+            --endpoint-url "https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
+
+      - name: Verify object exists in R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          AWS_REGION: auto
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          aws s3 ls "s3://${{ github.event.inputs.bucket_name }}/${{ github.event.inputs.object_key }}" \
+            --endpoint-url "https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"

@@ -3,9 +3,8 @@ import 'server-only'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-import type { Club } from '@/domain/club'
-
 import type { ClubRepository } from '@/application/ports/club-repository'
+import type { Club } from '@/domain/club'
 
 type GeoJsonFeature = {
   type: 'Feature'

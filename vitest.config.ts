@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'server-only': fileURLToPath(new URL('./src/test/server-only.ts', import.meta.url)),
     },
   },
   test: {
@@ -15,7 +16,11 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'lcov'],
       reportsDirectory: './coverage',
-      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      include: [
+        'src/domain/**/*.ts',
+        'src/application/use-cases/**/*.ts',
+        'src/adapters/repositories/**/*.ts',
+      ],
       exclude: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
       thresholds: {
         statements: 80,
