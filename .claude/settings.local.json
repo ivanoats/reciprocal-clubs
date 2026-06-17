@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /tmp/page.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3000)",
+      "Read(//tmp/**)",
+      "Bash(lsof -nP -iTCP:3000 -sTCP:LISTEN)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx panda *)",
+      "Bash(which node; node --version; echo '---'; ls -la ~/.nvm/versions/node 2>/dev/null | head; echo '---'; which volta fnm asdf 2>&1 | head)",
+      "Bash(grep -E '^\\(node|npm|npx\\)$')"
+    ]
+  }
+}

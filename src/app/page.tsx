@@ -1,6 +1,6 @@
 import { GetClubsUseCase } from '@/application/use-cases/get-clubs'
 import { GeoJsonClubRepository } from '@/adapters/repositories/geojson-club-repository'
-import { ClubExplorer } from '@/ui/components/club-explorer'
+import { ClubExplorerIsland } from '@/ui/components/club-explorer-island'
 import { ClubFilters } from '@/ui/components/club-filters'
 import { css } from '../../styled-system/css'
 
@@ -38,7 +38,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
         <ClubFilters query={params.q} regions={regions} selectedRegion={params.region} />
 
-        <ClubExplorer clubs={clubs} />
+        <ClubExplorerIsland clubs={clubs} />
       </section>
     </main>
   )

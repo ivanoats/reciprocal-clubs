@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
+import type { StyleSpecification } from 'maplibre-gl'
 
 import type { Club } from '@/domain/club'
 import { css } from '../../../styled-system/css'
@@ -16,6 +17,26 @@ const SOURCE_ID = 'clubs-source'
 const CLUSTER_LAYER_ID = 'clusters'
 const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
+const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
+
+const BASE_MAP_STYLE: StyleSpecification = {
+  version: 8,
+  sources: {
+    osm: {
+      type: 'raster',
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      attribution: '&copy; OpenStreetMap contributors',
+    },
+  },
+  layers: [
+    {
+      id: 'osm-base',
+      type: 'raster',
+      source: 'osm',
+    },
+  ],
+}
 
 export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -52,19 +73,21 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: 'https://demotiles.maplibre.org/style.json',
-      center: [-122.3321, 47.6062],
+      style: BASE_MAP_STYLE,
+      center: INITIAL_CENTER,
       zoom: 4.5,
     })
     mapRef.current = map
 
+    const resizeObserver = new ResizeObserver(() => {
+      map.resize()
+    })
+    resizeObserver.observe(containerRef.current)
+
     map.on('load', () => {
       map.addSource(SOURCE_ID, {
         type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [],
-        },
+        data: featureCollection,
         cluster: true,
         clusterMaxZoom: 9,
         clusterRadius: 42,
@@ -175,17 +198,41 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       map.on('mouseleave', CLUB_LAYER_ID, () => {
         map.getCanvas().style.cursor = ''
       })
+
+      const bounds = new maplibregl.LngLatBounds()
+      clubs.forEach((club) => bounds.extend([club.longitude, club.latitude]))
+
+      if (!bounds.isEmpty()) {
+        map.fitBounds(bounds, {
+          padding: 48,
+          maxZoom: 8,
+        })
+      }
+    })
+
+    map.on('error', (event) => {
+      // Surface map loading failures during development.
+      console.error('MapLibre error', event.error)
     })
 
     return () => {
+      resizeObserver.disconnect()
       map.remove()
       mapRef.current = null
     }
-  }, [])
+  }, [clubs, featureCollection])
 
   useEffect(() => {
     const map = mapRef.current
     if (!map) {
+      return
+    }
+
+    if (!map.getSource(SOURCE_ID)) {
+      map.once('load', () => {
+        const pendingSource = map.getSource(SOURCE_ID) as maplibregl.GeoJSONSource | undefined
+        pendingSource?.setData(featureCollection)
+      })
       return
     }
 
