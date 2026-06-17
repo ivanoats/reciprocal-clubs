@@ -21,6 +21,7 @@ const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
 
 const BASE_MAP_STYLE: StyleSpecification = {
   version: 8,
+  glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
   sources: {
     osm: {
       type: 'raster',
@@ -28,12 +29,33 @@ const BASE_MAP_STYLE: StyleSpecification = {
       tileSize: 256,
       attribution: '&copy; OpenStreetMap contributors',
     },
+    seamark: {
+      type: 'raster',
+      tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      attribution: '&copy; OpenSeaMap contributors',
+    },
   },
   layers: [
+    {
+      id: 'chart-background',
+      type: 'background',
+      paint: {
+        'background-color': '#d8efe8',
+      },
+    },
     {
       id: 'osm-base',
       type: 'raster',
       source: 'osm',
+    },
+    {
+      id: 'seamark-overlay',
+      type: 'raster',
+      source: 'seamark',
+      paint: {
+        'raster-opacity': 0.9,
+      },
     },
   ],
 }
