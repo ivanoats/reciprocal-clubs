@@ -1,16 +1,18 @@
 # KML vs Newly Extracted Data Comparison
 
 ## Summary
+
 - **KML File Clubs**: 68 clubs with address, phone, region details
-- **Newly Extracted Data (Map)**: 175 clubs with GPS coordinates  
+- **Newly Extracted Data (Map)**: 175 clubs with GPS coordinates
 - **Details Page**: 68 clubs with website URLs
 - **Net Addition**: 107 new clubs in the extracted data
 
 ## Key Differences
 
 ### 1. Data Coverage
+
 | Aspect | KML | Extracted Data | Winner |
-|--------|-----|----------------|--------|
+| --- | --- | --- | --- |
 | Total Clubs | 68 | 175 | **Extracted (157% more)** |
 | GPS Coordinates | Yes | Yes | **Tie** |
 | Website URLs | No | Yes (68 clubs) | **Extracted** |
@@ -19,9 +21,11 @@
 | Regions | Yes | Yes | **Tie** |
 
 ### 2. New Clubs in Extracted Data (107 additional clubs)
+
 The following clubs appear in the extracted map data but NOT in the KML:
 
 #### California (additional)
+
 - Aeolian Yacht Club (37.75°N, -122.24°W)
 - Alameda Yacht Club (37.78°N, -122.26°W)
 - Alamitos Bay Yacht Club (33.75°N, -118.12°W)
@@ -121,20 +125,25 @@ The following clubs appear in the extracted map data but NOT in the KML:
 - Yakima Valley Boat Club (46.64°N, -121.17°W)
 
 ### 3. Clubs with Coordinate Issues in Extracted Data
+
 - **Deep Bay Yacht Club** - (0°, 0°)
 - **Seattle Yacht Club** - (0°, 0°)
 - **Washington Yacht Club** - (0°, 0°)
 - **Shilshole Bay Yacht Club** - (0.68°N, -0.40°W) - Clearly corrupted
 
 ### 4. Coordinate Differences (sample comparison)
+
 Several clubs show slight coordinate variations between sources (typical GPS rounding):
-- **Anacortes Yacht Club**: 
+
+- **Anacortes Yacht Club**:
   - KML: 48.516769, -122.605008
   - Map: 48.5125, -122.605
   - Difference: ~360 feet (acceptable variance)
 
 ## Recommendation: Use Extracted Data
+
 **The newly extracted data is superior** because it:
+
 1. **Contains 157% more clubs** (175 vs 68)
 2. **Has coordinates for all clubs** (where available)
 3. **Includes website URLs** for modern reference
@@ -142,11 +151,13 @@ Several clubs show slight coordinate variations between sources (typical GPS rou
 5. **Is more current** (extracted June 2026)
 
 **However, preserve the KML data for:**
+
 1. Contact information (addresses, phone numbers)
 2. Pin type annotations (Club location vs Moorage marina/harbor)
 3. Regional grouping and styling information
 
 ## Action Items
+
 ✅ Use extracted map data (175 clubs) as the primary source
 ✅ Merge with KML contact details where available (68 clubs)
 ✅ Flag 3 clubs with missing coordinates for manual verification
