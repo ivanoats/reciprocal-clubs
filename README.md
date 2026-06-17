@@ -233,6 +233,13 @@ Manual workflow inputs:
 - `object_key` (for example `ncds_20c.pmtiles`)
 - `bucket_name` (for example `styc`)
 
+For local uploads (also suitable for large files), use:
+
+```sh
+R2_BUCKET=styc R2_ACCOUNT_ID=<cloudflare-account-id> \
+npm run nautical:pmtiles:upload:r2 -- data/nautical-charts/pmtiles/ncds_20c.pmtiles ncds_20c.pmtiles
+```
+
 ## Available data files
 
 | Format | File | Purpose |
