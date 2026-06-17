@@ -7,7 +7,16 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(npx panda *)",
       "Bash(which node; node --version; echo '---'; ls -la ~/.nvm/versions/node 2>/dev/null | head; echo '---'; which volta fnm asdf 2>&1 | head)",
-      "Bash(grep -E '^\\(node|npm|npx\\)$')"
+      "Bash(grep -E '^\\(node|npm|npx\\)$')",
+      "Bash(ps -p 43463 -o pid,ppid,command)",
+      "Bash(ps -p 39697 -o pid,ppid,command)",
+      "Bash(kill 43463)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(kill 48039 48038)",
+      "Bash(pkill -f 'next dev')",
+      "Bash(pkill -f 'next-server')",
+      "mcp__1d27dd6b-6dec-4662-ae8a-f05854cdfd8c__resolve-library-id",
+      "mcp__1d27dd6b-6dec-4662-ae8a-f05854cdfd8c__query-docs"
     ]
   }
 }

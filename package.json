@@ -16,7 +16,7 @@
     "test:coverage": "vitest run --coverage",
     "validate:data": "node validate.cjs",
     "export:kml": "node geojson-to-kml.cjs",
-    "prepare": "panda codegen && panda cssgen --outfile styled-system/styles.css"
+    "prepare": "panda codegen"
   },
   "dependencies": {
     "@ark-ui/react": "^4.9.1",
