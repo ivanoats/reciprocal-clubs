@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import maplibregl from 'maplibre-gl'
 import type { StyleSpecification } from 'maplibre-gl'
+import { Protocol } from 'pmtiles'
 
 import type { Club } from '@/domain/club'
 import { css } from '../../../styled-system/css'
@@ -14,6 +15,7 @@ type MapViewProps = {
 }
 
 type MapMode = 'nautical' | 'standard'
+type NauticalChartSourceMode = 'xyz' | 'pmtiles'
 
 const SOURCE_ID = 'clubs-source'
 const CLUSTER_LAYER_ID = 'clusters'
@@ -22,12 +24,43 @@ const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
 const DEFAULT_NOAA_CHART_TILE_URL =
   'https://gis.charttools.noaa.gov/arcgis/rest/services/MarineChart_Services/NOAACharts/MapServer/tile/{z}/{y}/{x}'
+const RAW_NAUTICAL_CHART_SOURCE_MODE =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE?.trim().toLowerCase() ||
+  'xyz'
+const NAUTICAL_CHART_SOURCE_MODE: NauticalChartSourceMode =
+  RAW_NAUTICAL_CHART_SOURCE_MODE === 'pmtiles' ? 'pmtiles' : 'xyz'
 const NOAA_CHART_TILE_URL =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL?.trim() ||
   DEFAULT_NOAA_CHART_TILE_URL
+const PMTILES_ARCHIVE_URL_RAW =
+  process.env.NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL?.trim() ||
+  'http://localhost:8081/noaa_regions_04_10.pmtiles'
+const PMTILES_ARCHIVE_URL = PMTILES_ARCHIVE_URL_RAW.startsWith('pmtiles://')
+  ? PMTILES_ARCHIVE_URL_RAW
+  : `pmtiles://${PMTILES_ARCHIVE_URL_RAW}`
 const NOAA_CHART_ATTRIBUTION =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
   '&copy; NOAA Office of Coast Survey'
+
+let hasRegisteredPmtilesProtocol = false
+
+const getNauticalSourceConfig = () => {
+  if (NAUTICAL_CHART_SOURCE_MODE === 'pmtiles') {
+    return {
+      type: 'raster' as const,
+      url: PMTILES_ARCHIVE_URL,
+      tileSize: 256,
+      attribution: NOAA_CHART_ATTRIBUTION,
+    }
+  }
+
+  return {
+    type: 'raster' as const,
+    tiles: [NOAA_CHART_TILE_URL],
+    tileSize: 256,
+    attribution: NOAA_CHART_ATTRIBUTION,
+  }
+}
 
 const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
@@ -59,10 +92,7 @@ const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         attribution: '&copy; OpenStreetMap contributors',
       },
       noaa: {
-        type: 'raster',
-        tiles: [NOAA_CHART_TILE_URL],
-        tileSize: 256,
-        attribution: NOAA_CHART_ATTRIBUTION,
+        ...getNauticalSourceConfig(),
       },
     },
     layers,
@@ -98,6 +128,16 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   useEffect(() => {
     onSelectClubRef.current = onSelectClub
   }, [onSelectClub])
+
+  useEffect(() => {
+    if (NAUTICAL_CHART_SOURCE_MODE !== 'pmtiles' || hasRegisteredPmtilesProtocol) {
+      return
+    }
+
+    const protocol = new Protocol()
+    maplibregl.addProtocol('pmtiles', protocol.tile)
+    hasRegisteredPmtilesProtocol = true
+  }, [])
 
   useEffect(() => {
     if (!containerRef.current) {

@@ -27,6 +27,10 @@ Support a configurable chart tile URL via environment variable so chart mode
 can point at a local MBTiles-backed tile server (for example, NOAA MBTiles
 regions 04-10 from `vokkim/noaa-nautical-charts`) without code changes.
 
+Support an optional PMTiles mode for chart source loading in MapLibre by using
+the PMTiles protocol (`pmtiles://`). This allows direct use of a `.pmtiles`
+archive URL while preserving the same chart/standard UI behavior.
+
 The style includes:
 
 - a neutral marine background color
@@ -34,6 +38,8 @@ The style includes:
 - OpenStreetMap raster tiles for standard mode
 - a high-contrast, opaque UI toggle between chart and standard basemaps
 - optional env-based override for a local MBTiles tile-server URL
+- optional PMTiles source mode using `NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE`
+  and `NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL`
 - explicit attribution for both data sources
 
 ## Consequences
@@ -45,6 +51,8 @@ The style includes:
 - If NOAA tiles are unavailable, users can switch to the standard OSM mode.
 - If a local MBTiles service is configured, chart mode can run independently
   of NOAA live tile availability.
+- If MBTiles are converted to PMTiles and served locally, chart mode can run
+  with either XYZ tile requests or direct PMTiles archive loading.
 - Users can opt into a cleaner standard basemap without leaving the map view.
 - The current approach is an interim nautical basemap, not a full ENC-style
   chart renderer.

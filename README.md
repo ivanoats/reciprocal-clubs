@@ -75,16 +75,26 @@ npx markdownlint-cli "**/*.md" --ignore node_modules
 
 ## Nautical chart source configuration
 
-The chart basemap mode can use either the default NOAA live tile service or a
-custom MBTiles-backed tile server URL.
+The chart basemap mode supports two source modes:
+
+- `xyz` (default): NOAA live tile service or any XYZ endpoint
+- `pmtiles`: direct `pmtiles://` access in MapLibre via the PMTiles protocol
 
 Set these variables in `.env.local`:
 
 ```sh
-# Optional. Defaults to NOAA Chart Display Service if not set.
-# Example for a local XYZ tile server fronting MBTiles:
-# http://localhost:8080/data/{z}/{x}/{y}.png
+# Optional. `xyz` (default) or `pmtiles`.
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=xyz
+
+# Optional in `xyz` mode. Defaults to NOAA Chart Display Service if not set.
+# Example for a local XYZ tile server fronting MBTiles or PMTiles:
+# http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
 NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=
+
+# Optional in `pmtiles` mode. Can be http(s) URL or full pmtiles:// URL.
+# Example:
+# http://localhost:8081/noaa_regions_04_10.pmtiles
+NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=
 
 # Optional attribution override for the chart source.
 NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
@@ -95,16 +105,47 @@ NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
 The repository lists MBTiles downloads from NOAA for regions 04 through 10,
 which cover the needed U.S. areas.
 
-1. Download:
-  `MBTILES_04.mbtiles` through `MBTILES_10.mbtiles`
-2. Serve them with a local tile server that exposes an XYZ endpoint.
-3. Point `NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL` to that endpoint.
+1. Download `MBTILES_04.mbtiles` through `MBTILES_10.mbtiles`.
+2. Place them in `data/nautical-charts/mbtiles/`.
+3. Convert to PMTiles:
+
+```sh
+npm run nautical:pmtiles:convert
+```
+
+1. Merge into one archive (recommended):
+
+```sh
+npm run nautical:pmtiles:merge
+```
+
+1. Serve local PMTiles data:
+
+```sh
+npm run nautical:pmtiles:serve
+```
+
+1. Choose one app mode:
+
+- `xyz` mode from PMTiles server endpoint:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=xyz
+NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
+```
+
+- `pmtiles` mode from archive URL:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
+NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=http://localhost:8081/noaa_regions_04_10.pmtiles
+```
 
 Notes:
 
 - MapLibre in the browser cannot read `.mbtiles` files directly.
-- The MBTiles files must be served through an HTTP tile server first.
-- Keep `chart` mode pointed at the local URL and `standard` mode remains OSM.
+- Convert MBTiles to PMTiles first, then serve PMTiles over HTTP.
+- Keep `chart` mode pointed at NOAA/PMTiles data; `standard` mode remains OSM.
 
 ## Available data files
 
