@@ -20,13 +20,16 @@ yet.
 
 Use a raster OSM base with an OpenSeaMap seamark overlay as the nautical map
 presentation for the club explorer. Keep the club markers and interactions in
-the existing MapLibre client component.
+the existing MapLibre client component, and expose a toggle so users can
+switch back to the standard basemap when they prefer a simpler view or when
+the seamark overlay is not helpful.
 
 The style includes:
 
 - a neutral marine background color
 - OpenStreetMap raster tiles for the base geography
 - OpenSeaMap seamark tiles for nautical symbols and chart detail
+- a UI toggle between chart and standard basemaps
 - explicit attribution for both data sources
 
 ## Consequences
@@ -37,5 +40,6 @@ The style includes:
   MapLibre setup.
 - If seamark tiles are unavailable, the app still falls back to the OSM base
   map.
+- Users can opt into a cleaner standard basemap without leaving the map view.
 - The current approach is an interim nautical basemap, not a full ENC-style
   chart renderer.

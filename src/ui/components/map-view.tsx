@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import maplibregl from 'maplibre-gl'
 import type { StyleSpecification } from 'maplibre-gl'
 
@@ -19,7 +19,7 @@ const CLUSTER_COUNT_LAYER_ID = 'cluster-count'
 const CLUB_LAYER_ID = 'unclustered-club'
 const INITIAL_CENTER: [number, number] = [-122.3321, 47.6062]
 
-const BASE_MAP_STYLE: StyleSpecification = {
+const createBaseStyle = (includeSeamarkOverlay: boolean): StyleSpecification => ({
   version: 8,
   glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
   sources: {
@@ -49,21 +49,30 @@ const BASE_MAP_STYLE: StyleSpecification = {
       type: 'raster',
       source: 'osm',
     },
-    {
-      id: 'seamark-overlay',
-      type: 'raster',
-      source: 'seamark',
-      paint: {
-        'raster-opacity': 0.9,
-      },
-    },
+    ...(includeSeamarkOverlay
+      ? [
+          {
+            id: 'seamark-overlay',
+            type: 'raster',
+            source: 'seamark',
+            paint: {
+              'raster-opacity': 0.9,
+            },
+          },
+        ]
+      : []),
   ],
-}
+})
 
 export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
+  const [mapMode, setMapMode] = useState<'nautical' | 'standard'>('nautical')
+  const mapStyle = useMemo(
+    () => createBaseStyle(mapMode === 'nautical'),
+    [mapMode],
+  )
 
   const featureCollection = useMemo(
     () => ({
@@ -242,9 +251,9 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       map.remove()
       mapRef.current = null
     }
-    // Map is created once on mount; data updates flow through the next effect.
+    // The map is recreated when the selected basemap mode changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [mapStyle])
 
   useEffect(() => {
     const map = mapRef.current
@@ -274,32 +283,100 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         maxZoom: 8,
       })
     }
-  }, [clubs, featureCollection])
+  }, [clubs, featureCollection, mapStyle])
 
   useEffect(() => {
     const map = mapRef.current
-    if (!map || !map.getLayer(CLUB_LAYER_ID)) {
+    if (!map) {
       return
     }
 
-    map.setPaintProperty(CLUB_LAYER_ID, 'circle-color', [
-      'case',
-      ['==', ['get', 'name'], selectedClubName ?? ''],
-      '#f97316',
-      '#0891b2',
-    ])
+    const applySelectedClubStyle = () => {
+      if (!map.getLayer(CLUB_LAYER_ID)) {
+        return
+      }
 
-    const selectedClub = clubs.find((club) => club.name === selectedClubName)
-    if (!selectedClub) {
+      map.setPaintProperty(CLUB_LAYER_ID, 'circle-color', [
+        'case',
+        ['==', ['get', 'name'], selectedClubName ?? ''],
+        '#f97316',
+        '#0891b2',
+      ])
+
+      const selectedClub = clubs.find((club) => club.name === selectedClubName)
+      if (!selectedClub) {
+        return
+      }
+
+      map.easeTo({
+        center: [selectedClub.longitude, selectedClub.latitude],
+        zoom: Math.max(map.getZoom(), 12),
+        duration: 450,
+      })
+    }
+
+    if (!map.getLayer(CLUB_LAYER_ID)) {
+      map.once('load', applySelectedClubStyle)
       return
     }
 
-    map.easeTo({
-      center: [selectedClub.longitude, selectedClub.latitude],
-      zoom: Math.max(map.getZoom(), 12),
-      duration: 450,
-    })
-  }, [clubs, selectedClubName])
+    applySelectedClubStyle()
+  }, [clubs, selectedClubName, mapStyle])
 
-  return <div aria-label="Club map" className={css({ w: 'full', h: 'full' })} ref={containerRef} role="region" />
+  return (
+    <div className={css({ position: 'relative', w: 'full', h: 'full' })}>
+      <div
+        className={css({
+          position: 'absolute',
+          top: '3',
+          right: '3',
+          zIndex: 1,
+          display: 'flex',
+          gap: '1',
+          rounded: 'full',
+          border: '1px solid',
+          borderColor: 'borderSubtle',
+          bg: 'bgCanvas',
+          p: '1',
+          backdropFilter: 'blur(10px)',
+        })}
+      >
+        <button
+          className={css({
+            cursor: 'pointer',
+            rounded: 'full',
+            px: '3',
+            py: '1.5',
+            fontSize: 'sm',
+            fontWeight: '600',
+            color: mapMode === 'nautical' ? 'textPrimary' : 'textMuted',
+            bg: mapMode === 'nautical' ? 'bgSurface' : 'transparent',
+            boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
+          })}
+          onClick={() => setMapMode('nautical')}
+          type="button"
+        >
+          Chart
+        </button>
+        <button
+          className={css({
+            cursor: 'pointer',
+            rounded: 'full',
+            px: '3',
+            py: '1.5',
+            fontSize: 'sm',
+            fontWeight: '600',
+            color: mapMode === 'standard' ? 'textPrimary' : 'textMuted',
+            bg: mapMode === 'standard' ? 'bgSurface' : 'transparent',
+            boxShadow: mapMode === 'standard' ? 'sm' : 'none',
+          })}
+          onClick={() => setMapMode('standard')}
+          type="button"
+        >
+          Standard
+        </button>
+      </div>
+      <div aria-label="Club map" className={css({ w: 'full', h: 'full' })} ref={containerRef} role="region" />
+    </div>
+  )
 }
