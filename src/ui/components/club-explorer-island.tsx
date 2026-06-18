@@ -21,5 +21,5 @@ type ClubExplorerIslandProps = {
 }
 
 export const ClubExplorerIsland = ({ clubs, initialSelectedClubName }: ClubExplorerIslandProps) => {
-  return <ClubExplorer key={initialSelectedClubName ?? clubs[0]?.name ?? 'none'} clubs={clubs} initialSelectedClubName={initialSelectedClubName} />
+  return <ClubExplorer clubs={clubs} initialSelectedClubName={initialSelectedClubName} />
 }

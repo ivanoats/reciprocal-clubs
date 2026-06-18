@@ -26,6 +26,7 @@ export const useMapViewport = (
     const track = () => setZoom(map.getZoom())
     map.on('zoom', track)
     map.on('zoomend', track)
+    setZoom(map.getZoom())
     return () => {
       map.off('zoom', track)
       map.off('zoomend', track)

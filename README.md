@@ -1,6 +1,7 @@
 # Reciprocal Clubs
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5e99940d-be1e-4d3a-b6dc-317c7a494c0c/deploy-status)](https://app.netlify.com/projects/styc-recip/deploys)
+[![DeepSource](https://app.deepsource.com/gh/ivanoats/reciprocal-clubs.svg/?label=code+coverage&show_trend=true&token=8TAYcwujHq_C0-tCTd2LRv6M)](https://app.deepsource.com/gh/ivanoats/reciprocal-clubs/)
 
 This repository serves two purposes:
 
