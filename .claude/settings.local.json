@@ -16,7 +16,9 @@
       "Bash(pkill -f 'next dev')",
       "Bash(pkill -f 'next-server')",
       "mcp__1d27dd6b-6dec-4662-ae8a-f05854cdfd8c__resolve-library-id",
-      "mcp__1d27dd6b-6dec-4662-ae8a-f05854cdfd8c__query-docs"
+      "mcp__1d27dd6b-6dec-4662-ae8a-f05854cdfd8c__query-docs",
+      "Bash(zsh -ic 'cat /Users/ivan/code/reciprocal-clubs/CONTEXT.md 2>/dev/null || echo \"no CONTEXT.md\"')",
+      "Bash(zsh -ic 'ls /Users/ivan/code/reciprocal-clubs/ && ls /Users/ivan/code/reciprocal-clubs/docs/ 2>/dev/null || echo \"no docs dir\"')"
     ]
   }
 }
