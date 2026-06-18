@@ -13,4 +13,4 @@ name = "test-coverage"
 enabled = true
 
   [analyzers.meta]
-  runtime = "js"
+  runtime = "javascript"

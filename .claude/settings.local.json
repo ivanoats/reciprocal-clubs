@@ -21,7 +21,12 @@
       "Bash(zsh -ic 'ls /Users/ivan/code/reciprocal-clubs/ && ls /Users/ivan/code/reciprocal-clubs/docs/ 2>/dev/null || echo \"no docs dir\"')",
       "WebFetch(domain:distribution.charts.noaa.gov)",
       "Bash(bash -c 'node_modules/.bin/markdownlint \"**/*.md\" --ignore node_modules')",
-      "Bash(zsh -ic 'git status --short')"
+      "Bash(zsh -ic 'git status --short')",
+      "WebSearch",
+      "WebFetch(domain:docs.deepsource.com)",
+      "WebFetch(domain:deepsource.io)",
+      "WebFetch(domain:app.deepsource.com)",
+      "WebFetch(domain:dev.to)"
     ]
   }
 }
