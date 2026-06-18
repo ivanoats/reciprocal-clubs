@@ -99,7 +99,10 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const activeNauticalSourceLabel = 'PMTiles'
 
   const featureCollection = useMemo(() => buildFeatureCollection(clubs), [clubs])
-  featureCollectionRef.current = featureCollection
+
+  useEffect(() => {
+    featureCollectionRef.current = featureCollection
+  }, [featureCollection])
 
   useEffect(() => {
     onSelectClubRef.current = onSelectClub
@@ -172,7 +175,6 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       map.remove()
       mapRef.current = null
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Style swap — preserves viewport when the basemap mode changes.
