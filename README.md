@@ -75,10 +75,12 @@ npx markdownlint-cli "**/*.md" --ignore node_modules
 
 ## Nautical chart source configuration
 
-The chart basemap mode supports two source modes:
+Chart mode is PMTiles-only.
 
-- `pmtiles` (default): direct `pmtiles://` access in MapLibre via the PMTiles protocol
-- `xyz`: NOAA live tile service or any XYZ endpoint
+- The map reads nautical chart tiles from a PMTiles archive URL.
+- There is no runtime fallback to NOAA XYZ/OpenSeaMap in chart mode.
+- If PMTiles cannot be loaded, chart mode remains blank (with status text) rather
+  than switching to another basemap.
 
 Start from the template and then adjust values as needed:
 
@@ -89,27 +91,21 @@ cp .env.example .env.local
 Set these variables in `.env.local`:
 
 ```sh
-# Optional. `pmtiles` (default) or `xyz`.
+# Keep as pmtiles for current chart behavior.
 NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
 
-# Optional in `xyz` mode. Defaults to local NOAA proxy route if not set:
-# /api/noaa-tiles/{z}/{x}/{y}
-# Example for a local XYZ tile server fronting MBTiles or PMTiles:
-# http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
-# Must include {z}, {x}, and {y}. Invalid values auto-fallback to NOAA default.
-NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=
-
-# Optional in `pmtiles` mode. Can be http(s) URL or full pmtiles:// URL.
-# Example:
+# Required for chart mode. Can be http(s) URL or full pmtiles:// URL.
+# Example local:
 # http://localhost:8081/ncds_20c.pmtiles
+# Example Cloudflare Worker:
+# https://styc-pmtiles.<subdomain>.workers.dev/ncds_20c.pmtiles
 NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=
 
-# Optional attribution override for the chart source.
+# Optional attribution override for chart source.
 NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
 
-# Optional glyph endpoint for MapLibre symbol rendering.
-# Defaults to MapLibre demo glyphs; set this to a production-grade CDN
-# or self-hosted path.
+# Optional glyph endpoint for MapLibre symbols.
+# Default: https://fonts.openmaptiles.org/{fontstack}/{range}.pbf
 NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL=
 ```
 
@@ -151,16 +147,7 @@ Then run the PMTiles server:
 npm run nautical:pmtiles:serve
 ```
 
-1. Choose one app mode:
-
-- `xyz` mode from PMTiles server endpoint:
-
-```sh
-NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=xyz
-NEXT_PUBLIC_NAUTICAL_CHART_TILE_URL=http://localhost:8081/noaa_regions_04_10/{z}/{x}/{y}.png
-```
-
-- `pmtiles` mode from archive URL:
+1. Point the app to the PMTiles archive URL:
 
 ```sh
 NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
@@ -171,15 +158,8 @@ Notes:
 
 - MapLibre in the browser cannot read `.mbtiles` files directly.
 - Convert MBTiles to PMTiles first, then serve PMTiles over HTTP.
-- Keep `chart` mode pointed at NOAA/PMTiles data; `standard` mode remains OSM.
-- If PMTiles fails to load at runtime, chart mode automatically falls back to
-  NOAA XYZ tiles.
-- If a custom XYZ chart URL fails, chart mode automatically falls back to the
-  default NOAA XYZ proxy route.
-- If the NOAA XYZ route fails, chart mode falls back to the NOAA export route,
-  then to OpenSeaMap seamarks.
-- The default NOAA chart URL uses a same-origin Next.js proxy route to avoid
-  browser CORS issues with direct upstream tile requests.
+- `chart` mode uses PMTiles; `standard` mode remains OSM.
+- There is no chart fallback layer in current behavior.
 
 ### Cloudflare R2 + Worker deployment (recommended for production PMTiles)
 
@@ -197,6 +177,8 @@ cp cloudflare/pmtiles-worker/wrangler.toml.example cloudflare/pmtiles-worker/wra
 - set `account_id`
 - set `bucket_name` if not `styc`
 - set `ALLOWED_ORIGINS` for local + production origins
+  - include both `http://localhost:3000` and `http://localhost:3001`
+  - wildcard domain patterns are supported, for example `https://*.netlify.app`
 
 1. Deploy:
 
@@ -242,6 +224,40 @@ npm run nautical:pmtiles:upload:r2 -- \
 ```
 
 If `R2_AWS_PROFILE` is omitted, the script defaults to `r2`.
+The script validates that the selected profile uses a 32-character R2 access
+key ID to avoid accidental use of non-R2 AWS credentials.
+
+### Netlify deployment and environment variables
+
+There was not a dedicated Netlify env var checklist before; this section is the
+source of truth for Netlify configuration.
+
+1. Connect the repository to a Netlify site.
+2. In Netlify, open Site configuration > Environment variables.
+3. Add these app variables:
+
+Required:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_SOURCE_MODE=pmtiles
+NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL=https://<worker-subdomain>/ncds_20c.pmtiles
+```
+
+Optional:
+
+```sh
+NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
+NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL=
+```
+
+1. Trigger a redeploy after changing environment variables.
+
+Notes:
+
+- Use the Cloudflare Worker URL for `NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL`.
+- Netlify environment variables are separate from GitHub Actions secrets used
+  for Cloudflare workflows.
+- Local `.env.local` values do not automatically apply to Netlify.
 
 ## Available data files
 
@@ -310,7 +326,8 @@ The app is built with:
 - **Panda CSS** for all styling
 - **Ark UI** for accessible headless primitives
 - **MapLibre GL JS** for interactive mapping
-- **Netlify** for deployment
+- **Netlify** for app hosting
+- **Cloudflare R2 + Worker** for PMTiles chart delivery
 
 Important implementation constraints:
 
@@ -321,7 +338,7 @@ Important implementation constraints:
 
 ## Architecture
 
-The app will follow a hexagonal architecture so domain logic stays
+The app follows a hexagonal architecture so domain logic stays
 independent from Next.js and UI details.
 
 ```mermaid
@@ -343,8 +360,7 @@ src/
 
 - `domain/` contains pure business logic
 - `application/` contains use cases and ports
-- `adapters/` contains implementations for Next.js, data loading, and
-  mapping integration
+- `adapters/` contains implementations for Next.js, data loading, map, and external services
 - `ui/` contains thin React components
 
 ## Quality and delivery conventions

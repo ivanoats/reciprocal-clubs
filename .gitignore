@@ -54,3 +54,6 @@ Thumbs.db
 data/*.mbtiles
 data/nautical-charts/*.pmtiles
 data/nautical-charts/**/*.pmtiles
+
+# Local Netlify folder
+.netlify

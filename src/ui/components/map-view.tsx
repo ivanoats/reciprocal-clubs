@@ -472,8 +472,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         return
       }
 
-      const targetZoom =
-        mapMode === 'nautical' ? Math.max(map.getZoom(), 9) : map.getZoom()
+      const targetZoom = Math.max(map.getZoom(), CHART_DETAIL_MIN_ZOOM)
 
       map.easeTo({
         center: [selectedClub.longitude, selectedClub.latitude],
@@ -589,7 +588,11 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
               borderColor: 'borderSubtle',
             })}
             onClick={() => {
-              mapRef.current?.easeTo({ zoom: CHART_DETAIL_MIN_ZOOM, duration: 500 })
+              mapRef.current?.easeTo({
+                center: INITIAL_CENTER,
+                zoom: CHART_DETAIL_MIN_ZOOM,
+                duration: 500,
+              })
             }}
             type="button"
           >
