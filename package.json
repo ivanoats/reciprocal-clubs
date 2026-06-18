@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:full": "concurrently \"npm run dev\" \"npm run nautical:pmtiles:serve\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -40,6 +41,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitest/coverage-v8": "^4.1.9",
+    "concurrently": "^10.0.3",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.0",
     "jsdom": "^27.0.1",

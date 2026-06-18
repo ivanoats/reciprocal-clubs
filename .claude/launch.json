@@ -4,7 +4,7 @@
     {
       "name": "next-dev",
       "runtimeExecutable": "/bin/sh",
-      "runtimeArgs": ["-c", "export PATH=/Users/ivan/.nvm/versions/node/v22.22.0/bin:$PATH && exec npm run dev"],
+      "runtimeArgs": ["-c", "export PATH=/Users/ivan/.nvm/versions/node/v22.22.0/bin:$PATH && exec npm run dev:full"],
       "port": 3000,
       "autoPort": true
     }
