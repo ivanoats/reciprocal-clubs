@@ -116,11 +116,11 @@ Download MBTiles files from the NOAA Chart Distribution System interactive map:
 <https://distribution.charts.noaa.gov/ncds/index.html>
 
 Click a region on the map, then click the **Baseline** link to download the
-`.mbtiles` file. Files are named `ncds_XX.mbtiles` (e.g. `ncds_19.mbtiles`
+`.mbtiles` file. Files are named `ncds_*.mbtiles` (e.g. `ncds_19.mbtiles`
 through `ncds_24.mbtiles` cover the Pacific Northwest). The file currently
 used in this project is `ncds_20c.mbtiles`.
 
-1. Download the relevant `ncds_XX.mbtiles` file(s).
+1. Download the relevant `ncds_*.mbtiles` file(s).
 2. Place them in `data/nautical-charts/mbtiles/`.
 3. Convert all downloaded files to PMTiles:
 

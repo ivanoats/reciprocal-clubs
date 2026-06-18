@@ -17,7 +17,7 @@
     "test:coverage": "vitest run --coverage",
     "validate:data": "node validate.cjs",
     "export:kml": "node geojson-to-kml.cjs",
-    "nautical:pmtiles:convert": "mkdir -p data/nautical-charts/pmtiles && for f in data/nautical-charts/mbtiles/ncds_*.mbtiles; do name=$(basename \"$f\" .mbtiles); pmtiles convert \"$f\" \"data/nautical-charts/pmtiles/${name}.pmtiles\"; done",
+    "nautical:pmtiles:convert": "mkdir -p data/nautical-charts/pmtiles data/nautical-charts/mbtiles && for f in data/nautical-charts/mbtiles/ncds_*.mbtiles; do [ -f \"$f\" ] || continue; name=$(basename \"$f\" .mbtiles); pmtiles convert \"$f\" \"data/nautical-charts/pmtiles/${name}.pmtiles\" || exit 1; done",
     "nautical:pmtiles:merge": "pmtiles merge data/nautical-charts/pmtiles/ncds_*.pmtiles data/nautical-charts/pmtiles/noaa_pnw.pmtiles",
     "nautical:pmtiles:serve": "pmtiles serve data/nautical-charts/pmtiles --port 8081",
     "nautical:pmtiles:upload:r2": "bash scripts/upload-pmtiles-to-r2.sh",
