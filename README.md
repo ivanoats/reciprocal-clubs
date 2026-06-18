@@ -110,42 +110,42 @@ NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION=
 NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL=
 ```
 
-### Using vokkim/noaa-nautical-charts regions 04-10
+### Downloading NOAA nautical chart MBTiles
 
-The repository lists MBTiles downloads from NOAA for regions 04 through 10,
-which cover the needed U.S. areas.
+Download MBTiles files from the NOAA Chart Distribution System interactive map:
+<https://distribution.charts.noaa.gov/ncds/index.html>
 
-1. Download `MBTILES_04.mbtiles` through `MBTILES_10.mbtiles`.
+Click a region on the map, then click the **Baseline** link to download the
+`.mbtiles` file. Files are named `ncds_XX.mbtiles` (e.g. `ncds_19.mbtiles`
+through `ncds_24.mbtiles` cover the Pacific Northwest). The file currently
+used in this project is `ncds_20c.mbtiles`.
+
+1. Download the relevant `ncds_XX.mbtiles` file(s).
 2. Place them in `data/nautical-charts/mbtiles/`.
-3. Convert to PMTiles:
+3. Convert all downloaded files to PMTiles:
 
 ```sh
 npm run nautical:pmtiles:convert
 ```
 
-1. Merge into one archive (recommended):
+1. Merge into one archive (recommended for multi-region coverage):
 
 ```sh
 npm run nautical:pmtiles:merge
 ```
 
-1. Serve local PMTiles data:
+This produces `data/nautical-charts/pmtiles/noaa_pnw.pmtiles`.
+
+1. Serve locally:
 
 ```sh
 npm run nautical:pmtiles:serve
 ```
 
-### Converting a single MBTiles file (for example ncds_20c.mbtiles)
+Or start Next.js and the PMTiles server together:
 
 ```sh
-mkdir -p data/nautical-charts/pmtiles
-pmtiles convert data/ncds_20c.mbtiles data/nautical-charts/pmtiles/ncds_20c.pmtiles
-```
-
-Then run the PMTiles server:
-
-```sh
-npm run nautical:pmtiles:serve
+npm run dev:full
 ```
 
 1. Point the app to the PMTiles archive URL:
@@ -361,7 +361,8 @@ src/
 
 - `domain/` contains pure business logic
 - `application/` contains use cases and ports
-- `adapters/` contains implementations for Next.js, data loading, map, and external services
+- `adapters/` contains implementations for Next.js, data loading, map, and
+  external services
 - `ui/` contains thin React components
 
 ## Quality and delivery conventions
