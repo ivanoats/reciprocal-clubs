@@ -28,6 +28,7 @@ const INITIAL_PNW_BOUNDS: [[number, number], [number, number]] = [
 const CHART_BOUNDS: [number, number, number, number] = [-129.917222, 47.008889, -116.333333, 60.333333]
 const CHART_MIN_ZOOM = 0
 const CHART_MAX_ZOOM = 16
+const CHART_DETAIL_MIN_ZOOM = 12
 const DEFAULT_GLYPHS_URL = 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf'
 const SOFT_FALLBACK_TIMEOUT_MS = 8000
 const HARD_FALLBACK_TIMEOUT_MS = 18000
@@ -135,6 +136,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const [noaaLoaded, setNoaaLoaded] = useState(false)
   const [noaaErrorCount, setNoaaErrorCount] = useState(0)
   const [lastNauticalError, setLastNauticalError] = useState<string>('')
+  const [zoom, setZoom] = useState<number>(4.5)
   const activeNauticalSourceLabel = 'PMTiles'
   const mapStyle = useMemo(
     () => createBaseStyle(mapMode),
@@ -247,6 +249,10 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
     map.on('move', () => {
       map.triggerRepaint()
     })
+
+    const trackZoom = () => setZoom(map.getZoom())
+    map.on('zoom', trackZoom)
+    map.on('zoomend', trackZoom)
 
     map.on('load', () => {
       map.addSource(SOURCE_ID, {
@@ -543,6 +549,54 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           Standard
         </button>
       </div>
+      {mapMode === 'nautical' && zoom < CHART_DETAIL_MIN_ZOOM ? (
+        <div
+          className={css({
+            position: 'absolute',
+            top: '3',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '2',
+            rounded: 'full',
+            border: '1px solid',
+            borderColor: 'borderSubtle',
+            bg: 'bgSurface',
+            pl: '3',
+            pr: '1',
+            py: '1',
+            fontSize: 'xs',
+            color: 'textMuted',
+            boxShadow: 'md',
+            opacity: 0.98,
+          })}
+          role="status"
+        >
+          <span>Zoom in for chart detail</span>
+          <button
+            className={css({
+              cursor: 'pointer',
+              rounded: 'full',
+              px: '2.5',
+              py: '1',
+              fontSize: 'xs',
+              fontWeight: '600',
+              color: 'textPrimary',
+              bg: 'bgCanvas',
+              border: '1px solid',
+              borderColor: 'borderSubtle',
+            })}
+            onClick={() => {
+              mapRef.current?.easeTo({ zoom: CHART_DETAIL_MIN_ZOOM, duration: 500 })
+            }}
+            type="button"
+          >
+            {`Zoom to ${CHART_DETAIL_MIN_ZOOM}`}
+          </button>
+        </div>
+      ) : null}
       {mapMode === 'nautical' ? (
         <div
           className={css({
