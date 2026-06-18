@@ -17,9 +17,8 @@
     "test:coverage": "vitest run --coverage",
     "validate:data": "node validate.cjs",
     "export:kml": "node geojson-to-kml.cjs",
-    "nautical:pmtiles:convert:ncds": "mkdir -p data/nautical-charts/pmtiles && pmtiles convert data/ncds_20c.mbtiles data/nautical-charts/pmtiles/ncds_20c.pmtiles",
-    "nautical:pmtiles:convert": "mkdir -p data/nautical-charts/pmtiles && for r in 04 05 06 07 08 09 10; do pmtiles convert data/nautical-charts/mbtiles/MBTILES_${r}.mbtiles data/nautical-charts/pmtiles/MBTILES_${r}.pmtiles; done",
-    "nautical:pmtiles:merge": "pmtiles merge data/nautical-charts/pmtiles/MBTILES_04.pmtiles data/nautical-charts/pmtiles/MBTILES_05.pmtiles data/nautical-charts/pmtiles/MBTILES_06.pmtiles data/nautical-charts/pmtiles/MBTILES_07.pmtiles data/nautical-charts/pmtiles/MBTILES_08.pmtiles data/nautical-charts/pmtiles/MBTILES_09.pmtiles data/nautical-charts/pmtiles/MBTILES_10.pmtiles data/nautical-charts/pmtiles/noaa_regions_04_10.pmtiles",
+    "nautical:pmtiles:convert": "mkdir -p data/nautical-charts/pmtiles data/nautical-charts/mbtiles && for f in data/nautical-charts/mbtiles/ncds_*.mbtiles; do [ -f \"$f\" ] || continue; name=$(basename \"$f\" .mbtiles); pmtiles convert \"$f\" \"data/nautical-charts/pmtiles/${name}.pmtiles\" || exit 1; done",
+    "nautical:pmtiles:merge": "pmtiles merge data/nautical-charts/pmtiles/ncds_*.pmtiles data/nautical-charts/pmtiles/noaa_pnw.pmtiles",
     "nautical:pmtiles:serve": "pmtiles serve data/nautical-charts/pmtiles --port 8081",
     "nautical:pmtiles:upload:r2": "bash scripts/upload-pmtiles-to-r2.sh",
     "prepare": "panda codegen"

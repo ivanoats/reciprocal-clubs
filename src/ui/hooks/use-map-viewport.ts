@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type maplibregl from 'maplibre-gl'
 
 import type { Club } from '@/domain/club'
@@ -14,10 +14,6 @@ export const useMapViewport = (
   selectedClubName: string | undefined,
 ) => {
   const [zoom, setZoom] = useState(4.5)
-  const clubsRef = useRef(clubs)
-  clubsRef.current = clubs
-  const selectedClubNameRef = useRef(selectedClubName)
-  selectedClubNameRef.current = selectedClubName
 
   // Zoom tracking — registered once after map creation.
   useEffect(() => {
@@ -27,6 +23,7 @@ export const useMapViewport = (
     map.on('zoom', track)
     map.on('zoomend', track)
     setZoom(map.getZoom())
+    // skipcq: JS-0045
     return () => {
       map.off('zoom', track)
       map.off('zoomend', track)
@@ -75,6 +72,7 @@ export const useMapViewport = (
       return
     }
     apply()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clubs, selectedClubName])
 
   return { zoom }

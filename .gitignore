@@ -57,3 +57,6 @@ data/nautical-charts/**/*.pmtiles
 
 # Local Netlify folder
 .netlify
+
+data/nautical-charts/*.mbtiles
+data/nautical-charts/**/*.mbtiles
