@@ -170,6 +170,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       map.on('mouseleave', CLUB_LAYER_ID, () => { map.getCanvas().style.cursor = '' })
     })
 
+    // skipcq: JS-0045
     return () => {
       resizeObserver.disconnect()
       map.remove()
