@@ -73,9 +73,19 @@ const createBaseStyle = (
           },
         },
         {
+          id: 'osm-base',
+          type: 'raster' as const,
+          source: 'osm',
+          paint: {
+            'raster-opacity': 0.85,
+            'raster-saturation': -0.25,
+          },
+        },
+        {
           id: 'nautical-base',
           type: 'raster' as const,
           source: 'noaa',
+          minzoom: 8,
           paint: {
             'raster-opacity': 1,
             'raster-resampling': 'nearest',
