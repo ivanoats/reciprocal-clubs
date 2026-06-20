@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { StyleSpecification } from 'maplibre-gl'
+import type { SourceSpecification, StyleSpecification } from 'maplibre-gl'
 
 import {
   type MapMode,
@@ -24,7 +24,7 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
   const isWmts = mapMode === 'wmts'
 
-  const nauticalSources = Object.fromEntries(
+  const nauticalSources: Record<string, SourceSpecification> = Object.fromEntries(
     PMTILES_ARCHIVE_URLS.map((url, i) => [
       `noaa-${i}`,
       {
@@ -61,16 +61,16 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
     : isWmts
       ? [
           { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
-          { id: 'noaa-wmts-base', type: 'raster' as const, source: 'noaa-wmts' },
+          { id: 'noaa-wmts-base', type: 'raster' as const, source: 'wmts-noaa-charts' },
         ]
       : [
           { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
           { id: 'base-map', type: 'raster', source: 'osm' },
         ]
 
-  const wmtsSources = isWmts
+  const wmtsSources: Record<string, SourceSpecification> = isWmts
     ? {
-        'noaa-wmts': {
+        'wmts-noaa-charts': {
           type: 'raster' as const,
           tiles: [NOAA_WMTS_TILE_URL],
           tileSize: 256,

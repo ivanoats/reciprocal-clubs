@@ -6,6 +6,7 @@ import { Protocol } from 'pmtiles'
 
 import type { Club } from '@/domain/club'
 import {
+  type MapMode,
   SOURCE_ID,
   CLUSTER_LAYER_ID,
   CLUSTER_COUNT_LAYER_ID,
@@ -89,7 +90,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
   const featureCollectionRef = useRef<ReturnType<typeof buildFeatureCollection> | null>(null)
-  const [mapMode, setMapMode] = useState<'nautical' | 'standard' | 'wmts'>('nautical')
+  const [mapMode, setMapMode] = useState<MapMode>('nautical')
 
   const mapStyle = useMapStyle(mapMode)
   const { zoom } = useMapViewport(mapRef, clubs, selectedClubName)
@@ -235,6 +236,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('nautical')}
+          aria-pressed={mapMode === 'nautical'}
           type="button"
         >
           Chart
@@ -252,6 +254,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             boxShadow: mapMode === 'standard' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('standard')}
+          aria-pressed={mapMode === 'standard'}
           type="button"
         >
           Standard
@@ -269,6 +272,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             boxShadow: mapMode === 'wmts' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('wmts')}
+          aria-pressed={mapMode === 'wmts'}
           type="button"
         >
           NOAA Charts
