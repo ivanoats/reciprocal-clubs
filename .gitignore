@@ -58,5 +58,8 @@ data/nautical-charts/**/*.pmtiles
 # Local Netlify folder
 .netlify
 
+# Cloudflare Wrangler CLI
+.wrangler
+
 data/nautical-charts/*.mbtiles
 data/nautical-charts/**/*.mbtiles

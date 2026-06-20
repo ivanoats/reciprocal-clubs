@@ -28,9 +28,7 @@ export const useMapViewport = (
       map.off('zoom', track)
       map.off('zoomend', track)
     }
-    // mapRef identity is stable; run once on mount.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [mapRef])
 
   // Initial bounds fit — fires once when the map first loads.
   useEffect(() => {
@@ -39,8 +37,7 @@ export const useMapViewport = (
     map.once('load', () => {
       map.fitBounds(INITIAL_PNW_BOUNDS, { padding: 36, duration: 0 })
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [mapRef])
 
   // Club selection — highlight marker and fly to club.
   useEffect(() => {
@@ -72,8 +69,7 @@ export const useMapViewport = (
       return
     }
     apply()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [clubs, selectedClubName])
+  }, [clubs, mapRef, selectedClubName])
 
   return { zoom }
 }
