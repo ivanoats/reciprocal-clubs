@@ -9,6 +9,8 @@ import {
   CHART_MIN_ZOOM,
   CHART_MAX_ZOOM,
   NOAA_CHART_ATTRIBUTION,
+  NOAA_WMTS_TILE_URL,
+  NOAA_WMTS_MAX_ZOOM,
 } from '@/ui/map-constants'
 
 const NAUTICAL_RASTER_PAINT = {
@@ -20,6 +22,7 @@ const NAUTICAL_RASTER_PAINT = {
 
 export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
+  const isWmts = mapMode === 'wmts'
 
   const nauticalSources = Object.fromEntries(
     PMTILES_ARCHIVE_URLS.map((url, i) => [
@@ -55,10 +58,27 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         },
         ...nauticalLayers,
       ]
-    : [
-        { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
-        { id: 'base-map', type: 'raster', source: 'osm' },
-      ]
+    : isWmts
+      ? [
+          { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
+          { id: 'noaa-wmts-base', type: 'raster' as const, source: 'noaa-wmts' },
+        ]
+      : [
+          { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
+          { id: 'base-map', type: 'raster', source: 'osm' },
+        ]
+
+  const wmtsSources = isWmts
+    ? {
+        'noaa-wmts': {
+          type: 'raster' as const,
+          tiles: [NOAA_WMTS_TILE_URL],
+          tileSize: 256,
+          maxzoom: NOAA_WMTS_MAX_ZOOM,
+          attribution: NOAA_CHART_ATTRIBUTION,
+        },
+      }
+    : {}
 
   return {
     version: 8,
@@ -71,6 +91,7 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         attribution: '&copy; OpenStreetMap contributors',
       },
       ...nauticalSources,
+      ...wmtsSources,
     },
     layers,
   }

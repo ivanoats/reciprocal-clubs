@@ -1,4 +1,4 @@
-export type MapMode = 'nautical' | 'standard'
+export type MapMode = 'nautical' | 'standard' | 'wmts'
 
 export const SOURCE_ID = 'clubs-source'
 export const CLUSTER_LAYER_ID = 'clusters'
@@ -42,3 +42,7 @@ export const PMTILES_ARCHIVE_URL = PMTILES_ARCHIVE_URLS[0]
 export const NOAA_CHART_ATTRIBUTION =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
   '&copy; NOAA Office of Coast Survey'
+
+export const NOAA_WMTS_TILE_URL =
+  'https://tileservice.charts.noaa.gov/tiles/50000_1/{z}/{x}/{y}.png'
+export const NOAA_WMTS_MAX_ZOOM = 18

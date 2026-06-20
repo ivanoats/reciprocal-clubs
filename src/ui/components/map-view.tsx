@@ -89,7 +89,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
   const featureCollectionRef = useRef<ReturnType<typeof buildFeatureCollection> | null>(null)
-  const [mapMode, setMapMode] = useState<'nautical' | 'standard'>('nautical')
+  const [mapMode, setMapMode] = useState<'nautical' | 'standard' | 'wmts'>('nautical')
 
   const mapStyle = useMapStyle(mapMode)
   const { zoom } = useMapViewport(mapRef, clubs, selectedClubName)
@@ -256,6 +256,23 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         >
           Standard
         </button>
+        <button
+          className={css({
+            cursor: 'pointer',
+            rounded: 'full',
+            px: '3',
+            py: '1.5',
+            fontSize: 'sm',
+            fontWeight: '600',
+            color: mapMode === 'wmts' ? 'textPrimary' : 'textMuted',
+            bg: mapMode === 'wmts' ? 'bgCanvas' : 'bgSurface',
+            boxShadow: mapMode === 'wmts' ? 'sm' : 'none',
+          })}
+          onClick={() => setMapMode('wmts')}
+          type="button"
+        >
+          NOAA Charts
+        </button>
       </div>
 
       {mapMode === 'nautical' && zoom < 12 ? (
@@ -327,6 +344,27 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           })}
         >
           {`Chart ${activeNauticalSourceLabel} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}${lastNauticalError ? ` • ${lastNauticalError}` : ''}`}
+        </div>
+      ) : mapMode === 'wmts' ? (
+        <div
+          className={css({
+            position: 'absolute',
+            left: '3',
+            bottom: '3',
+            zIndex: 1,
+            rounded: 'md',
+            border: '1px solid',
+            borderColor: 'borderSubtle',
+            bg: 'bgSurface',
+            px: '2.5',
+            py: '1.5',
+            fontSize: 'xs',
+            color: 'textMuted',
+            boxShadow: 'sm',
+            opacity: 0.96,
+          })}
+        >
+          NOAA Nautical Charts • NOAA Office of Coast Survey
         </div>
       ) : null}
 
