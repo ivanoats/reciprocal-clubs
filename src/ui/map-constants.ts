@@ -43,6 +43,5 @@ export const NOAA_CHART_ATTRIBUTION =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
   '&copy; NOAA Office of Coast Survey'
 
-export const NOAA_WMTS_TILE_URL =
-  'https://tileservice.charts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/MapServer/tile/{z}/{y}/{x}'
+export const NOAA_WMTS_TILE_URL = '/api/noaa-tiles/{z}/{x}/{y}'
 export const NOAA_WMTS_MAX_ZOOM = 17
