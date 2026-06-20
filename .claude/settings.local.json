@@ -28,7 +28,8 @@
       "WebFetch(domain:app.deepsource.com)",
       "WebFetch(domain:dev.to)",
       "mcp__b30eecb5-cced-49ab-8e89-57f0c981b14a__netlify-project-services-reader",
-      "mcp__b30eecb5-cced-49ab-8e89-57f0c981b14a__netlify-project-services-updater"
+      "mcp__b30eecb5-cced-49ab-8e89-57f0c981b14a__netlify-project-services-updater",
+      "Bash(zsh -ic 'find /Users/ivan/code/reciprocal-clubs -type f -name \"*.json\" -o -name \"*.md\" -o -name \"*.config.*\" | head -30')"
     ]
   }
 }

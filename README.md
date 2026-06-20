@@ -7,7 +7,7 @@ This repository serves two purposes:
 
 1. It is the authoritative geodata source for **68 active reciprocal
    yacht clubs** for Sloop Tavern Yacht Club (STYC).
-2. It is the home of a **Next.js 19 web app** that will provide an
+2. It is the home of a **Next.js 16 web app** that provides an
    interactive club directory and map on top of that data.
 
 The authoritative dataset is `data/clubs.geojson`. Other formats such as
@@ -319,7 +319,7 @@ Notes:
 }
 ```
 
-## Planned application stack
+## Application stack
 
 The app is built with:
 
@@ -340,7 +340,8 @@ Important implementation constraints:
 ## Architecture
 
 The app follows a hexagonal architecture so domain logic stays
-independent from Next.js and UI details.
+independent from Next.js and UI details. See [docs/architecture.md](docs/architecture.md)
+for full C4 diagrams and data-flow documentation.
 
 ```mermaid
 graph TD
@@ -361,8 +362,8 @@ src/
 
 - `domain/` contains pure business logic
 - `application/` contains use cases and ports
-- `adapters/` contains implementations for Next.js, data loading, map, and
-  external services
+- `adapters/` contains implementations of application ports (currently:
+  `GeoJsonClubRepository` for data loading)
 - `ui/` contains thin React components
 
 ## Quality and delivery conventions
@@ -375,7 +376,8 @@ src/
 - Pull requests follow **Conventional Commits** and **conventional
   branching**
 - PRs are **squash-merged**
-- Releases and changelog generation are handled by **semantic-release**
+- Releases and changelog generation are intended to be handled by
+  **semantic-release** (not yet configured)
 
 ## Architectural decisions
 
