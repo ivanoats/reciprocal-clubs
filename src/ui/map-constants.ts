@@ -43,5 +43,5 @@ export const NOAA_CHART_ATTRIBUTION =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
   '&copy; NOAA Office of Coast Survey'
 
-export const NOAA_WMTS_TILE_URL = '/api/noaa-tiles/{z}/{x}/{y}'
-export const NOAA_WMTS_MAX_ZOOM = 17
+export const NOAA_WMTS_TILE_URL = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'
+export const NOAA_WMTS_MAX_ZOOM = 18

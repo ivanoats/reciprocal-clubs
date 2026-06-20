@@ -275,7 +275,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           aria-pressed={mapMode === 'wmts'}
           type="button"
         >
-          NOAA Charts
+          SeaMarks
         </button>
       </div>
 
@@ -368,7 +368,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             opacity: 0.96,
           })}
         >
-          NOAA Nautical Charts • NOAA Office of Coast Survey
+          Nautical Overlay • OpenSeaMap contributors
         </div>
       ) : null}
 
