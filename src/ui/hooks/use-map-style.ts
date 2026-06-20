@@ -61,7 +61,13 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
     : isWmts
       ? [
           { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
-          { id: 'noaa-wmts-base', type: 'raster' as const, source: 'wmts-noaa-charts' },
+          {
+            id: 'osm-base',
+            type: 'raster' as const,
+            source: 'osm',
+            paint: { 'raster-opacity': 0.85, 'raster-saturation': -0.25 },
+          },
+          { id: 'noaa-wmts-base', type: 'raster' as const, source: 'wmts-noaa-charts', minzoom: 4 },
         ]
       : [
           { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
