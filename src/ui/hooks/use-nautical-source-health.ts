@@ -8,9 +8,12 @@ import {
   MAX_NAUTICAL_SOURCE_ERRORS_BEFORE_FALLBACK,
 } from '@/ui/map-constants'
 
+const isNoaaSourceId = (sourceId: string | undefined): boolean =>
+  typeof sourceId === 'string' && sourceId.startsWith('noaa-')
+
 const isNauticalSourceError = (event: maplibregl.ErrorEvent): boolean => {
   const sourceId = (event as { sourceId?: string }).sourceId
-  if (sourceId === 'noaa') return true
+  if (isNoaaSourceId(sourceId)) return true
   const message =
     event.error instanceof Error ? event.error.message.toLowerCase() : String(event.error).toLowerCase()
   return message.includes('pmtiles') || message.includes('source "noaa"') || message.includes('noaa')
@@ -20,7 +23,7 @@ const isNoaaSourceDataEvent = (event: maplibregl.MapSourceDataEvent): boolean =>
   const sourceId = (event as { sourceId?: string }).sourceId
   const isSourceLoaded = (event as { isSourceLoaded?: boolean }).isSourceLoaded
   const sourceDataType = (event as { sourceDataType?: string }).sourceDataType
-  return sourceId === 'noaa' && (!!isSourceLoaded || sourceDataType === 'content')
+  return isNoaaSourceId(sourceId) && (!!isSourceLoaded || sourceDataType === 'content')
 }
 
 export const useNauticalSourceHealth = (
