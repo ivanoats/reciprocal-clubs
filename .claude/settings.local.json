@@ -26,7 +26,9 @@
       "WebFetch(domain:docs.deepsource.com)",
       "WebFetch(domain:deepsource.io)",
       "WebFetch(domain:app.deepsource.com)",
-      "WebFetch(domain:dev.to)"
+      "WebFetch(domain:dev.to)",
+      "mcp__b30eecb5-cced-49ab-8e89-57f0c981b14a__netlify-project-services-reader",
+      "mcp__b30eecb5-cced-49ab-8e89-57f0c981b14a__netlify-project-services-updater"
     ]
   }
 }

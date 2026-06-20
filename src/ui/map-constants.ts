@@ -23,12 +23,21 @@ const DEFAULT_GLYPHS_URL = 'https://fonts.openmaptiles.org/{fontstack}/{range}.p
 export const MAPLIBRE_GLYPHS_URL =
   process.env.NEXT_PUBLIC_MAPLIBRE_GLYPHS_URL?.trim() || DEFAULT_GLYPHS_URL
 
-const PMTILES_ARCHIVE_URL_RAW =
+const topmtilesUrl = (raw: string) =>
+  raw.startsWith('pmtiles://') ? raw : `pmtiles://${raw}`
+
+const PMTILES_ARCHIVE_URLS_RAW =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_PMTILES_URL?.trim() ||
   'http://localhost:8081/ncds_20c.pmtiles'
-export const PMTILES_ARCHIVE_URL = PMTILES_ARCHIVE_URL_RAW.startsWith('pmtiles://')
-  ? PMTILES_ARCHIVE_URL_RAW
-  : `pmtiles://${PMTILES_ARCHIVE_URL_RAW}`
+
+export const PMTILES_ARCHIVE_URLS: string[] = PMTILES_ARCHIVE_URLS_RAW
+  .split(',')
+  .map((u) => u.trim())
+  .filter(Boolean)
+  .map(topmtilesUrl)
+
+// Legacy single-URL alias used by any code that hasn't migrated yet
+export const PMTILES_ARCHIVE_URL = PMTILES_ARCHIVE_URLS[0]
 
 export const NOAA_CHART_ATTRIBUTION =
   process.env.NEXT_PUBLIC_NAUTICAL_CHART_ATTRIBUTION?.trim() ||
