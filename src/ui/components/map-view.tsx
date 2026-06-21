@@ -90,11 +90,12 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
   const featureCollectionRef = useRef<ReturnType<typeof buildFeatureCollection> | null>(null)
   const [mapMode, setMapMode] = useState<'nautical' | 'standard'>('nautical')
+  const [map, setMap] = useState<maplibregl.Map | null>(null)
 
   const mapStyle = useMapStyle(mapMode)
-  const { zoom } = useMapViewport(mapRef, clubs, selectedClubName)
+  const { zoom } = useMapViewport(map, clubs, selectedClubName)
   const { loaded: noaaLoaded, errorCount: noaaErrorCount, lastError: lastNauticalError } =
-    useNauticalSourceHealth(mapRef, mapMode)
+    useNauticalSourceHealth(map, mapMode)
 
   const activeNauticalSourceLabel = 'PMTiles'
 
@@ -127,6 +128,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       cancelPendingTileRequestsWhileZooming: false,
     })
     mapRef.current = map
+    setMap(map)
 
     const resizeObserver = new ResizeObserver(() => map.resize())
     resizeObserver.observe(containerRef.current)
@@ -175,6 +177,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       resizeObserver.disconnect()
       map.remove()
       mapRef.current = null
+      setMap(null)
     }
   }, [])
 

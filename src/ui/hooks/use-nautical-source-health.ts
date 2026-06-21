@@ -27,7 +27,7 @@ const isNoaaSourceDataEvent = (event: maplibregl.MapSourceDataEvent): boolean =>
 }
 
 export const useNauticalSourceHealth = (
-  mapRef: React.RefObject<maplibregl.Map | null>,
+  map: maplibregl.Map | null,
   mapMode: MapMode,
 ) => {
   const [loaded, setLoaded] = useState(false)
@@ -35,7 +35,6 @@ export const useNauticalSourceHealth = (
   const [lastError, setLastError] = useState('')
 
   useEffect(() => {
-    const map = mapRef.current
     if (!map) return
 
     let localErrorCount = 0
@@ -92,7 +91,7 @@ export const useNauticalSourceHealth = (
       if (softTimer !== null) window.clearTimeout(softTimer)
       if (hardTimer !== null) window.clearTimeout(hardTimer)
     }
-  }, [mapRef, mapMode])
+  }, [map, mapMode])
 
   return { loaded, errorCount, lastError }
 }
