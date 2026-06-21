@@ -37,6 +37,10 @@ export const useNauticalSourceHealth = (
   useEffect(() => {
     if (!map) return
 
+    // Reset stale state whenever map instance or mode changes.
+    const reset = () => { setLoaded(false); setErrorCount(0); setLastError('') }
+    reset()
+
     let localErrorCount = 0
     let hasLoaded = false
 
