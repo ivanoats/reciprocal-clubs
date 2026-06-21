@@ -9,7 +9,7 @@ import {
 } from '@/ui/map-constants'
 
 export const useMapViewport = (
-  mapRef: React.RefObject<maplibregl.Map | null>,
+  map: maplibregl.Map | null,
   clubs: Club[],
   selectedClubName: string | undefined,
 ) => {
@@ -17,31 +17,33 @@ export const useMapViewport = (
 
   // Zoom tracking — registered once after map creation.
   useEffect(() => {
-    const map = mapRef.current
     if (!map) return
     const track = () => setZoom(map.getZoom())
     map.on('zoom', track)
     map.on('zoomend', track)
-    setZoom(map.getZoom())
+    track()
     // skipcq: JS-0045
     return () => {
       map.off('zoom', track)
       map.off('zoomend', track)
     }
-  }, [mapRef])
+  }, [map])
 
-  // Initial bounds fit — fires once when the map first loads.
+  // Initial bounds fit — fires once when the map first becomes available.
   useEffect(() => {
-    const map = mapRef.current
     if (!map) return
-    map.once('load', () => {
-      map.fitBounds(INITIAL_PNW_BOUNDS, { padding: 36, duration: 0 })
-    })
-  }, [mapRef])
+    const fit = () => { map.fitBounds(INITIAL_PNW_BOUNDS, { padding: 36, duration: 0 }) }
+    if (map.isStyleLoaded()) {
+      fit()
+    } else {
+      map.once('load', fit)
+      // skipcq: JS-0045
+      return () => { map.off('load', fit) }
+    }
+  }, [map])
 
   // Club selection — highlight marker and fly to club.
   useEffect(() => {
-    const map = mapRef.current
     if (!map) return
 
     const apply = () => {
@@ -69,7 +71,7 @@ export const useMapViewport = (
       return
     }
     apply()
-  }, [clubs, mapRef, selectedClubName])
+  }, [clubs, map, selectedClubName])
 
   return { zoom }
 }
