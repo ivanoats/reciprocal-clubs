@@ -32,9 +32,14 @@ export const useMapViewport = (
   // Initial bounds fit — fires once when the map first becomes available.
   useEffect(() => {
     if (!map) return
-    map.once('load', () => {
-      map.fitBounds(INITIAL_PNW_BOUNDS, { padding: 36, duration: 0 })
-    })
+    const fit = () => { map.fitBounds(INITIAL_PNW_BOUNDS, { padding: 36, duration: 0 }) }
+    if (map.isStyleLoaded()) {
+      fit()
+    } else {
+      map.once('load', fit)
+      // skipcq: JS-0045
+      return () => { map.off('load', fit) }
+    }
   }, [map])
 
   // Club selection — highlight marker and fly to club.
