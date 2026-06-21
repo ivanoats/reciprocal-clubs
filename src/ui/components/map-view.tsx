@@ -6,6 +6,7 @@ import { Protocol } from 'pmtiles'
 
 import type { Club } from '@/domain/club'
 import {
+  type MapMode,
   SOURCE_ID,
   CLUSTER_LAYER_ID,
   CLUSTER_COUNT_LAYER_ID,
@@ -89,7 +90,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const onSelectClubRef = useRef<MapViewProps['onSelectClub']>(onSelectClub)
   const featureCollectionRef = useRef<ReturnType<typeof buildFeatureCollection> | null>(null)
-  const [mapMode, setMapMode] = useState<'nautical' | 'standard'>('nautical')
+  const [mapMode, setMapMode] = useState<MapMode>('nautical')
   const [map, setMap] = useState<maplibregl.Map | null>(null)
 
   const mapStyle = useMapStyle(mapMode)
@@ -238,6 +239,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('nautical')}
+          aria-pressed={mapMode === 'nautical'}
           type="button"
         >
           Chart
@@ -255,9 +257,28 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             boxShadow: mapMode === 'standard' ? 'sm' : 'none',
           })}
           onClick={() => setMapMode('standard')}
+          aria-pressed={mapMode === 'standard'}
           type="button"
         >
           Standard
+        </button>
+        <button
+          className={css({
+            cursor: 'pointer',
+            rounded: 'full',
+            px: '3',
+            py: '1.5',
+            fontSize: 'sm',
+            fontWeight: '600',
+            color: mapMode === 'wmts' ? 'textPrimary' : 'textMuted',
+            bg: mapMode === 'wmts' ? 'bgCanvas' : 'bgSurface',
+            boxShadow: mapMode === 'wmts' ? 'sm' : 'none',
+          })}
+          onClick={() => setMapMode('wmts')}
+          aria-pressed={mapMode === 'wmts'}
+          type="button"
+        >
+          SeaMarks
         </button>
       </div>
 
@@ -330,6 +351,27 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           })}
         >
           {`Chart ${activeNauticalSourceLabel} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}${lastNauticalError ? ` • ${lastNauticalError}` : ''}`}
+        </div>
+      ) : mapMode === 'wmts' ? (
+        <div
+          className={css({
+            position: 'absolute',
+            left: '3',
+            bottom: '3',
+            zIndex: 1,
+            rounded: 'md',
+            border: '1px solid',
+            borderColor: 'borderSubtle',
+            bg: 'bgSurface',
+            px: '2.5',
+            py: '1.5',
+            fontSize: 'xs',
+            color: 'textMuted',
+            boxShadow: 'sm',
+            opacity: 0.96,
+          })}
+        >
+          Nautical Overlay • OpenSeaMap contributors
         </div>
       ) : null}
 

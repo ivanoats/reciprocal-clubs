@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { StyleSpecification } from 'maplibre-gl'
+import type { SourceSpecification, StyleSpecification } from 'maplibre-gl'
 
 import {
   type MapMode,
@@ -9,6 +9,8 @@ import {
   CHART_MIN_ZOOM,
   CHART_MAX_ZOOM,
   NOAA_CHART_ATTRIBUTION,
+  NOAA_WMTS_TILE_URL,
+  NOAA_WMTS_MAX_ZOOM,
 } from '@/ui/map-constants'
 
 const NAUTICAL_RASTER_PAINT = {
@@ -20,8 +22,9 @@ const NAUTICAL_RASTER_PAINT = {
 
 export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
   const isNautical = mapMode === 'nautical'
+  const isWmts = mapMode === 'wmts'
 
-  const nauticalSources = Object.fromEntries(
+  const nauticalSources: Record<string, SourceSpecification> = Object.fromEntries(
     PMTILES_ARCHIVE_URLS.map((url, i) => [
       `noaa-${i}`,
       {
@@ -55,10 +58,33 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         },
         ...nauticalLayers,
       ]
-    : [
-        { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
-        { id: 'base-map', type: 'raster', source: 'osm' },
-      ]
+    : isWmts
+      ? [
+          { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
+          {
+            id: 'osm-base',
+            type: 'raster' as const,
+            source: 'osm',
+            paint: { 'raster-opacity': 0.85, 'raster-saturation': -0.25 },
+          },
+          { id: 'noaa-wmts-base', type: 'raster' as const, source: 'wmts-noaa-charts', minzoom: 4 },
+        ]
+      : [
+          { id: 'map-background', type: 'background', paint: { 'background-color': '#d7e3ef' } },
+          { id: 'base-map', type: 'raster', source: 'osm' },
+        ]
+
+  const wmtsSources: Record<string, SourceSpecification> = isWmts
+    ? {
+        'wmts-noaa-charts': {
+          type: 'raster' as const,
+          tiles: [NOAA_WMTS_TILE_URL],
+          tileSize: 256,
+          maxzoom: NOAA_WMTS_MAX_ZOOM,
+          attribution: NOAA_CHART_ATTRIBUTION,
+        },
+      }
+    : {}
 
   return {
     version: 8,
@@ -71,6 +97,7 @@ export const createBaseStyle = (mapMode: MapMode): StyleSpecification => {
         attribution: '&copy; OpenStreetMap contributors',
       },
       ...nauticalSources,
+      ...wmtsSources,
     },
     layers,
   }
