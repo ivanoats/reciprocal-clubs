@@ -94,7 +94,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const [map, setMap] = useState<maplibregl.Map | null>(null)
 
   const mapStyle = useMapStyle(mapMode)
-  const { zoom } = useMapViewport(map, clubs, selectedClubName)
+  useMapViewport(map, clubs, selectedClubName)
   const { loaded: noaaLoaded, errorCount: noaaErrorCount, lastError: lastNauticalError } =
     useNauticalSourceHealth(map, mapMode)
 
@@ -281,55 +281,6 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           SeaMarks
         </button>
       </div>
-
-      {mapMode === 'nautical' && zoom < 12 ? (
-        <div
-          className={css({
-            position: 'absolute',
-            top: '3',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '2',
-            rounded: 'full',
-            border: '1px solid',
-            borderColor: 'borderSubtle',
-            bg: 'bgSurface',
-            pl: '3',
-            pr: '1',
-            py: '1',
-            fontSize: 'xs',
-            color: 'textMuted',
-            boxShadow: 'md',
-            opacity: 0.98,
-          })}
-          role="status"
-        >
-          <span>Zoom in for chart detail</span>
-          <button
-            className={css({
-              cursor: 'pointer',
-              rounded: 'full',
-              px: '2.5',
-              py: '1',
-              fontSize: 'xs',
-              fontWeight: '600',
-              color: 'textPrimary',
-              bg: 'bgCanvas',
-              border: '1px solid',
-              borderColor: 'borderSubtle',
-            })}
-            onClick={() => {
-              mapRef.current?.easeTo({ center: INITIAL_CENTER, zoom: 12, duration: 500 })
-            }}
-            type="button"
-          >
-            Zoom to 12
-          </button>
-        </div>
-      ) : null}
 
       {mapMode === 'nautical' ? (
         <div
