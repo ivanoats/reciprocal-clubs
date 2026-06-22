@@ -20,6 +20,8 @@ export default defineConfig({
         'src/domain/**/*.ts',
         'src/application/use-cases/**/*.ts',
         'src/adapters/repositories/**/*.ts',
+        'src/ui/hooks/**/*.ts',
+        'src/ui/map-constants.ts',
       ],
       exclude: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
       thresholds: {
