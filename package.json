@@ -1,6 +1,6 @@
 {
   "name": "reciprocal-clubs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "STYC reciprocal club geodata and Next.js application",
   "license": "MIT",
   "author": "Ivan Storck",
@@ -21,7 +21,8 @@
     "nautical:pmtiles:merge": "pmtiles merge data/nautical-charts/pmtiles/ncds_*.pmtiles data/nautical-charts/pmtiles/noaa_pnw.pmtiles",
     "nautical:pmtiles:serve": "pmtiles serve data/nautical-charts/pmtiles --port 8081",
     "nautical:pmtiles:upload:r2": "bash scripts/upload-pmtiles-to-r2.sh",
-    "prepare": "panda codegen"
+    "release": "semantic-release",
+    "prepare": "panda codegen && husky"
   },
   "dependencies": {
     "@ark-ui/react": "^4.9.1",
@@ -32,8 +33,13 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "21.0.2",
+    "@commitlint/config-conventional": "21.0.2",
     "@pandacss/dev": "^1.11.3",
     "@pandacss/preset-panda": "^1.11.3",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/npm": "13.1.5",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
@@ -41,10 +47,13 @@
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.9",
     "concurrently": "^10.0.3",
+    "conventional-changelog-conventionalcommits": "9.3.1",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.0.0",
+    "husky": "9.1.7",
     "jsdom": "^29.1.1",
     "markdownlint-cli": "^0.49.0",
+    "semantic-release": "25.0.5",
     "typescript": "^5.9.3",
     "vite": "^8.0.16",
     "vitest": "^4.1.9"
