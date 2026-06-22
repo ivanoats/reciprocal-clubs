@@ -286,7 +286,10 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         <div
           className={css({
             position: 'absolute',
-            top: '3',
+            // On narrow viewports the top-right basemap toggle and this badge
+            // would collide, so drop the badge below it on mobile and restore
+            // the top row on md+.
+            top: { base: '16', md: '3' },
             left: '3',
             zIndex: 1,
             display: 'flex',
