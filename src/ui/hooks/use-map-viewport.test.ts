@@ -18,14 +18,14 @@ const club = (name: string, longitude: number, latitude: number): Club => ({
 
 describe('useMapViewport', () => {
   it('returns the default zoom when there is no map', () => {
-    const { result } = renderHook(() => useMapViewport(null, [], undefined))
+    const { result } = renderHook(() => useMapViewport(null, []))
     expect(result.current.zoom).toBe(4.5)
   })
 
   it('tracks zoom changes from map zoom events', () => {
     const map = new FakeMap()
     map.zoomValue = 9
-    const { result } = renderHook(() => useMapViewport(asMap(map), [], undefined))
+    const { result } = renderHook(() => useMapViewport(asMap(map), []))
 
     // track() runs immediately on registration
     expect(result.current.zoom).toBe(9)
@@ -38,14 +38,14 @@ describe('useMapViewport', () => {
   it('fits the PNW bounds immediately when the style is already loaded', () => {
     const map = new FakeMap()
     map.styleLoaded = true
-    renderHook(() => useMapViewport(asMap(map), [], undefined))
+    renderHook(() => useMapViewport(asMap(map), []))
     expect(map.fitBoundsCalls).toHaveLength(1)
   })
 
   it('defers the bounds fit to the load event when the style is not ready', () => {
     const map = new FakeMap()
     map.styleLoaded = false
-    renderHook(() => useMapViewport(asMap(map), [], undefined))
+    renderHook(() => useMapViewport(asMap(map), []))
 
     expect(map.fitBoundsCalls).toHaveLength(0)
     act(() => map.emit('load'))

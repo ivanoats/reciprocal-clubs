@@ -39,6 +39,7 @@
     "@pandacss/preset-panda": "^1.11.3",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
+    "@semantic-release/npm": "13.1.5",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",

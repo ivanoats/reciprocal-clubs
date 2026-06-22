@@ -74,7 +74,7 @@ describe('useNauticalSourceHealth', () => {
 
   it('does not count WMTS source errors as nautical health (PR #9 regression guard)', () => {
     const map = new FakeMap()
-    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(vi.fn())
     const { result } = renderHook(() => useNauticalSourceHealth(asMap(map), 'wmts'))
 
     act(() => map.emit('error', errorEvent('tile load error', 'wmts-noaa-charts')))

@@ -11,7 +11,7 @@ import {
 export const useMapViewport = (
   map: maplibregl.Map | null,
   clubs: Club[],
-  selectedClubName: string | undefined,
+  selectedClubName?: string,
 ) => {
   const [zoom, setZoom] = useState(4.5)
 

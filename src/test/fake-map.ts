@@ -1,6 +1,10 @@
 import type maplibregl from 'maplibre-gl'
 
 type Handler = (event?: unknown) => void
+// A once() wrapper carries a reference to the original handler so that off()
+// can match either the wrapper or the original, mirroring MapLibre/EventEmitter
+// semantics where `off(type, handler)` removes a listener added via `once`.
+type OnceHandler = Handler & { original?: Handler }
 
 // Minimal MapLibre stand-in for hook tests: an event emitter with the
 // handful of methods our hooks call. Cast to maplibregl.Map at the call site.
@@ -18,14 +22,17 @@ export class FakeMap {
   }
 
   off(type: string, handler: Handler) {
-    this.handlers[type] = (this.handlers[type] ?? []).filter((h) => h !== handler)
+    this.handlers[type] = (this.handlers[type] ?? []).filter(
+      (h) => h !== handler && (h as OnceHandler).original !== handler,
+    )
   }
 
   once(type: string, handler: Handler) {
-    const wrapper: Handler = (event) => {
+    const wrapper: OnceHandler = (event) => {
       this.off(type, wrapper)
       handler(event)
     }
+    wrapper.original = handler
     this.on(type, wrapper)
   }
 
