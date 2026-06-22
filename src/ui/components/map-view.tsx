@@ -287,8 +287,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           className={css({
             position: 'absolute',
             top: '3',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            left: '3',
             zIndex: 1,
             display: 'flex',
             alignItems: 'center',
