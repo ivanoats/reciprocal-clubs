@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.0...v1.0.1) (2026-06-22)
+
+### Bug Fixes
+
+* **map:** remove zoom-detail badge from chart mode ([#12](https://github.com/ivanoats/reciprocal-clubs/issues/12)) ([b148ab6](https://github.com/ivanoats/reciprocal-clubs/commit/b148ab62b1dd8528b14924c8565e0f634018ea5e))
+
 ## 1.0.0 (2026-06-22)
 
 ### Features
