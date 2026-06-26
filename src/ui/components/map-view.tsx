@@ -240,81 +240,42 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
           boxShadow: 'md',
         })}
       >
-        <button
-          className={css({
-            cursor: 'pointer',
-            rounded: 'lg',
-            px: '3.5',
-            py: '1.5',
-            fontSize: 'xs',
-            fontWeight: '700',
-            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-            color: mapMode === 'nautical' ? 'white' : 'textMuted',
-            bgGradient: mapMode === 'nautical' ? 'to-br' : 'none',
-            gradientFrom: mapMode === 'nautical' ? 'cyan.500' : 'none',
-            gradientTo: mapMode === 'nautical' ? 'blue.600' : 'none',
-            boxShadow: mapMode === 'nautical' ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
-            _hover: {
-              color: mapMode === 'nautical' ? 'white' : 'textPrimary',
-              bg: mapMode === 'nautical' ? 'none' : 'bgHover',
-            },
-          })}
-          onClick={() => setMapMode('nautical')}
-          aria-pressed={mapMode === 'nautical'}
-          type="button"
-        >
-          Chart
-        </button>
-        <button
-          className={css({
-            cursor: 'pointer',
-            rounded: 'lg',
-            px: '3.5',
-            py: '1.5',
-            fontSize: 'xs',
-            fontWeight: '700',
-            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-            color: mapMode === 'standard' ? 'white' : 'textMuted',
-            bgGradient: mapMode === 'standard' ? 'to-br' : 'none',
-            gradientFrom: mapMode === 'standard' ? 'cyan.500' : 'none',
-            gradientTo: mapMode === 'standard' ? 'blue.600' : 'none',
-            boxShadow: mapMode === 'standard' ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
-            _hover: {
-              color: mapMode === 'standard' ? 'white' : 'textPrimary',
-              bg: mapMode === 'standard' ? 'none' : 'bgHover',
-            },
-          })}
-          onClick={() => setMapMode('standard')}
-          aria-pressed={mapMode === 'standard'}
-          type="button"
-        >
-          Standard
-        </button>
-        <button
-          className={css({
-            cursor: 'pointer',
-            rounded: 'lg',
-            px: '3.5',
-            py: '1.5',
-            fontSize: 'xs',
-            fontWeight: '700',
-            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-            color: mapMode === 'wmts' ? 'white' : 'textMuted',
-            bgGradient: mapMode === 'wmts' ? 'to-br' : 'none',
-            gradientFrom: mapMode === 'wmts' ? 'cyan.500' : 'none',
-            gradientTo: mapMode === 'wmts' ? 'blue.600' : 'none',
-            boxShadow: mapMode === 'wmts' ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
-            _hover: {
-              color: mapMode === 'wmts' ? 'white' : 'textPrimary',
-              bg: mapMode === 'wmts' ? 'none' : 'bgHover',
-            },
-          })}
-          onClick={() => setMapMode('wmts')}
-          aria-pressed={mapMode === 'wmts'}
-          type="button"
-        >
-          SeaMarks
-        </button>
+        {(['nautical', 'standard', 'wmts'] as const).map((mode) => {
+          const isActive = mapMode === mode
+          const labels: Record<MapMode, string> = {
+            nautical: 'Chart',
+            standard: 'Standard',
+            wmts: 'SeaMarks',
+          }
+          return (
+            <button
+              key={mode}
+              className={css({
+                cursor: 'pointer',
+                rounded: 'lg',
+                px: '3.5',
+                py: '1.5',
+                fontSize: 'xs',
+                fontWeight: '700',
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                color: isActive ? 'white' : 'textMuted',
+                bgGradient: isActive ? 'to-br' : 'none',
+                gradientFrom: isActive ? 'cyan.500' : 'none',
+                gradientTo: isActive ? 'blue.600' : 'none',
+                boxShadow: isActive ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
+                _hover: {
+                  color: isActive ? 'white' : 'textPrimary',
+                  bg: isActive ? 'none' : 'bgHover',
+                },
+              })}
+              onClick={() => setMapMode(mode)}
+              aria-pressed={isActive}
+              type="button"
+            >
+              {labels[mode]}
+            </button>
+          )
+        })}
       </div>
 
       {mapMode === 'nautical' ? (
