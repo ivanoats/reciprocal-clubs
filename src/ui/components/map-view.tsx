@@ -184,14 +184,24 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   }, [])
 
   // Style swap — preserves viewport when the basemap mode changes.
+  const lastStyleRef = useRef<StyleSpecification | null>(null)
+
   useEffect(() => {
-    const map = mapRef.current
-    if (!map || !map.isStyleLoaded()) return
+    if (!map) return
+    if (lastStyleRef.current === mapStyle) return
+
+    // Skip redundant setStyle on the initial map load
+    if (lastStyleRef.current === null) {
+      lastStyleRef.current = mapStyle
+      return
+    }
+
+    lastStyleRef.current = mapStyle
     map.setStyle(mapStyle)
     map.once('styledata', () => {
       addClubLayers(map, featureCollectionRef.current ?? buildFeatureCollection([]))
     })
-  }, [mapStyle])
+  }, [map, mapStyle])
 
   // GeoJSON data update — pushes new club data to the existing source.
   useEffect(() => {
