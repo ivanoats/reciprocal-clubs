@@ -161,9 +161,18 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         const region = typeof feature.properties?.region === 'string' ? feature.properties.region : ''
         const distance = typeof feature.properties?.distanceNm === 'number' ? feature.properties.distanceNm : ''
         if (!name) return
+
+        const popupContent = `
+          <div style="font-family: var(--font-manrope), system-ui, -apple-system, sans-serif; padding: 6px 4px; min-width: 160px;">
+            <p style="margin: 0; font-family: var(--font-space-grotesk), system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.3;">${name}</p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; font-weight: 500; color: #475569;">${region}</p>
+            <p style="margin: 6px 0 0 0; font-size: 11px; font-weight: 700; color: #0891b2; display: flex; align-items: center; gap: 4px;">⛵ ${distance} nm</p>
+          </div>
+        `
+
         new maplibregl.Popup({ offset: 12 })
           .setLngLat(feature.geometry.coordinates as [number, number])
-          .setHTML(`<strong>${name}</strong><br/>${region}<br/>${distance} nm`)
+          .setHTML(popupContent)
           .addTo(map)
         onSelectClubRef.current?.(name)
       })
@@ -217,31 +226,38 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       <div
         className={css({
           position: 'absolute',
-          top: '3',
-          right: '3',
+          top: '3.5',
+          right: '3.5',
           zIndex: 1,
           display: 'flex',
           gap: '1',
-          rounded: 'full',
-          border: '1px solid',
+          rounded: 'xl',
+          borderWidth: '1px',
           borderColor: 'borderSubtle',
-          bg: 'bgSurface',
+          bg: { base: 'rgba(255, 255, 255, 0.75)', _dark: 'rgba(15, 23, 42, 0.65)' },
+          backdropFilter: 'blur(8px)',
           p: '1',
           boxShadow: 'md',
-          opacity: 0.98,
         })}
       >
         <button
           className={css({
             cursor: 'pointer',
-            rounded: 'full',
-            px: '3',
+            rounded: 'lg',
+            px: '3.5',
             py: '1.5',
-            fontSize: 'sm',
-            fontWeight: '600',
-            color: mapMode === 'nautical' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'nautical' ? 'bgCanvas' : 'bgSurface',
-            boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
+            fontSize: 'xs',
+            fontWeight: '700',
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            color: mapMode === 'nautical' ? 'white' : 'textMuted',
+            bgGradient: mapMode === 'nautical' ? 'to-br' : 'none',
+            gradientFrom: mapMode === 'nautical' ? 'cyan.500' : 'none',
+            gradientTo: mapMode === 'nautical' ? 'blue.600' : 'none',
+            boxShadow: mapMode === 'nautical' ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
+            _hover: {
+              color: mapMode === 'nautical' ? 'white' : 'textPrimary',
+              bg: mapMode === 'nautical' ? 'none' : 'bgHover',
+            },
           })}
           onClick={() => setMapMode('nautical')}
           aria-pressed={mapMode === 'nautical'}
@@ -252,14 +268,21 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         <button
           className={css({
             cursor: 'pointer',
-            rounded: 'full',
-            px: '3',
+            rounded: 'lg',
+            px: '3.5',
             py: '1.5',
-            fontSize: 'sm',
-            fontWeight: '600',
-            color: mapMode === 'standard' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'standard' ? 'bgCanvas' : 'bgSurface',
-            boxShadow: mapMode === 'standard' ? 'sm' : 'none',
+            fontSize: 'xs',
+            fontWeight: '700',
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            color: mapMode === 'standard' ? 'white' : 'textMuted',
+            bgGradient: mapMode === 'standard' ? 'to-br' : 'none',
+            gradientFrom: mapMode === 'standard' ? 'cyan.500' : 'none',
+            gradientTo: mapMode === 'standard' ? 'blue.600' : 'none',
+            boxShadow: mapMode === 'standard' ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
+            _hover: {
+              color: mapMode === 'standard' ? 'white' : 'textPrimary',
+              bg: mapMode === 'standard' ? 'none' : 'bgHover',
+            },
           })}
           onClick={() => setMapMode('standard')}
           aria-pressed={mapMode === 'standard'}
@@ -270,14 +293,21 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         <button
           className={css({
             cursor: 'pointer',
-            rounded: 'full',
-            px: '3',
+            rounded: 'lg',
+            px: '3.5',
             py: '1.5',
-            fontSize: 'sm',
-            fontWeight: '600',
-            color: mapMode === 'wmts' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'wmts' ? 'bgCanvas' : 'bgSurface',
-            boxShadow: mapMode === 'wmts' ? 'sm' : 'none',
+            fontSize: 'xs',
+            fontWeight: '700',
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            color: mapMode === 'wmts' ? 'white' : 'textMuted',
+            bgGradient: mapMode === 'wmts' ? 'to-br' : 'none',
+            gradientFrom: mapMode === 'wmts' ? 'cyan.500' : 'none',
+            gradientTo: mapMode === 'wmts' ? 'blue.600' : 'none',
+            boxShadow: mapMode === 'wmts' ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
+            _hover: {
+              color: mapMode === 'wmts' ? 'white' : 'textPrimary',
+              bg: mapMode === 'wmts' ? 'none' : 'bgHover',
+            },
           })}
           onClick={() => setMapMode('wmts')}
           aria-pressed={mapMode === 'wmts'}

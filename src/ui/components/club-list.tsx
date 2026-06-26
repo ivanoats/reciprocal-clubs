@@ -8,6 +8,100 @@ type ClubListProps = {
   onSelectClub?: (clubName: string) => void
 }
 
+const getRegionColor = (region: string) => {
+  const norm = region.toLowerCase()
+  if (norm.includes('north')) {
+    return {
+      bg: { base: 'teal.50', _dark: 'rgba(13, 148, 136, 0.15)' },
+      color: { base: 'teal.700', _dark: 'teal.300' },
+      border: { base: 'teal.100', _dark: 'rgba(13, 148, 136, 0.3)' },
+    }
+  }
+  if (norm.includes('south')) {
+    return {
+      bg: { base: 'indigo.50', _dark: 'rgba(79, 70, 229, 0.15)' },
+      color: { base: 'indigo.700', _dark: 'indigo.300' },
+      border: { base: 'indigo.100', _dark: 'rgba(79, 70, 229, 0.3)' },
+    }
+  }
+  if (norm.includes('islands') || norm.includes('san juan')) {
+    return {
+      bg: { base: 'cyan.50', _dark: 'rgba(6, 182, 212, 0.15)' },
+      color: { base: 'cyan.700', _dark: 'cyan.300' },
+      border: { base: 'cyan.100', _dark: 'rgba(6, 182, 212, 0.3)' },
+    }
+  }
+  if (norm.includes('canada') || norm.includes('bc') || norm.includes('british columbia')) {
+    return {
+      bg: { base: 'rose.50', _dark: 'rgba(244, 63, 94, 0.15)' },
+      color: { base: 'rose.700', _dark: 'rose.300' },
+      border: { base: 'rose.100', _dark: 'rgba(244, 63, 94, 0.3)' },
+    }
+  }
+  if (norm.includes('inland') || norm.includes('east') || norm.includes('lake') || norm.includes('water')) {
+    return {
+      bg: { base: 'amber.50', _dark: 'rgba(217, 119, 6, 0.15)' },
+      color: { base: 'amber.700', _dark: 'amber.300' },
+      border: { base: 'amber.100', _dark: 'rgba(217, 119, 6, 0.3)' },
+    }
+  }
+  return {
+    bg: { base: 'slate.50', _dark: 'rgba(100, 116, 139, 0.15)' },
+    color: { base: 'slate.700', _dark: 'slate.300' },
+    border: { base: 'slate.100', _dark: 'rgba(100, 116, 139, 0.3)' },
+  }
+}
+
+const PinIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={css({ w: '3.5', h: '3.5', flexShrink: 0, mt: '0.5' })}
+  >
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+)
+
+const SailboatIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={css({ w: '3.5', h: '3.5', flexShrink: 0 })}
+  >
+    <path d="M22 20H2" />
+    <path d="M10 20V2L2 14h8" />
+    <path d="M14 20V6l6 8h-6" />
+  </svg>
+)
+
+const ExternalLinkIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={css({ w: '3.5', h: '3.5', ml: '1.5' })}
+  >
+    <path d="M15 3h6v6" />
+    <path d="M10 14 21 3" />
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+  </svg>
+)
+
 export const ClubList = ({ clubs, selectedClubName, onSelectClub }: ClubListProps) => {
   return (
     <ul
@@ -17,64 +111,152 @@ export const ClubList = ({ clubs, selectedClubName, onSelectClub }: ClubListProp
         listStyle: 'none',
         p: 0,
         m: 0,
+        maxH: { lg: '640px' },
+        overflowY: { lg: 'auto' },
+        pr: { lg: '2' },
+        _scrollbar: {
+          width: '6px',
+        },
+        '_scrollbarTrack': {
+          bg: 'transparent',
+        },
+        '_scrollbarThumb': {
+          bg: 'borderSubtle',
+          borderRadius: 'full',
+        },
       })}
     >
-      {clubs.map((club) => (
-        <li
-          key={club.name}
-          className={css({
-            bg: 'bgSurface',
-            borderRadius: 'lg',
-            borderWidth: '1px',
-            borderColor: selectedClubName === club.name ? 'accent' : 'borderSubtle',
-            overflow: 'hidden',
-          })}
-        >
-          <button
+      {clubs.map((club) => {
+        const isSelected = selectedClubName === club.name
+        const badgeColors = getRegionColor(club.region)
+
+        return (
+          <li
+            key={club.name}
             className={css({
-              display: 'grid',
-              gap: '1',
-              w: 'full',
-              p: '4',
-              textAlign: 'left',
-              bg: 'transparent',
-              cursor: 'pointer',
-              transition: 'all 120ms ease',
+              bg: 'bgSurface',
+              borderRadius: '2xl',
+              borderWidth: '1.5px',
+              borderColor: isSelected ? 'accent' : 'borderSubtle',
+              overflow: 'hidden',
+              boxShadow: isSelected ? 'md' : 'xs',
+              transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
               _hover: {
-                bg: 'bgHover',
-              },
-              _focusVisible: {
-                outline: '2px solid',
-                outlineColor: 'accent',
-                outlineOffset: '2px',
+                transform: 'translateY(-2px)',
+                borderColor: isSelected ? 'accent' : { base: 'slate.300', _dark: 'slate.600' },
+                boxShadow: 'md',
               },
             })}
-            aria-pressed={selectedClubName === club.name}
-            aria-label={`${club.name}, ${club.region}`}
-            onClick={() => onSelectClub?.(club.name)}
-            type="button"
           >
-            <p className={css({ fontFamily: 'heading', fontWeight: '700', color: 'textPrimary' })}>{club.name}</p>
-            <p className={css({ color: 'textMuted', fontSize: 'sm' })}>{club.region}</p>
-            <p className={css({ color: 'textMuted', fontSize: 'sm' })}>{club.address}</p>
-            <p className={css({ mt: '1', color: 'textPrimary', fontWeight: '500' })}>{club.distanceNm} nm from Seattle</p>
-          </button>
-          <div className={css({ px: '4', pb: '4' })}>
-            <a
+            <button
               className={css({
-                display: 'inline-block',
-                color: 'accent',
-                textDecoration: 'underline',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.5',
+                w: 'full',
+                p: '5',
+                textAlign: 'left',
+                bg: 'transparent',
+                cursor: 'pointer',
+                transition: 'background-color 0.15s ease',
+                _hover: {
+                  bg: 'bgHover',
+                },
+                _focusVisible: {
+                  outline: '2px solid',
+                  outlineColor: 'accent',
+                  outlineOffset: '-2.5px',
+                  borderRadius: 'xl',
+                },
               })}
-              href={club.website}
-              rel="noreferrer"
-              target="_blank"
+              aria-pressed={isSelected}
+              aria-label={`${club.name}, ${club.region}`}
+              onClick={() => onSelectClub?.(club.name)}
+              type="button"
             >
-              Visit website
-            </a>
-          </div>
-        </li>
-      ))}
+              <p className={css({ fontFamily: 'heading', fontSize: 'md', fontWeight: '700', color: 'textPrimary', lineHeight: 'snug' })}>
+                {club.name}
+              </p>
+
+              <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '2', alignItems: 'center' })}>
+                <span
+                  className={css({
+                    px: '2.5',
+                    py: '0.5',
+                    borderRadius: 'full',
+                    fontSize: 'xs',
+                    fontWeight: '600',
+                    borderWidth: '1px',
+                    borderColor: badgeColors.border,
+                    bg: badgeColors.bg,
+                    color: badgeColors.color,
+                  })}
+                >
+                  {club.region}
+                </span>
+
+                <div
+                  className={css({
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1',
+                    color: 'textPrimary',
+                    fontSize: 'xs',
+                    fontWeight: '600',
+                    bg: { base: 'slate.100', _dark: 'slate.800' },
+                    px: '2.5',
+                    py: '0.5',
+                    borderRadius: 'md',
+                  })}
+                >
+                  <SailboatIcon />
+                  <span>{club.distanceNm} nm</span>
+                </div>
+              </div>
+
+              <div className={css({ display: 'flex', alignItems: 'flex-start', gap: '1.5', color: 'textMuted', fontSize: 'xs', mt: '0.5' })}>
+                <PinIcon />
+                <span className={css({ lineHeight: 'normal' })}>{club.address}</span>
+              </div>
+            </button>
+            <div
+              className={css({
+                px: '5',
+                pb: '4',
+                pt: '0.5',
+                display: 'flex',
+                justifyContent: 'flex-end',
+              })}
+            >
+              <a
+                className={css({
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  fontSize: 'xs',
+                  fontWeight: '600',
+                  color: 'accent',
+                  px: '3.5',
+                  py: '1.5',
+                  borderRadius: 'xl',
+                  borderWidth: '1px',
+                  borderColor: 'borderSubtle',
+                  transition: 'all 0.2s ease',
+                  _hover: {
+                    bg: 'bgHover',
+                    borderColor: 'accent',
+                  },
+                })}
+                href={club.website}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Visit website
+                <ExternalLinkIcon />
+              </a>
+            </div>
+          </li>
+        )
+      })}
     </ul>
   )
 }
