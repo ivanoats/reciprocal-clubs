@@ -169,3 +169,26 @@ describe('MapView zoom indicator', () => {
     expect(screen.queryByText(/zoom in for chart detail/)).toBeNull()
   })
 })
+
+describe('MapView style swap', () => {
+  it('swaps style when toggling map mode even if isStyleLoaded is false', async () => {
+    const { getByRole } = render(<MapView clubs={clubs} />)
+
+    await waitFor(() => expect(mapInstances).toHaveLength(1))
+    const map = mapInstances[0]
+
+    act(() => {
+      map.emit('load')
+    })
+
+    // Simulate tile loading state where isStyleLoaded would return false
+    map.styleLoaded = false
+
+    const standardButton = getByRole('button', { name: 'Standard' })
+    act(() => {
+      standardButton.click()
+    })
+
+    expect(map.setStyle).toHaveBeenCalled()
+  })
+})
