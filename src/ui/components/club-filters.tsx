@@ -1,3 +1,5 @@
+'use client'
+
 import { css } from '../../../styled-system/css'
 
 type ClubFiltersProps = {
@@ -42,6 +44,7 @@ export const ClubFilters = ({ selectedRegion, query, regions }: ClubFiltersProps
         })}
         defaultValue={selectedRegion ?? ''}
         name="region"
+        onChange={(e) => e.target.form?.requestSubmit()}
       >
         <option value="">All regions</option>
         {regions.map((region) => (
