@@ -16,6 +16,7 @@ import {
 import { createBaseStyle, useMapStyle } from '@/ui/hooks/use-map-style'
 import { useMapViewport } from '@/ui/hooks/use-map-viewport'
 import { useNauticalSourceHealth } from '@/ui/hooks/use-nautical-source-health'
+import { CHART_DETAIL_MIN_ZOOM } from '@/ui/map-constants'
 import { css } from '../../../styled-system/css'
 
 type MapViewProps = {
@@ -94,7 +95,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
   const [map, setMap] = useState<maplibregl.Map | null>(null)
 
   const mapStyle = useMapStyle(mapMode)
-  useMapViewport(map, clubs, selectedClubName)
+  const { zoom } = useMapViewport(map, clubs, selectedClubName)
   const { loaded: noaaLoaded, errorCount: noaaErrorCount, lastError: lastNauticalError } =
     useNauticalSourceHealth(map, mapMode)
 
@@ -301,7 +302,7 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             opacity: 0.96,
           })}
         >
-          {`Chart ${activeNauticalSourceLabel} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}${lastNauticalError ? ` • ${lastNauticalError}` : ''}`}
+          {`Chart ${activeNauticalSourceLabel} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}${lastNauticalError ? ` • ${lastNauticalError}` : ''}${zoom < CHART_DETAIL_MIN_ZOOM ? ' • zoom in for chart detail' : ''}`}
         </div>
       ) : mapMode === 'wmts' ? (
         <div

@@ -1,7 +1,8 @@
-import { act, render, waitFor } from '@testing-library/react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { act, cleanup, render, screen, waitFor } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { Club } from '@/domain/club'
+import { CHART_DETAIL_MIN_ZOOM } from '@/ui/map-constants'
 
 const mapInstances: MockMap[] = []
 
@@ -111,6 +112,10 @@ beforeEach(() => {
   )
 })
 
+afterEach(() => {
+  cleanup()
+})
+
 describe('MapView nautical panning', () => {
   it('keeps the nautical chart layer alive when panning from Seattle toward Whidbey Island', async () => {
     render(<MapView clubs={clubs} />)
@@ -132,5 +137,35 @@ describe('MapView nautical panning', () => {
     expect(map.setStyle.mock.calls.length).toBe(setStyleCallsBeforePan)
     expect(map.addSource).toHaveBeenCalledTimes(1)
     expect(map.addLayer).toHaveBeenCalled()
+  })
+})
+
+describe('MapView zoom indicator', () => {
+  it('shows "zoom in for chart detail" when zoom is below CHART_DETAIL_MIN_ZOOM', async () => {
+    render(<MapView clubs={clubs} />)
+
+    await waitFor(() => expect(mapInstances).toHaveLength(1))
+    const map = mapInstances[0]
+    map.getZoom.mockReturnValue(CHART_DETAIL_MIN_ZOOM - 1)
+
+    act(() => {
+      map.emit('zoom')
+    })
+
+    expect(screen.getByText(/zoom in for chart detail/)).toBeTruthy()
+  })
+
+  it('hides "zoom in for chart detail" when zoom meets CHART_DETAIL_MIN_ZOOM', async () => {
+    render(<MapView clubs={clubs} />)
+
+    await waitFor(() => expect(mapInstances).toHaveLength(1))
+    const map = mapInstances[0]
+    map.getZoom.mockReturnValue(CHART_DETAIL_MIN_ZOOM)
+
+    act(() => {
+      map.emit('zoom')
+    })
+
+    expect(screen.queryByText(/zoom in for chart detail/)).toBeNull()
   })
 })
