@@ -3,13 +3,12 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 
+import { GeoJsonClubRepository } from './geojson-club-repository'
+
 let tempRoot = ''
-const originalCwd = process.cwd()
 
 describe('GeoJsonClubRepository', () => {
   afterEach(async () => {
-    process.chdir(originalCwd)
-
     if (tempRoot) {
       await rm(tempRoot, { recursive: true, force: true })
       tempRoot = ''
@@ -47,10 +46,7 @@ describe('GeoJsonClubRepository', () => {
       'utf8',
     )
 
-    process.chdir(tempRoot)
-
-    const { GeoJsonClubRepository } = await import('./geojson-club-repository')
-    const repository = new GeoJsonClubRepository()
+    const repository = new GeoJsonClubRepository(dataDir)
     const clubs = await repository.getAllClubs()
 
     expect(clubs).toEqual([
