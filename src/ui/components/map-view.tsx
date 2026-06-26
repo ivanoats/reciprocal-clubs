@@ -302,7 +302,13 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
             opacity: 0.96,
           })}
         >
-          {`Chart ${activeNauticalSourceLabel} • ${noaaLoaded ? 'tiles loaded' : 'loading'}${noaaErrorCount > 0 ? ` • errors ${noaaErrorCount}` : ''}${lastNauticalError ? ` • ${lastNauticalError}` : ''}${zoom < CHART_DETAIL_MIN_ZOOM ? ' • zoom in for chart detail' : ''}`}
+          {[
+            `Chart ${activeNauticalSourceLabel}`,
+            noaaLoaded ? 'tiles loaded' : 'loading',
+            noaaErrorCount > 0 ? `errors ${noaaErrorCount}` : '',
+            lastNauticalError,
+            zoom < CHART_DETAIL_MIN_ZOOM ? 'zoom in for chart detail' : '',
+          ].filter(Boolean).join(' • ')}
         </div>
       ) : mapMode === 'wmts' ? (
         <div
