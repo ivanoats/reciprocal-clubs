@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.2...v1.0.3) (2026-06-26)
+
+### Bug Fixes
+
+* **filters:** auto-submit form on region select change ([#26](https://github.com/ivanoats/reciprocal-clubs/issues/26)) ([7e167c2](https://github.com/ivanoats/reciprocal-clubs/commit/7e167c275d7d79f36d6ee3e8543aa85cae2ec198))
+
 ## [1.0.2](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.1...v1.0.2) (2026-06-26)
 
 ### Bug Fixes
