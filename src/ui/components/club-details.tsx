@@ -11,6 +11,27 @@ const normalizePhoneHref = (phone: string): string => phone.replace(/[^\d+]/g, '
 
 const hasPhone = (phone: Club['phone']): phone is string => typeof phone === 'string' && phone.length > 0
 
+const DetailsDistance = ({ distanceNm }: { distanceNm: number }) => (
+  <div className={css({ display: 'flex', alignItems: 'center', gap: '2', color: 'textPrimary', fontSize: 'sm', fontWeight: '600' })}>
+    <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'center', w: '7', h: '7', borderRadius: 'md', bg: { base: 'cyan.50', _dark: 'rgba(6, 182, 212, 0.15)' }, color: 'accent' })}>
+      <SailboatIcon />
+    </div>
+    <span>{distanceNm} nautical miles from Seattle</span>
+  </div>
+)
+
+const DetailsAddress = ({ region, address }: { region: string; address: string }) => (
+  <div className={css({ display: 'flex', alignItems: 'flex-start', gap: '2', color: 'textMuted', fontSize: 'sm' })}>
+    <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'center', w: '7', h: '7', borderRadius: 'md', bg: { base: 'slate.100', _dark: 'slate.800' }, color: 'textMuted', mt: '0.5' })}>
+      <PinIcon />
+    </div>
+    <div className={css({ display: 'flex', flexDirection: 'column' })}>
+      <span className={css({ fontWeight: '600', color: 'textPrimary' })}>{region}</span>
+      <span className={css({ mt: '0.5', fontSize: 'xs' })}>{address}</span>
+    </div>
+  </div>
+)
+
 export const ClubDetails = ({ club }: ClubDetailsProps) => {
   return (
     <aside
@@ -40,6 +61,7 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
         })}
       >
         <svg
+          aria-hidden="true"
           className={css({
             position: 'absolute',
             bottom: '-1px',
@@ -53,7 +75,7 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fill="#ffffff"
+            fill="currentColor"
             d="M0,192L48,197.3C96,203,192,213,288,202.7C384,192,480,160,576,149.3C672,139,768,149,864,165.3C960,181,1056,203,1152,192C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
         </svg>
@@ -84,22 +106,8 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
       {/* Info body */}
       <div className={css({ p: '5', display: 'flex', flexDirection: 'column', gap: '4' })}>
         <div className={css({ display: 'grid', gap: '3' })}>
-          <div className={css({ display: 'flex', alignItems: 'center', gap: '2', color: 'textPrimary', fontSize: 'sm', fontWeight: '600' })}>
-            <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'center', w: '7', h: '7', borderRadius: 'md', bg: { base: 'cyan.50', _dark: 'rgba(6, 182, 212, 0.15)' }, color: 'accent' })}>
-              <SailboatIcon />
-            </div>
-            <span>{club.distanceNm} nautical miles from Seattle</span>
-          </div>
-
-          <div className={css({ display: 'flex', alignItems: 'flex-start', gap: '2', color: 'textMuted', fontSize: 'sm' })}>
-            <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'center', w: '7', h: '7', borderRadius: 'md', bg: { base: 'slate.100', _dark: 'slate.800' }, color: 'textMuted', mt: '0.5' })}>
-              <PinIcon />
-            </div>
-            <div className={css({ display: 'flex', flexDirection: 'column' })}>
-              <span className={css({ fontWeight: '600', color: 'textPrimary' })}>{club.region}</span>
-              <span className={css({ mt: '0.5', fontSize: 'xs' })}>{club.address}</span>
-            </div>
-          </div>
+          <DetailsDistance distanceNm={club.distanceNm} />
+          <DetailsAddress region={club.region} address={club.address} />
         </div>
 
         {/* Dynamic call and web CTA buttons */}
@@ -171,3 +179,4 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
     </aside>
   )
 }
+

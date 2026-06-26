@@ -53,6 +53,26 @@ const getRegionColor = (region: string) => {
   }
 }
 
+const ListDistance = ({ distanceNm }: { distanceNm: number }) => (
+  <div
+    className={css({
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1',
+      color: 'textPrimary',
+      fontSize: 'xs',
+      fontWeight: '600',
+      bg: { base: 'slate.100', _dark: 'slate.800' },
+      px: '2.5',
+      py: '0.5',
+      borderRadius: 'md',
+    })}
+  >
+    <SailboatIcon />
+    <span>{distanceNm} nm</span>
+  </div>
+)
+
 type ClubListItemProps = {
   club: Club
   isSelected: boolean
@@ -126,23 +146,7 @@ const ClubListItem = ({ club, isSelected, onSelectClub }: ClubListItemProps) => 
             {club.region}
           </span>
 
-          <div
-            className={css({
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1',
-              color: 'textPrimary',
-              fontSize: 'xs',
-              fontWeight: '600',
-              bg: { base: 'slate.100', _dark: 'slate.800' },
-              px: '2.5',
-              py: '0.5',
-              borderRadius: 'md',
-            })}
-          >
-            <SailboatIcon />
-            <span>{club.distanceNm} nm</span>
-          </div>
+          <ListDistance distanceNm={club.distanceNm} />
         </div>
 
         <div className={css({ display: 'flex', alignItems: 'flex-start', gap: '1.5', color: 'textMuted', fontSize: 'xs', mt: '0.5' })}>
