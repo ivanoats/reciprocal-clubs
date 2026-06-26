@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.5...v1.0.6) (2026-06-26)
+
+### Bug Fixes
+
+* **map:** add missing StyleSpecification type import to fix build ([5bb2a1a](https://github.com/ivanoats/reciprocal-clubs/commit/5bb2a1a1b41fe3308e776b829ff53923692ba16c))
+* **map:** allow style swap during tile downloads by replacing isStyleLoaded check ([#29](https://github.com/ivanoats/reciprocal-clubs/issues/29)) ([eefd2bb](https://github.com/ivanoats/reciprocal-clubs/commit/eefd2bb36d0f4f6ada855e6cf4e5e182f78181e3))
+
 ## [1.0.5](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.4...v1.0.5) (2026-06-26)
 
 ### Bug Fixes
