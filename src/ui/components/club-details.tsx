@@ -32,6 +32,73 @@ const DetailsAddress = ({ region, address }: { region: string; address: string }
   </div>
 )
 
+const DetailsActions = ({ website, phone }: { website: string; phone?: string }) => (
+  <div className={css({ display: 'flex', flexDirection: { base: 'column', sm: 'row' }, gap: '2.5', mt: '1', pt: '4', borderTop: '1px solid', borderColor: 'borderSubtle/60' })}>
+    <a
+      className={css({
+        flex: 1,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgGradient: 'to-br',
+        gradientFrom: 'cyan.500',
+        gradientTo: 'blue.600',
+        color: 'white',
+        px: '4',
+        py: '2.5',
+        borderRadius: 'xl',
+        fontSize: 'xs',
+        fontWeight: '700',
+        boxShadow: '0 4px 12px 0 rgba(6, 182, 212, 0.25)',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        _hover: {
+          transform: 'translateY(-1.5px)',
+          boxShadow: '0 6px 16px 0 rgba(6, 182, 212, 0.35)',
+        },
+        _active: {
+          transform: 'translateY(0)',
+        },
+      })}
+      href={website}
+      rel="noreferrer"
+      target="_blank"
+    >
+      Visit Website
+      <ExternalLinkIcon />
+    </a>
+
+    {hasPhone(phone) ? (
+      <a
+        className={css({
+          flex: 1,
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '2',
+          borderWidth: '1.5px',
+          borderColor: 'borderSubtle',
+          color: 'textPrimary',
+          bg: 'bgSurface',
+          px: '4',
+          py: '2.5',
+          borderRadius: 'xl',
+          fontSize: 'xs',
+          fontWeight: '700',
+          transition: 'all 0.2s ease',
+          _hover: {
+            bg: 'bgHover',
+            borderColor: { base: 'slate.400', _dark: 'slate.500' },
+          },
+        })}
+        href={`tel:${normalizePhoneHref(phone)}`}
+      >
+        <PhoneIcon />
+        {phone}
+      </a>
+    ) : null}
+  </div>
+)
+
 export const ClubDetails = ({ club }: ClubDetailsProps) => {
   return (
     <aside
@@ -110,73 +177,10 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
           <DetailsAddress region={club.region} address={club.address} />
         </div>
 
-        {/* Dynamic call and web CTA buttons */}
-        <div className={css({ display: 'flex', flexDirection: { base: 'column', sm: 'row' }, gap: '2.5', mt: '1', pt: '4', borderTop: '1px solid', borderColor: 'borderSubtle/60' })}>
-          <a
-            className={css({
-              flex: 1,
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              bgGradient: 'to-br',
-              gradientFrom: 'cyan.500',
-              gradientTo: 'blue.600',
-              color: 'white',
-              px: '4',
-              py: '2.5',
-              borderRadius: 'xl',
-              fontSize: 'xs',
-              fontWeight: '700',
-              boxShadow: '0 4px 12px 0 rgba(6, 182, 212, 0.25)',
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-              _hover: {
-                transform: 'translateY(-1.5px)',
-                boxShadow: '0 6px 16px 0 rgba(6, 182, 212, 0.35)',
-              },
-              _active: {
-                transform: 'translateY(0)',
-              },
-            })}
-            href={club.website}
-            rel="noreferrer"
-            target="_blank"
-          >
-            Visit Website
-            <ExternalLinkIcon />
-          </a>
-
-          {hasPhone(club.phone) ? (
-            <a
-              className={css({
-                flex: 1,
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '2',
-                borderWidth: '1.5px',
-                borderColor: 'borderSubtle',
-                color: 'textPrimary',
-                bg: 'bgSurface',
-                px: '4',
-                py: '2.5',
-                borderRadius: 'xl',
-                fontSize: 'xs',
-                fontWeight: '700',
-                transition: 'all 0.2s ease',
-                _hover: {
-                  bg: 'bgHover',
-                  borderColor: { base: 'slate.400', _dark: 'slate.500' },
-                },
-              })}
-              href={`tel:${normalizePhoneHref(club.phone)}`}
-            >
-              <PhoneIcon />
-              {club.phone}
-            </a>
-          ) : null}
-        </div>
+        <DetailsActions website={club.website} phone={club.phone} />
       </div>
     </aside>
   )
 }
+
 
