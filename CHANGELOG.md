@@ -1,3 +1,9 @@
+## [1.0.7](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.6...v1.0.7) (2026-06-26)
+
+### Bug Fixes
+
+* **map:** resolve sonar and deepsource issues in style swap ([#30](https://github.com/ivanoats/reciprocal-clubs/issues/30)) ([482ca46](https://github.com/ivanoats/reciprocal-clubs/commit/482ca4656392136a41c80ddf7cbae3b5b84947c2))
+
 ## [1.0.6](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.5...v1.0.6) (2026-06-26)
 
 ### Bug Fixes
