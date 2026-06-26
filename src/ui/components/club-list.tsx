@@ -26,7 +26,7 @@ export const ClubList = ({ clubs, selectedClubName, onSelectClub }: ClubListProp
             bg: 'bgSurface',
             borderRadius: 'lg',
             borderWidth: '1px',
-            borderColor: selectedClubName === club.name ? 'accent' : 'slate.200',
+            borderColor: selectedClubName === club.name ? 'accent' : 'borderSubtle',
             overflow: 'hidden',
           })}
         >
@@ -41,7 +41,7 @@ export const ClubList = ({ clubs, selectedClubName, onSelectClub }: ClubListProp
               cursor: 'pointer',
               transition: 'all 120ms ease',
               _hover: {
-                bg: 'slate.50',
+                bg: 'bgHover',
               },
               _focusVisible: {
                 outline: '2px solid',

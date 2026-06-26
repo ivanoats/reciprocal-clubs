@@ -16,7 +16,7 @@ export const ClubDetails = ({ club }: ClubDetailsProps) => {
       className={css({
         bg: 'bgSurface',
         borderWidth: '1px',
-        borderColor: 'slate.200',
+        borderColor: 'borderSubtle',
         borderRadius: 'lg',
         p: '4',
         display: 'grid',

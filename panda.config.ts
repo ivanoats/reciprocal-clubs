@@ -46,6 +46,18 @@ export default defineConfig({
               _dark: '{colors.cyan.400}',
             },
           },
+          bgHover: {
+            value: {
+              _light: '{colors.slate.50}',
+              _dark: '{colors.slate.800}',
+            },
+          },
+          borderSubtle: {
+            value: {
+              _light: '{colors.slate.200}',
+              _dark: '{colors.slate.700}',
+            },
+          },
         },
       },
     },
