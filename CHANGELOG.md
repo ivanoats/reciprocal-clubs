@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.4...v1.0.5) (2026-06-26)
+
+### Bug Fixes
+
+* **map:** wire up zoom state and add chart-detail zoom indicator ([#25](https://github.com/ivanoats/reciprocal-clubs/issues/25)) ([2fc7c37](https://github.com/ivanoats/reciprocal-clubs/commit/2fc7c374c40a2d74c96faab5f66cc6ab47c2fd92))
+
 ## [1.0.4](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.3...v1.0.4) (2026-06-26)
 
 ### Bug Fixes
