@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.1...v1.0.2) (2026-06-26)
+
+### Bug Fixes
+
+* **repository:** eliminate process.chdir test pollution via dataDir dependency injection ([#28](https://github.com/ivanoats/reciprocal-clubs/issues/28)) ([1572a58](https://github.com/ivanoats/reciprocal-clubs/commit/1572a5836df616710bf92b111c6939a630f2d24f))
+
 ## [1.0.1](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.0...v1.0.1) (2026-06-22)
 
 ### Bug Fixes
