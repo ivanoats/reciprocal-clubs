@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.3...v1.0.4) (2026-06-26)
+
+### Bug Fixes
+
+* **theme:** replace hardcoded slate colors with semantic tokens to fix dark mode hover flash ([#27](https://github.com/ivanoats/reciprocal-clubs/issues/27)) ([b385fd3](https://github.com/ivanoats/reciprocal-clubs/commit/b385fd3132cb719df3f80e30ea233e359489d817))
+* **validate:** resolve clubs.geojson path relative to __dirname ([#24](https://github.com/ivanoats/reciprocal-clubs/issues/24)) ([9edc4b9](https://github.com/ivanoats/reciprocal-clubs/commit/9edc4b9ef14380172033e3c6948c4145d5388fc9))
+
 ## [1.0.3](https://github.com/ivanoats/reciprocal-clubs/compare/v1.0.2...v1.0.3) (2026-06-26)
 
 ### Bug Fixes
