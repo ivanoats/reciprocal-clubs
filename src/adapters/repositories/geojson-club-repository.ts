@@ -43,8 +43,10 @@ const toClub = (feature: GeoJsonFeature): Club => {
 }
 
 export class GeoJsonClubRepository implements ClubRepository {
+  constructor(private readonly dataDir: string = join(process.cwd(), 'data')) {}
+
   async getAllClubs(): Promise<Club[]> {
-    const filePath = join(process.cwd(), 'data', 'clubs.geojson')
+    const filePath = join(this.dataDir, 'clubs.geojson')
     const raw = await readFile(filePath, 'utf8')
     const data = JSON.parse(raw) as GeoJsonCollection
 
