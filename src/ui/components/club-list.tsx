@@ -1,6 +1,7 @@
 import { css } from '../../../styled-system/css'
 
 import type { Club } from '@/domain/club'
+import { PinIcon, SailboatIcon, ExternalLinkIcon } from './icons'
 
 type ClubListProps = {
   clubs: Club[]
@@ -52,55 +53,141 @@ const getRegionColor = (region: string) => {
   }
 }
 
-const PinIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={css({ w: '3.5', h: '3.5', flexShrink: 0, mt: '0.5' })}
-  >
-    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-)
+type ClubListItemProps = {
+  club: Club
+  isSelected: boolean
+  onSelectClub?: (clubName: string) => void
+}
 
-const SailboatIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={css({ w: '3.5', h: '3.5', flexShrink: 0 })}
-  >
-    <path d="M22 20H2" />
-    <path d="M10 20V2L2 14h8" />
-    <path d="M14 20V6l6 8h-6" />
-  </svg>
-)
+const ClubListItem = ({ club, isSelected, onSelectClub }: ClubListItemProps) => {
+  const badgeColors = getRegionColor(club.region)
 
-const ExternalLinkIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={css({ w: '3.5', h: '3.5', ml: '1.5' })}
-  >
-    <path d="M15 3h6v6" />
-    <path d="M10 14 21 3" />
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-  </svg>
-)
+  return (
+    <li
+      className={css({
+        bg: 'bgSurface',
+        borderRadius: '2xl',
+        borderWidth: '1.5px',
+        borderColor: isSelected ? 'accent' : 'borderSubtle',
+        overflow: 'hidden',
+        boxShadow: isSelected ? 'md' : 'xs',
+        transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+        _hover: {
+          transform: 'translateY(-2px)',
+          borderColor: isSelected ? 'accent' : { base: 'slate.300', _dark: 'slate.600' },
+          boxShadow: 'md',
+        },
+      })}
+    >
+      <button
+        className={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2.5',
+          w: 'full',
+          p: '5',
+          textAlign: 'left',
+          bg: 'transparent',
+          cursor: 'pointer',
+          transition: 'background-color 0.15s ease',
+          _hover: {
+            bg: 'bgHover',
+          },
+          _focusVisible: {
+            outline: '2px solid',
+            outlineColor: 'accent',
+            outlineOffset: '-2.5px',
+            borderRadius: 'xl',
+          },
+        })}
+        aria-pressed={isSelected}
+        aria-label={`${club.name}, ${club.region}`}
+        onClick={() => onSelectClub?.(club.name)}
+        type="button"
+      >
+        <p className={css({ fontFamily: 'heading', fontSize: 'md', fontWeight: '700', color: 'textPrimary', lineHeight: 'snug' })}>
+          {club.name}
+        </p>
+
+        <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '2', alignItems: 'center' })}>
+          <span
+            className={css({
+              px: '2.5',
+              py: '0.5',
+              borderRadius: 'full',
+              fontSize: 'xs',
+              fontWeight: '600',
+              borderWidth: '1px',
+              borderColor: badgeColors.border,
+              bg: badgeColors.bg,
+              color: badgeColors.color,
+            })}
+          >
+            {club.region}
+          </span>
+
+          <div
+            className={css({
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1',
+              color: 'textPrimary',
+              fontSize: 'xs',
+              fontWeight: '600',
+              bg: { base: 'slate.100', _dark: 'slate.800' },
+              px: '2.5',
+              py: '0.5',
+              borderRadius: 'md',
+            })}
+          >
+            <SailboatIcon />
+            <span>{club.distanceNm} nm</span>
+          </div>
+        </div>
+
+        <div className={css({ display: 'flex', alignItems: 'flex-start', gap: '1.5', color: 'textMuted', fontSize: 'xs', mt: '0.5' })}>
+          <PinIcon />
+          <span className={css({ lineHeight: 'normal' })}>{club.address}</span>
+        </div>
+      </button>
+      <div
+        className={css({
+          px: '5',
+          pb: '4',
+          pt: '0.5',
+          display: 'flex',
+          justifyContent: 'flex-end',
+        })}
+      >
+        <a
+          className={css({
+            display: 'inline-flex',
+            alignItems: 'center',
+            fontSize: 'xs',
+            fontWeight: '600',
+            color: 'accent',
+            px: '3.5',
+            py: '1.5',
+            borderRadius: 'xl',
+            borderWidth: '1px',
+            borderColor: 'borderSubtle',
+            transition: 'all 0.2s ease',
+            _hover: {
+              bg: 'bgHover',
+              borderColor: 'accent',
+            },
+          })}
+          href={club.website}
+          rel="noreferrer"
+          target="_blank"
+        >
+          Visit website
+          <ExternalLinkIcon />
+        </a>
+      </div>
+    </li>
+  )
+}
 
 export const ClubList = ({ clubs, selectedClubName, onSelectClub }: ClubListProps) => {
   return (
@@ -126,137 +213,15 @@ export const ClubList = ({ clubs, selectedClubName, onSelectClub }: ClubListProp
         },
       })}
     >
-      {clubs.map((club) => {
-        const isSelected = selectedClubName === club.name
-        const badgeColors = getRegionColor(club.region)
-
-        return (
-          <li
-            key={club.name}
-            className={css({
-              bg: 'bgSurface',
-              borderRadius: '2xl',
-              borderWidth: '1.5px',
-              borderColor: isSelected ? 'accent' : 'borderSubtle',
-              overflow: 'hidden',
-              boxShadow: isSelected ? 'md' : 'xs',
-              transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-              _hover: {
-                transform: 'translateY(-2px)',
-                borderColor: isSelected ? 'accent' : { base: 'slate.300', _dark: 'slate.600' },
-                boxShadow: 'md',
-              },
-            })}
-          >
-            <button
-              className={css({
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '2.5',
-                w: 'full',
-                p: '5',
-                textAlign: 'left',
-                bg: 'transparent',
-                cursor: 'pointer',
-                transition: 'background-color 0.15s ease',
-                _hover: {
-                  bg: 'bgHover',
-                },
-                _focusVisible: {
-                  outline: '2px solid',
-                  outlineColor: 'accent',
-                  outlineOffset: '-2.5px',
-                  borderRadius: 'xl',
-                },
-              })}
-              aria-pressed={isSelected}
-              aria-label={`${club.name}, ${club.region}`}
-              onClick={() => onSelectClub?.(club.name)}
-              type="button"
-            >
-              <p className={css({ fontFamily: 'heading', fontSize: 'md', fontWeight: '700', color: 'textPrimary', lineHeight: 'snug' })}>
-                {club.name}
-              </p>
-
-              <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '2', alignItems: 'center' })}>
-                <span
-                  className={css({
-                    px: '2.5',
-                    py: '0.5',
-                    borderRadius: 'full',
-                    fontSize: 'xs',
-                    fontWeight: '600',
-                    borderWidth: '1px',
-                    borderColor: badgeColors.border,
-                    bg: badgeColors.bg,
-                    color: badgeColors.color,
-                  })}
-                >
-                  {club.region}
-                </span>
-
-                <div
-                  className={css({
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1',
-                    color: 'textPrimary',
-                    fontSize: 'xs',
-                    fontWeight: '600',
-                    bg: { base: 'slate.100', _dark: 'slate.800' },
-                    px: '2.5',
-                    py: '0.5',
-                    borderRadius: 'md',
-                  })}
-                >
-                  <SailboatIcon />
-                  <span>{club.distanceNm} nm</span>
-                </div>
-              </div>
-
-              <div className={css({ display: 'flex', alignItems: 'flex-start', gap: '1.5', color: 'textMuted', fontSize: 'xs', mt: '0.5' })}>
-                <PinIcon />
-                <span className={css({ lineHeight: 'normal' })}>{club.address}</span>
-              </div>
-            </button>
-            <div
-              className={css({
-                px: '5',
-                pb: '4',
-                pt: '0.5',
-                display: 'flex',
-                justifyContent: 'flex-end',
-              })}
-            >
-              <a
-                className={css({
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  fontSize: 'xs',
-                  fontWeight: '600',
-                  color: 'accent',
-                  px: '3.5',
-                  py: '1.5',
-                  borderRadius: 'xl',
-                  borderWidth: '1px',
-                  borderColor: 'borderSubtle',
-                  transition: 'all 0.2s ease',
-                  _hover: {
-                    bg: 'bgHover',
-                    borderColor: 'accent',
-                  },
-                })}
-                href={club.website}
-                rel="noreferrer"
-                target="_blank"
-              >
-                Visit website
-                <ExternalLinkIcon />
-              </a>
-            </div>
-          </li>
-        )
-      })}
+      {clubs.map((club) => (
+        <ClubListItem
+          key={club.name}
+          club={club}
+          isSelected={selectedClubName === club.name}
+          onSelectClub={onSelectClub}
+        />
+      ))}
     </ul>
   )
 }
+
