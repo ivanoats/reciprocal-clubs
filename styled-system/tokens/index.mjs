@@ -1895,6 +1895,14 @@ const tokens = {
     "value": "var(--colors-accent)",
     "variable": "var(--colors-accent)"
   },
+  "colors.bgHover": {
+    "value": "var(--colors-bg-hover)",
+    "variable": "var(--colors-bg-hover)"
+  },
+  "colors.borderSubtle": {
+    "value": "var(--colors-border-subtle)",
+    "variable": "var(--colors-border-subtle)"
+  },
   "colors.colorPalette": {
     "value": "var(--colors-color-palette)",
     "variable": "var(--colors-color-palette)"
