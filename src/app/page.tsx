@@ -137,8 +137,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         minH: '100vh',
         bg: 'bgCanvas',
         backgroundImage: {
-          base: 'radial-gradient(ellipse at top, {colors.slate.100}, {colors.slate.50})',
-          _dark: 'radial-gradient(ellipse at top, {colors.slate.900}, {colors.slate.950})',
+          base: 'radial-gradient(ellipse at top, var(--colors-slate-100), var(--colors-slate-50))',
+          _dark: 'radial-gradient(ellipse at top, var(--colors-slate-900), var(--colors-slate-950))',
         },
         color: 'textPrimary',
         p: { base: '4', md: '8' },
@@ -154,4 +154,3 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     </main>
   )
 }
-

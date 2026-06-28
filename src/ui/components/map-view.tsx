@@ -162,10 +162,12 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         const distance = typeof feature.properties?.distanceNm === 'number' ? feature.properties.distanceNm : ''
         if (!name) return
 
+        const escapeHtml = (str: string) =>
+          str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
         const popupContent = `
           <div style="font-family: var(--font-manrope), system-ui, -apple-system, sans-serif; padding: 6px 4px; min-width: 160px;">
-            <p style="margin: 0; font-family: var(--font-space-grotesk), system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.3;">${name}</p>
-            <p style="margin: 4px 0 0 0; font-size: 11px; font-weight: 500; color: #475569;">${region}</p>
+            <p style="margin: 0; font-family: var(--font-space-grotesk), system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.3;">${escapeHtml(name)}</p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; font-weight: 500; color: #475569;">${escapeHtml(region)}</p>
             <p style="margin: 6px 0 0 0; font-size: 11px; font-weight: 700; color: #0891b2; display: flex; align-items: center; gap: 4px;">⛵ ${distance} nm</p>
           </div>
         `

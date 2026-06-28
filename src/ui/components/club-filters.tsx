@@ -61,6 +61,8 @@ export const ClubFilters = ({ selectedRegion, query, regions }: ClubFiltersProps
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          aria-hidden="true"
+          focusable="false"
           className={css({
             position: 'absolute',
             left: '3.5',
@@ -119,6 +121,8 @@ export const ClubFilters = ({ selectedRegion, query, regions }: ClubFiltersProps
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          aria-hidden="true"
+          focusable="false"
           className={css({
             position: 'absolute',
             right: '3.5',
