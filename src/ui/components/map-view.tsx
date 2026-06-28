@@ -161,9 +161,20 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
         const region = typeof feature.properties?.region === 'string' ? feature.properties.region : ''
         const distance = typeof feature.properties?.distanceNm === 'number' ? feature.properties.distanceNm : ''
         if (!name) return
+
+        const escapeHtml = (str: string) =>
+          str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+        const popupContent = `
+          <div style="font-family: var(--font-manrope), system-ui, -apple-system, sans-serif; padding: 6px 4px; min-width: 160px;">
+            <p style="margin: 0; font-family: var(--font-space-grotesk), system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.3;">${escapeHtml(name)}</p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; font-weight: 500; color: #475569;">${escapeHtml(region)}</p>
+            <p style="margin: 6px 0 0 0; font-size: 11px; font-weight: 700; color: #0891b2; display: flex; align-items: center; gap: 4px;">⛵ ${distance} nm</p>
+          </div>
+        `
+
         new maplibregl.Popup({ offset: 12 })
           .setLngLat(feature.geometry.coordinates as [number, number])
-          .setHTML(`<strong>${name}</strong><br/>${region}<br/>${distance} nm`)
+          .setHTML(popupContent)
           .addTo(map)
         onSelectClubRef.current?.(name)
       })
@@ -217,74 +228,56 @@ export const MapView = ({ clubs, selectedClubName, onSelectClub }: MapViewProps)
       <div
         className={css({
           position: 'absolute',
-          top: '3',
-          right: '3',
+          top: '3.5',
+          right: '3.5',
           zIndex: 1,
           display: 'flex',
           gap: '1',
-          rounded: 'full',
-          border: '1px solid',
+          rounded: 'xl',
+          borderWidth: '1px',
           borderColor: 'borderSubtle',
-          bg: 'bgSurface',
+          bg: { base: 'rgba(255, 255, 255, 0.75)', _dark: 'rgba(15, 23, 42, 0.65)' },
+          backdropFilter: 'blur(8px)',
           p: '1',
           boxShadow: 'md',
-          opacity: 0.98,
         })}
       >
-        <button
-          className={css({
-            cursor: 'pointer',
-            rounded: 'full',
-            px: '3',
-            py: '1.5',
-            fontSize: 'sm',
-            fontWeight: '600',
-            color: mapMode === 'nautical' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'nautical' ? 'bgCanvas' : 'bgSurface',
-            boxShadow: mapMode === 'nautical' ? 'sm' : 'none',
-          })}
-          onClick={() => setMapMode('nautical')}
-          aria-pressed={mapMode === 'nautical'}
-          type="button"
-        >
-          Chart
-        </button>
-        <button
-          className={css({
-            cursor: 'pointer',
-            rounded: 'full',
-            px: '3',
-            py: '1.5',
-            fontSize: 'sm',
-            fontWeight: '600',
-            color: mapMode === 'standard' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'standard' ? 'bgCanvas' : 'bgSurface',
-            boxShadow: mapMode === 'standard' ? 'sm' : 'none',
-          })}
-          onClick={() => setMapMode('standard')}
-          aria-pressed={mapMode === 'standard'}
-          type="button"
-        >
-          Standard
-        </button>
-        <button
-          className={css({
-            cursor: 'pointer',
-            rounded: 'full',
-            px: '3',
-            py: '1.5',
-            fontSize: 'sm',
-            fontWeight: '600',
-            color: mapMode === 'wmts' ? 'textPrimary' : 'textMuted',
-            bg: mapMode === 'wmts' ? 'bgCanvas' : 'bgSurface',
-            boxShadow: mapMode === 'wmts' ? 'sm' : 'none',
-          })}
-          onClick={() => setMapMode('wmts')}
-          aria-pressed={mapMode === 'wmts'}
-          type="button"
-        >
-          SeaMarks
-        </button>
+        {(['nautical', 'standard', 'wmts'] as const).map((mode) => {
+          const isActive = mapMode === mode
+          const labels: Record<MapMode, string> = {
+            nautical: 'Chart',
+            standard: 'Standard',
+            wmts: 'SeaMarks',
+          }
+          return (
+            <button
+              key={mode}
+              className={css({
+                cursor: 'pointer',
+                rounded: 'lg',
+                px: '3.5',
+                py: '1.5',
+                fontSize: 'xs',
+                fontWeight: '700',
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                color: isActive ? 'white' : 'textMuted',
+                bgGradient: isActive ? 'to-br' : 'none',
+                gradientFrom: isActive ? 'cyan.500' : 'none',
+                gradientTo: isActive ? 'blue.600' : 'none',
+                boxShadow: isActive ? '0 2px 6px 0 rgba(6, 182, 212, 0.25)' : 'none',
+                _hover: {
+                  color: isActive ? 'white' : 'textPrimary',
+                  bg: isActive ? 'none' : 'bgHover',
+                },
+              })}
+              onClick={() => setMapMode(mode)}
+              aria-pressed={isActive}
+              type="button"
+            >
+              {labels[mode]}
+            </button>
+          )
+        })}
       </div>
 
       {mapMode === 'nautical' ? (
